@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Czy jestem w Parku Pięciu Sióstr?</title>
+  <title>Gra terenowa — Ochota</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -17,19 +17,62 @@
     }
     .card {
       background: white;
-      padding: 2rem;
+      padding: 1.75rem;
       border-radius: 14px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       text-align: center;
-      max-width: 380px;
-      width: 90%;
+      max-width: 400px;
+      width: 92%;
     }
     h2 {
-      margin-top: 0;
-      font-size: 1.35rem;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.3rem;
+    }
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      margin: 1rem 0;
+    }
+    .step {
+      flex: 1;
+      padding: 8px 4px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: #e2e8f0;
+      color: #475569;
+    }
+    .step.active {
+      background: #2563eb;
+      color: white;
+    }
+    .step.done {
+      background: #16a34a;
+      color: white;
+    }
+    .target-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .target-box .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #1d4ed8;
+      font-weight: 700;
+    }
+    .target-box .name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 4px;
+      color: #1e3a8a;
     }
     .control-group {
-      margin: 1.25rem 0;
+      margin: 1rem 0;
       text-align: left;
       background: #f8fafc;
       padding: 12px 14px;
@@ -40,8 +83,8 @@
       display: flex;
       justify-content: space-between;
       font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
     }
     input[type="range"] {
       width: 100%;
@@ -51,11 +94,11 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 10px;
-      font-size: 0.85rem;
+      margin-top: 8px;
+      font-size: 0.83rem;
       color: #475569;
     }
-    button {
+    button.primary {
       background: #16a34a;
       color: white;
       border: none;
@@ -66,16 +109,30 @@
       cursor: pointer;
       width: 100%;
     }
-    button:hover {
+    button.primary:hover {
       background: #15803d;
     }
+    button.secondary {
+      background: transparent;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1.25rem;
+    }
+    button.secondary:hover {
+      background: #f1f5f9;
+      color: #334155;
+    }
     #wynik {
-      margin-top: 1.5rem;
-      line-height: 1.6;
-      font-size: 0.95rem;
+      margin-top: 1.25rem;
+      line-height: 1.55;
+      font-size: 0.92rem;
     }
     .status {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       padding: 10px;
       border-radius: 8px;
@@ -89,12 +146,28 @@
       background: #fee2e2;
       color: #991b1b;
     }
+    .finished {
+      background: #fef9c3;
+      color: #854d0e;
+      border: 1px solid #fde047;
+    }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h2>Park Pięciu Sióstr (Warszawa)</h2>
+    <h2>Trasa: Ochota</h2>
+
+    <div class="progress">
+      <div class="step" id="step-0">1. Pięciu Sióstr</div>
+      <div class="step" id="step-1">2. Szczęśliwicki</div>
+      <div class="step" id="step-2">3. Blue City</div>
+    </div>
+
+    <div class="target-box" id="targetBox">
+      <div class="label">Aktualny cel</div>
+      <div class="name" id="targetName">Park Pięciu Sióstr</div>
+    </div>
 
     <div class="control-group">
       <label for="margines">
@@ -111,40 +184,97 @@
       </div>
     </div>
 
-    <button onclick="sprawdzLokalizacje()">Sprawdź, czy jestem w parku</button>
+    <button class="primary" id="checkBtn" onclick="sprawdzLokalizacje()">Sprawdź moją pozycję</button>
     <div id="wynik"></div>
+
+    <button class="secondary" onclick="resetujGre()">Zacznij trasę od nowa</button>
   </div>
 
   <script>
-    // Przybliżony wielokąt granic Parku Pięciu Sióstr (Warszawa, Ochota)
-    // Wierzchołki w formacie [szerokość (lat), długość (lon)]
-    const PARK_POLYGON = [
-      [52.21625, 20.96520], // północny zachód (okolice Kopińskiej / Szczęśliwickiej)
-      [52.21640, 20.96815], // północny wschód (bliżej Białobrzeskiej)
-      [52.21435, 20.96935], // południowy wschód (okolice Bitwy Warszawskiej 1920 r.)
-      [52.21345, 20.96755], // południe (wzdłuż Bitwy Warszawskiej 1920 r.)
-      [52.21415, 20.96545]  // południowy zachód (od strony Szczęśliwickiej)
+    // Definicja 3 kolejnych etapów trasy z wielokątami granic [lat, lon]
+    const CELE = [
+      {
+        nazwa: "Park Pięciu Sióstr",
+        polygon: [
+          [52.21625, 20.96520],
+          [52.21640, 20.96815],
+          [52.21435, 20.96935],
+          [52.21345, 20.96755],
+          [52.21415, 20.96545]
+        ]
+      },
+      {
+        nazwa: "Park Szczęśliwicki",
+        polygon: [
+          [52.21020, 20.95580], // płn-zach (okolice Włodarzewskiej / Drawskiej)
+          [52.21040, 20.96280], // płn-wsch (okolice Drawskiej / Szczęśliwickiej)
+          [52.20650, 20.96420], // wschód (przy ul. Szczęśliwickiej)
+          [52.20360, 20.96220], // płd-wsch (okolice Dickensa / Urbanistów)
+          [52.20390, 20.95540], // płd-zach (okolice Włodarzewskiej)
+          [52.20720, 20.95460]  // zachód
+        ]
+      },
+      {
+        nazwa: "CH Blue City",
+        polygon: [
+          [52.21415, 20.95410], // płn-zach (Al. Jerozolimskie)
+          [52.21335, 20.95715], // płn-wsch (Al. Jerozolimskie / Opaczewska)
+          [52.21165, 20.95645], // płd-wsch (Opaczewska)
+          [52.21235, 20.95335]  // płd-zach
+        ]
+      }
     ];
 
+    let aktualnyEtap = Number(localStorage.getItem("ochota_etap") || 0);
     let ostatniOdczyt = null;
 
     const suwak = document.getElementById("margines");
     const marginesLabel = document.getElementById("marginesWartosc");
     const checkboxGps = document.getElementById("uwzglednijGps");
 
-    // Aktualizacja na żywo po przesunięciu suwaka (bez ponownego czekania na GPS)
+    aktualizujUI();
+
     suwak.addEventListener("input", () => {
       marginesLabel.textContent = suwak.value;
-      if (ostatniOdczyt) {
-        renderujWynik(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
+        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
       }
     });
 
     checkboxGps.addEventListener("change", () => {
-      if (ostatniOdczyt) {
-        renderujWynik(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
+        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
       }
     });
+
+    function aktualizujUI() {
+      for (let i = 0; i < CELE.length; i++) {
+        const el = document.getElementById(`step-${i}`);
+        el.className = "step";
+        if (i < aktualnyEtap) el.classList.add("done");
+        else if (i === aktualnyEtap) el.classList.add("active");
+      }
+
+      const targetBox = document.getElementById("targetBox");
+      const targetName = document.getElementById("targetName");
+      const checkBtn = document.getElementById("checkBtn");
+
+      if (aktualnyEtap >= CELE.length) {
+        targetBox.style.background = "#dcfce7";
+        targetBox.style.borderColor = "#86efac";
+        targetName.textContent = "Wszystkie 3 punkty zaliczone!";
+        checkBtn.disabled = true;
+        checkBtn.style.opacity = "0.6";
+        checkBtn.textContent = "Trasa ukończona";
+      } else {
+        targetBox.style.background = "#eff6ff";
+        targetBox.style.borderColor = "#bfdbfe";
+        targetName.textContent = CELE[aktualnyEtap].nazwa;
+        checkBtn.disabled = false;
+        checkBtn.style.opacity = "1";
+        checkBtn.textContent = `Sprawdź: ${CELE[aktualnyEtap].nazwa}`;
+      }
+    }
 
     function sprawdzLokalizacje() {
       const wynik = document.getElementById("wynik");
@@ -163,7 +293,7 @@
             lon: position.coords.longitude,
             acc: position.coords.accuracy
           };
-          renderujWynik(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+          ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
         },
         (error) => {
           switch (error.code) {
@@ -188,22 +318,51 @@
       );
     }
 
-    function renderujWynik(lat, lon, acc) {
+    function ocenPozycje(lat, lon, acc) {
       const wynik = document.getElementById("wynik");
+      if (aktualnyEtap >= CELE.length) return;
+
+      const cel = CELE[aktualnyEtap];
       const marginesSuwak = Number(suwak.value);
       const gpsBonus = checkboxGps.checked ? Math.round(acc) : 0;
       const calkowityMargines = marginesSuwak + gpsBonus;
 
-      const dystansDoParku = odlegloscOdWielokataMetry(lat, lon, PARK_POLYGON);
-      const wParku = dystansDoParku <= calkowityMargines;
+      const dystans = odlegloscOdWielokataMetry(lat, lon, cel.polygon);
+      const trafiony = dystans <= calkowityMargines;
 
-      const statusHtml = wParku
-        ? `<div class="status inside">TAK — jesteś w Parku Pięciu Sióstr!</div>`
-        : `<div class="status outside">NIE — jesteś poza parkiem.</div>`;
+      let statusHtml = "";
+
+      if (trafiony) {
+        const zaliczonyNazwa = cel.nazwa;
+        aktualnyEtap++;
+        localStorage.setItem("ochota_etap", String(aktualnyEtap));
+        aktualizujUI();
+
+        if (aktualnyEtap < CELE.length) {
+          statusHtml = `
+            <div class="status inside">
+              Zaliczono: ${zaliczonyNazwa}!<br>
+              Nowy cel: <strong>${CELE[aktualnyEtap].nazwa}</strong>
+            </div>
+          `;
+        } else {
+          statusHtml = `
+            <div class="status finished">
+              Gratulacje! Dotarłeś do Blue City i ukończyłeś całą trasę!
+            </div>
+          `;
+        }
+      } else {
+        statusHtml = `
+          <div class="status outside">
+            Jeszcze nie dotarłeś do celu: ${cel.nazwa}.
+          </div>
+        `;
+      }
 
       wynik.innerHTML = `
         ${statusHtml}
-        <strong>Odległość od granic parku:</strong> ${Math.round(dystansDoParku)} m<br>
+        <strong>Odległość do celu (${cel.nazwa}):</strong> ${Math.round(dystans)} m<br>
         <strong>Zastosowany bufor:</strong> ${calkowityMargines} m
         (suwak: ${marginesSuwak} m${checkboxGps.checked ? ` + GPS: ${gpsBonus} m` : ""})<br>
         <strong>Twoje GPS:</strong> ${lat.toFixed(6)}, ${lon.toFixed(6)} (±${Math.round(acc)} m)<br><br>
@@ -213,7 +372,14 @@
       `;
     }
 
-    // Sprawdza czy punkt leży wewnątrz wielokąta (algorytm ray-casting)
+    function resetujGre() {
+      aktualnyEtap = 0;
+      ostatniOdczyt = null;
+      localStorage.removeItem("ochota_etap");
+      document.getElementById("wynik").innerHTML = "";
+      aktualizujUI();
+    }
+
     function czyPunktWWielokacie(lat, lon, polygon) {
       let inside = false;
       for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
@@ -227,13 +393,11 @@
       return inside;
     }
 
-    // Zwraca 0 jeśli punkt jest wewnątrz parku, lub najkrótszą odległość w metrach do krawędzi parku
     function odlegloscOdWielokataMetry(lat, lon, polygon) {
       if (czyPunktWWielokacie(lat, lon, polygon)) {
         return 0;
       }
 
-      // Lokalna projekcja płaska w metrach wokół punktu użytkownika (dla Warszawy wystarczająco dokładna)
       const R = 6371000;
       const latRad = lat * Math.PI / 180;
       const toXY = ([pLat, pLon]) => ({
@@ -251,7 +415,6 @@
       return minDist;
     }
 
-    // Najkrótsza odległość punktu (px, py) od odcinka AB
     function odlegloscOdOdcinka(px, py, ax, ay, bx, by) {
       const dx = bx - ax;
       const dy = by - ay;

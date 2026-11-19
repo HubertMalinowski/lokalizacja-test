@@ -34,5 +34,60 @@
       [52.21165, 20.95645],
       [52.21235, 20.95335]
     ]
+  },
+  {
+    "id": "fort-korotynskiego",
+    "nazwa": "Fort Rakowiec (Korotyńskiego)",
+    "opis": "Dawny fort carski z XIX wieku po południowej stronie ul. Korotyńskiego, dziś z zielonym terenem i charakterystycznymi elementami fortyfikacji.",
+    "polygon": [
+      [52.20390, 20.97180],
+      [52.20410, 20.97720],
+      [52.20160, 20.97750],
+      [52.20140, 20.97210]
+    ]
+  },
+  {
+    "id": "osiedle-kolonia-lubeckiego",
+    "nazwa": "Kolonia Lubeckiego",
+    "opis": "Zabytkowe osiedle z lat 20. XX wieku z ceglaną i tynkowaną zabudową między Grójecką, Wawelską, Filtrową i Lekarską.",
+    "polygon": [
+      [52.22160, 20.98550],
+      [52.22210, 20.99220],
+      [52.21780, 20.99300],
+      [52.21730, 20.98620]
+    ]
+  },
+  {
+    "id": "hala-banacha",
+    "nazwa": "Hala Banacha i plac",
+    "opis": "Jeden z najbardziej rozpoznawalnych punktów lokalnego życia na Ochocie — targowisko i okolice ulic Grójeckiej, Banacha i Bitwy Warszawskiej 1920 r.",
+    "polygon": [
+      [52.21430, 20.97620],
+      [52.21445, 20.97960],
+      [52.21230, 20.97990],
+      [52.21215, 20.97650]
+    ]
+  },
+  {
+    "id": "pomnik-barykada-wrzesnia",
+    "nazwa": "Pomnik Barykada Września",
+    "opis": "Charakterystyczny monument upamiętniający obronę Warszawy we wrześniu 1939 r., zlokalizowany na rogu Grójeckiej i Bitwy Warszawskiej 1920 r.",
+    "polygon": [
+      [52.21560, 20.97680],
+      [52.21570, 20.97810],
+      [52.21475, 20.97825],
+      [52.21465, 20.97695]
+    ]
+  },
+  {
+    "id": "dworzec-zachodni-ochota",
+    "nazwa": "Dworzec Warszawa Zachodnia (strona Ochoty)",
+    "opis": "Duży węzeł przesiadkowy po zachodniej stronie dzielnicy w rejonie Alei Jerozolimskich i tunelu/przejścia w stronę Ochoty.",
+    "polygon": [
+      [52.22020, 20.96150],
+      [52.22060, 20.96650],
+      [52.21760, 20.96720],
+      [52.21720, 20.96220]
+    ]
   }
 ]

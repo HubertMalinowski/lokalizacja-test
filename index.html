@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moja lokalizacja</title>
+  <title>Czy jestem w Parku Pięciu Sióstr?</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -13,45 +13,140 @@
       min-height: 100vh;
       margin: 0;
       background: #f4f4f9;
+      color: #222;
     }
     .card {
       background: white;
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       text-align: center;
-      max-width: 350px;
+      max-width: 380px;
       width: 90%;
     }
+    h2 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+    .control-group {
+      margin: 1.25rem 0;
+      text-align: left;
+      background: #f8fafc;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+    input[type="range"] {
+      width: 100%;
+      cursor: pointer;
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #475569;
+    }
     button {
-      background: #2563eb;
+      background: #16a34a;
       color: white;
       border: none;
       padding: 12px 20px;
       font-size: 1rem;
+      font-weight: 600;
       border-radius: 8px;
       cursor: pointer;
+      width: 100%;
     }
     button:hover {
-      background: #1d4ed8;
+      background: #15803d;
     }
     #wynik {
       margin-top: 1.5rem;
       line-height: 1.6;
-      color: #333;
+      font-size: 0.95rem;
+    }
+    .status {
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .inside {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .outside {
+      background: #fee2e2;
+      color: #991b1b;
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h2>Sprawdź lokalizację</h2>
-    <button onclick="pobierzLokalizacje()">Pobierz moją lokalizację</button>
+    <h2>Park Pięciu Sióstr (Warszawa)</h2>
+
+    <div class="control-group">
+      <label for="margines">
+        <span>Margines błędu:</span>
+        <span><strong id="marginesWartosc">50</strong> m</span>
+      </label>
+      <input type="range" id="margines" min="0" max="500" step="10" value="50">
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="uwzglednijGps" checked>
+        <label for="uwzglednijGps" style="margin:0; font-weight:normal; cursor:pointer;">
+          Dolicz niepewność odczytu GPS (<code>accuracy</code>)
+        </label>
+      </div>
+    </div>
+
+    <button onclick="sprawdzLokalizacje()">Sprawdź, czy jestem w parku</button>
     <div id="wynik"></div>
   </div>
 
   <script>
-    function pobierzLokalizacje() {
+    // Przybliżony wielokąt granic Parku Pięciu Sióstr (Warszawa, Ochota)
+    // Wierzchołki w formacie [szerokość (lat), długość (lon)]
+    const PARK_POLYGON = [
+      [52.21625, 20.96520], // północny zachód (okolice Kopińskiej / Szczęśliwickiej)
+      [52.21640, 20.96815], // północny wschód (bliżej Białobrzeskiej)
+      [52.21435, 20.96935], // południowy wschód (okolice Bitwy Warszawskiej 1920 r.)
+      [52.21345, 20.96755], // południe (wzdłuż Bitwy Warszawskiej 1920 r.)
+      [52.21415, 20.96545]  // południowy zachód (od strony Szczęśliwickiej)
+    ];
+
+    let ostatniOdczyt = null;
+
+    const suwak = document.getElementById("margines");
+    const marginesLabel = document.getElementById("marginesWartosc");
+    const checkboxGps = document.getElementById("uwzglednijGps");
+
+    // Aktualizacja na żywo po przesunięciu suwaka (bez ponownego czekania na GPS)
+    suwak.addEventListener("input", () => {
+      marginesLabel.textContent = suwak.value;
+      if (ostatniOdczyt) {
+        renderujWynik(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+      }
+    });
+
+    checkboxGps.addEventListener("change", () => {
+      if (ostatniOdczyt) {
+        renderujWynik(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+      }
+    });
+
+    function sprawdzLokalizacje() {
       const wynik = document.getElementById("wynik");
 
       if (!navigator.geolocation) {
@@ -63,18 +158,12 @@
 
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          const acc = Math.round(position.coords.accuracy);
-
-          wynik.innerHTML = `
-            <strong>Szerokość (lat):</strong> ${lat}<br>
-            <strong>Długość (lon):</strong> ${lon}<br>
-            <strong>Dokładność:</strong> ~${acc} m<br><br>
-            <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">
-              Otwórz w Mapach Google
-            </a>
-          `;
+          ostatniOdczyt = {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+            acc: position.coords.accuracy
+          };
+          renderujWynik(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
         },
         (error) => {
           switch (error.code) {
@@ -92,11 +181,86 @@
           }
         },
         {
-          enableHighAccuracy: true, // wymusza GPS jeśli dostępny
-          timeout: 10000,           // maks. czas oczekiwania (10s)
-          maximumAge: 0             // nie używaj zapisanej lokalizacji z cache
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
         }
       );
+    }
+
+    function renderujWynik(lat, lon, acc) {
+      const wynik = document.getElementById("wynik");
+      const marginesSuwak = Number(suwak.value);
+      const gpsBonus = checkboxGps.checked ? Math.round(acc) : 0;
+      const calkowityMargines = marginesSuwak + gpsBonus;
+
+      const dystansDoParku = odlegloscOdWielokataMetry(lat, lon, PARK_POLYGON);
+      const wParku = dystansDoParku <= calkowityMargines;
+
+      const statusHtml = wParku
+        ? `<div class="status inside">TAK — jesteś w Parku Pięciu Sióstr!</div>`
+        : `<div class="status outside">NIE — jesteś poza parkiem.</div>`;
+
+      wynik.innerHTML = `
+        ${statusHtml}
+        <strong>Odległość od granic parku:</strong> ${Math.round(dystansDoParku)} m<br>
+        <strong>Zastosowany bufor:</strong> ${calkowityMargines} m
+        (suwak: ${marginesSuwak} m${checkboxGps.checked ? ` + GPS: ${gpsBonus} m` : ""})<br>
+        <strong>Twoje GPS:</strong> ${lat.toFixed(6)}, ${lon.toFixed(6)} (±${Math.round(acc)} m)<br><br>
+        <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">
+          Pokaż moją pozycję na mapie
+        </a>
+      `;
+    }
+
+    // Sprawdza czy punkt leży wewnątrz wielokąta (algorytm ray-casting)
+    function czyPunktWWielokacie(lat, lon, polygon) {
+      let inside = false;
+      for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        const xi = polygon[i][0], yi = polygon[i][1];
+        const xj = polygon[j][0], yj = polygon[j][1];
+
+        const intersect = ((yi > lon) !== (yj > lon)) &&
+          (lat < (xj - xi) * (lon - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    // Zwraca 0 jeśli punkt jest wewnątrz parku, lub najkrótszą odległość w metrach do krawędzi parku
+    function odlegloscOdWielokataMetry(lat, lon, polygon) {
+      if (czyPunktWWielokacie(lat, lon, polygon)) {
+        return 0;
+      }
+
+      // Lokalna projekcja płaska w metrach wokół punktu użytkownika (dla Warszawy wystarczająco dokładna)
+      const R = 6371000;
+      const latRad = lat * Math.PI / 180;
+      const toXY = ([pLat, pLon]) => ({
+        x: (pLon - lon) * (Math.PI / 180) * R * Math.cos(latRad),
+        y: (pLat - lat) * (Math.PI / 180) * R
+      });
+
+      let minDist = Infinity;
+      for (let i = 0; i < polygon.length; i++) {
+        const a = toXY(polygon[i]);
+        const b = toXY(polygon[(i + 1) % polygon.length]);
+        const dist = odlegloscOdOdcinka(0, 0, a.x, a.y, b.x, b.y);
+        if (dist < minDist) minDist = dist;
+      }
+      return minDist;
+    }
+
+    // Najkrótsza odległość punktu (px, py) od odcinka AB
+    function odlegloscOdOdcinka(px, py, ax, ay, bx, by) {
+      const dx = bx - ax;
+      const dy = by - ay;
+      const lenSq = dx * dx + dy * dy;
+      let t = lenSq === 0 ? 0 : ((px - ax) * dx + (py - ay) * dy) / lenSq;
+      t = Math.max(0, Math.min(1, t));
+      const projX = ax + t * dx;
+      const projY = ay + t * dy;
+      return Math.hypot(px - projX, py - projY);
     }
   </script>
 

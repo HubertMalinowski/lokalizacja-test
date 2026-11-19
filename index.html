@@ -30,12 +30,13 @@
     }
     .progress {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       gap: 6px;
       margin: 1rem 0;
     }
     .step {
-      flex: 1;
+      flex: 1 1 30%;
       padding: 8px 4px;
       border-radius: 8px;
       font-size: 0.78rem;
@@ -70,6 +71,12 @@
       font-weight: 700;
       margin-top: 4px;
       color: #1e3a8a;
+    }
+    .target-box .desc {
+      font-size: 0.85rem;
+      color: #334155;
+      margin-top: 6px;
+      line-height: 1.4;
     }
     .control-group {
       margin: 1rem 0;
@@ -109,7 +116,7 @@
       cursor: pointer;
       width: 100%;
     }
-    button.primary:hover {
+    button.primary:hover:not(:disabled) {
       background: #15803d;
     }
     button.secondary {
@@ -158,15 +165,12 @@
   <div class="card">
     <h2>Trasa: Ochota</h2>
 
-    <div class="progress">
-      <div class="step" id="step-0">1. Pięciu Sióstr</div>
-      <div class="step" id="step-1">2. Szczęśliwicki</div>
-      <div class="step" id="step-2">3. Blue City</div>
-    </div>
+    <div class="progress" id="progressBar"></div>
 
     <div class="target-box" id="targetBox">
       <div class="label">Aktualny cel</div>
-      <div class="name" id="targetName">Park Pięciu Sióstr</div>
+      <div class="name" id="targetName">Ładowanie trasy...</div>
+      <div class="desc" id="targetDesc"></div>
     </div>
 
     <div class="control-group">
@@ -184,47 +188,14 @@
       </div>
     </div>
 
-    <button class="primary" id="checkBtn" onclick="sprawdzLokalizacje()">Sprawdź moją pozycję</button>
+    <button class="primary" id="checkBtn" onclick="sprawdzLokalizacje()" disabled>Ładowanie...</button>
     <div id="wynik"></div>
 
     <button class="secondary" onclick="resetujGre()">Zacznij trasę od nowa</button>
   </div>
 
   <script>
-    // Definicja 3 kolejnych etapów trasy z wielokątami granic [lat, lon]
-    const CELE = [
-      {
-        nazwa: "Park Pięciu Sióstr",
-        polygon: [
-          [52.21625, 20.96520],
-          [52.21640, 20.96815],
-          [52.21435, 20.96935],
-          [52.21345, 20.96755],
-          [52.21415, 20.96545]
-        ]
-      },
-      {
-        nazwa: "Park Szczęśliwicki",
-        polygon: [
-          [52.21020, 20.95580], // płn-zach (okolice Włodarzewskiej / Drawskiej)
-          [52.21040, 20.96280], // płn-wsch (okolice Drawskiej / Szczęśliwickiej)
-          [52.20650, 20.96420], // wschód (przy ul. Szczęśliwickiej)
-          [52.20360, 20.96220], // płd-wsch (okolice Dickensa / Urbanistów)
-          [52.20390, 20.95540], // płd-zach (okolice Włodarzewskiej)
-          [52.20720, 20.95460]  // zachód
-        ]
-      },
-      {
-        nazwa: "CH Blue City",
-        polygon: [
-          [52.21415, 20.95410], // płn-zach (Al. Jerozolimskie)
-          [52.21335, 20.95715], // płn-wsch (Al. Jerozolimskie / Opaczewska)
-          [52.21165, 20.95645], // płd-wsch (Opaczewska)
-          [52.21235, 20.95335]  // płd-zach
-        ]
-      }
-    ];
-
+    let CELE = [];
     let aktualnyEtap = Number(localStorage.getItem("ochota_etap") || 0);
     let ostatniOdczyt = null;
 
@@ -232,7 +203,40 @@
     const marginesLabel = document.getElementById("marginesWartosc");
     const checkboxGps = document.getElementById("uwzglednijGps");
 
-    aktualizujUI();
+    async function zaladujCele() {
+      try {
+        const response = await fetch("./cele.json");
+        if (!response.ok) throw new Error(`Błąd HTTP: ${response.status}`);
+        CELE = await response.json();
+
+        if (aktualnyEtap > CELE.length) {
+          aktualnyEtap = CELE.length;
+          localStorage.setItem("ochota_etap", String(aktualnyEtap));
+        }
+
+        zbudujPasekPostepu();
+        aktualizujUI();
+      } catch (err) {
+        document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
+        document.getElementById("targetDesc").textContent = "";
+        document.getElementById("wynik").textContent =
+          "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
+        console.error(err);
+      }
+    }
+
+    function zbudujPasekPostepu() {
+      const progressBar = document.getElementById("progressBar");
+      progressBar.innerHTML = "";
+
+      CELE.forEach((cel, idx) => {
+        const stepDiv = document.createElement("div");
+        stepDiv.className = "step";
+        stepDiv.id = `step-${idx}`;
+        stepDiv.textContent = `${idx + 1}. ${cel.nazwa}`;
+        progressBar.appendChild(stepDiv);
+      });
+    }
 
     suwak.addEventListener("input", () => {
       marginesLabel.textContent = suwak.value;
@@ -250,6 +254,7 @@
     function aktualizujUI() {
       for (let i = 0; i < CELE.length; i++) {
         const el = document.getElementById(`step-${i}`);
+        if (!el) continue;
         el.className = "step";
         if (i < aktualnyEtap) el.classList.add("done");
         else if (i === aktualnyEtap) el.classList.add("active");
@@ -257,22 +262,26 @@
 
       const targetBox = document.getElementById("targetBox");
       const targetName = document.getElementById("targetName");
+      const targetDesc = document.getElementById("targetDesc");
       const checkBtn = document.getElementById("checkBtn");
 
       if (aktualnyEtap >= CELE.length) {
         targetBox.style.background = "#dcfce7";
         targetBox.style.borderColor = "#86efac";
-        targetName.textContent = "Wszystkie 3 punkty zaliczone!";
+        targetName.textContent = `Wszystkie ${CELE.length} punkty zaliczone!`;
+        targetDesc.textContent = "";
         checkBtn.disabled = true;
         checkBtn.style.opacity = "0.6";
         checkBtn.textContent = "Trasa ukończona";
       } else {
+        const cel = CELE[aktualnyEtap];
         targetBox.style.background = "#eff6ff";
         targetBox.style.borderColor = "#bfdbfe";
-        targetName.textContent = CELE[aktualnyEtap].nazwa;
+        targetName.textContent = cel.nazwa;
+        targetDesc.textContent = cel.opis || "";
         checkBtn.disabled = false;
         checkBtn.style.opacity = "1";
-        checkBtn.textContent = `Sprawdź: ${CELE[aktualnyEtap].nazwa}`;
+        checkBtn.textContent = `Sprawdź: ${cel.nazwa}`;
       }
     }
 
@@ -348,7 +357,7 @@
         } else {
           statusHtml = `
             <div class="status finished">
-              Gratulacje! Dotarłeś do Blue City i ukończyłeś całą trasę!
+              Gratulacje! Dotarłeś do ${zaliczonyNazwa} i ukończyłeś całą trasę!
             </div>
           `;
         }
@@ -425,6 +434,8 @@
       const projY = ay + t * dy;
       return Math.hypot(px - projX, py - projY);
     }
+
+    zaladujCele();
   </script>
 
 </body>

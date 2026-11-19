@@ -1,0 +1,38 @@
+[
+  {
+    "id": "pieciu-siostr",
+    "nazwa": "Park Pięciu Sióstr",
+    "opis": "Skwer na Ochocie między ul. Bitwy Warszawskiej 1920 r., Szczęśliwicką a Białobrzeską.",
+    "polygon": [
+      [52.21625, 20.96520],
+      [52.21640, 20.96815],
+      [52.21435, 20.96935],
+      [52.21345, 20.96755],
+      [52.21415, 20.96545]
+    ]
+  },
+  {
+    "id": "szczesliwicki",
+    "nazwa": "Park Szczęśliwicki",
+    "opis": "Duży park z górką, stawami i alejkami między Włodarzewską, Drawską, Szczęśliwicką i Dickensa.",
+    "polygon": [
+      [52.21020, 20.95580],
+      [52.21040, 20.96280],
+      [52.20650, 20.96420],
+      [52.20360, 20.96220],
+      [52.20390, 20.95540],
+      [52.20720, 20.95460]
+    ]
+  },
+  {
+    "id": "blue-city",
+    "nazwa": "CH Blue City",
+    "opis": "Centrum handlowe w Al. Jerozolimskich po stronie Ochoty / Włoch (okolice ul. Opaczewskiej).",
+    "polygon": [
+      [52.21415, 20.95410],
+      [52.21335, 20.95715],
+      [52.21165, 20.95645],
+      [52.21235, 20.95335]
+    ]
+  }
+]

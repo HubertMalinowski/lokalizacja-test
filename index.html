@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gra terenowa — Ochota</title>
+  <title>Gra terenowa — Ochota (losowa trasa)</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -119,19 +119,26 @@
     button.primary:hover:not(:disabled) {
       background: #15803d;
     }
+    .actions-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
     button.secondary {
       background: transparent;
-      color: #64748b;
+      color: #475569;
       border: 1px solid #cbd5e1;
-      padding: 7px 12px;
+      padding: 8px 12px;
       font-size: 0.8rem;
+      font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 1.25rem;
     }
     button.secondary:hover {
       background: #f1f5f9;
-      color: #334155;
+      color: #1e293b;
     }
     #wynik {
       margin-top: 1.25rem;
@@ -191,27 +198,98 @@
     <button class="primary" id="checkBtn" onclick="sprawdzLokalizacje()" disabled>Ładowanie...</button>
     <div id="wynik"></div>
 
-    <button class="secondary" onclick="resetujGre()">Zacznij trasę od nowa</button>
+    <div class="actions-row">
+      <button class="secondary" onclick="wylosujNowaTrase()">Wylosuj nową trasę (3 miejsca)</button>
+      <button class="secondary" onclick="powtorzTenSamZestaw()">Powtórz tę trójkę</button>
+    </div>
   </div>
 
   <script>
-    let CELE = [];
-    let aktualnyEtap = Number(localStorage.getItem("ochota_etap") || 0);
+    const LICZBA_CELOW_W_RUNDZIE = 3;
+    const STORAGE_IDS_KEY = "ochota_wylosowane_ids";
+    const STORAGE_ETAP_KEY = "ochota_etap";
+
+    let wszystkieCele = [];
+    let CELE = []; // wylosowany zestaw maksymalnie 3 miejsc na aktywną grę
+    let aktualnyEtap = Number(localStorage.getItem(STORAGE_ETAP_KEY) || 0);
     let ostatniOdczyt = null;
 
     const suwak = document.getElementById("margines");
     const marginesLabel = document.getElementById("marginesWartosc");
     const checkboxGps = document.getElementById("uwzglednijGps");
 
+    // Tasowanie tablicy bez mutowania oryginału (Fisher-Yates)
+    function losujUnikalne(lista, ile) {
+      const kopia = [...lista];
+      for (let i = kopia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [kopia[i], kopia[j]] = [kopia[j], kopia[i]];
+      }
+      return kopia.slice(0, Math.min(ile, kopia.length));
+    }
+
+    function zapiszStanTrasy() {
+      localStorage.setItem(STORAGE_IDS_KEY, JSON.stringify(CELE.map((c) => c.id)));
+      localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
+    }
+
+    function wylosujNowaTrase() {
+      CELE = losujUnikalne(wszstkieCele(), LICZBA_CELOW_W_RUNDZIE);
+      aktualnyEtap = 0;
+      ostatniOdczyt = null;
+      document.getElementById("wynik").innerHTML = "";
+      zapiszStanTrasy();
+      zbudujPasekPostepu();
+      aktualizujUI();
+    }
+
+    function wszstkieCele() {
+      return wszystkieCele;
+    }
+
+    function powtorzTenSamZestaw() {
+      aktualnyEtap = 0;
+      ostatniOdczyt = null;
+      document.getElementById("wynik").innerHTML = "";
+      localStorage.setItem(STORAGE_ETAP_KEY, "0");
+      aktualizujUI();
+    }
+
     async function zaladujCele() {
       try {
         const response = await fetch("./cele.json");
         if (!response.ok) throw new Error(`Błąd HTTP: ${response.status}`);
-        CELE = await response.json();
+        wszystkieCele = await response.json();
 
-        if (aktualnyEtap > CELE.length) {
-          aktualnyEtap = CELE.length;
-          localStorage.setItem("ochota_etap", String(aktualnyEtap));
+        if (!Array.isArray(wszystkieCele) || wszystkieCele.length === 0) {
+          throw new Error("Brak celów w cele.json");
+        }
+
+        // Odtwórz zapisany wylosowany zestaw, jeśli wszystkie ID nadal istnieją w cele.json
+        const zapisaneIdsRaw = localStorage.getItem(STORAGE_IDS_KEY);
+        let odtworzone = null;
+
+        if (zapisaneIdsRaw) {
+          const zapisaneIds = JSON.parse(zapisaneIdsRaw);
+          if (Array.isArray(zapisaneIds) && zapisaneIds.length > 0) {
+            const mapa = new Map(wszystkieCele.map((c) => [c.id, c]));
+            const dopasowane = zapisaneIds.map((id) => mapa.get(id)).filter(Boolean);
+            if (dopasowane.length === zapisaneIds.length) {
+              odtworzone = dopasowane;
+            }
+          }
+        }
+
+        if (odtworzone) {
+          CELE = odtworzone;
+          if (aktualnyEtap > CELE.length) {
+            aktualnyEtap = CELE.length;
+            localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
+          }
+        } else {
+          CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
+          aktualnyEtap = 0;
+          zapiszStanTrasy();
         }
 
         zbudujPasekPostepu();
@@ -268,8 +346,8 @@
       if (aktualnyEtap >= CELE.length) {
         targetBox.style.background = "#dcfce7";
         targetBox.style.borderColor = "#86efac";
-        targetName.textContent = `Wszystkie ${CELE.length} punkty zaliczone!`;
-        targetDesc.textContent = "";
+        targetName.textContent = `Wszystkie ${CELE.length} wylosowane punkty zaliczone!`;
+        targetDesc.textContent = "Możesz wylosować nową trasę albo powtórzyć ten sam zestaw.";
         checkBtn.disabled = true;
         checkBtn.style.opacity = "0.6";
         checkBtn.textContent = "Trasa ukończona";
@@ -344,7 +422,7 @@
       if (trafiony) {
         const zaliczonyNazwa = cel.nazwa;
         aktualnyEtap++;
-        localStorage.setItem("ochota_etap", String(aktualnyEtap));
+        localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
         aktualizujUI();
 
         if (aktualnyEtap < CELE.length) {
@@ -357,7 +435,7 @@
         } else {
           statusHtml = `
             <div class="status finished">
-              Gratulacje! Dotarłeś do ${zaliczonyNazwa} i ukończyłeś całą trasę!
+              Gratulacje! Dotarłeś do ${zaliczonyNazwa} i ukończyłeś całą wylosowaną trasę!
             </div>
           `;
         }
@@ -379,14 +457,6 @@
           Pokaż moją pozycję na mapie
         </a>
       `;
-    }
-
-    function resetujGre() {
-      aktualnyEtap = 0;
-      ostatniOdczyt = null;
-      localStorage.removeItem("ochota_etap");
-      document.getElementById("wynik").innerHTML = "";
-      aktualizujUI();
     }
 
     function czyPunktWWielokacie(lat, lon, polygon) {

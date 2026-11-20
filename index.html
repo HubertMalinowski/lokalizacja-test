@@ -358,3 +358,245 @@
       ostatniOdczyt = null;
       document.getElementById("wynik").innerHTML = "";
       localStorage.setItem(STORAGE_ETAP_KEY, "0");
+      aktualizujUI();
+    }
+
+    async function zaladujCele() {
+      try {
+        const response = await fetch("./cele.json");
+        if (!response.ok) throw new Error(`Błąd HTTP: ${response.status}`);
+        wszystkieCele = await response.json();
+
+        if (!Array.isArray(wszystkieCele) || wszystkieCele.length === 0) {
+          throw new Error("Brak celów w cele.json");
+        }
+
+        const zapisaneIdsRaw = localStorage.getItem(STORAGE_IDS_KEY);
+        let odtworzone = null;
+
+        if (zapisaneIdsRaw) {
+          const zapisaneIds = JSON.parse(zapisaneIdsRaw);
+          if (Array.isArray(zapisaneIds) && zapisaneIds.length > 0) {
+            const mapa = new Map(wszystkieCele.map((c) => [c.id, c]));
+            const dopasowane = zapisaneIds.map((id) => mapa.get(id)).filter(Boolean);
+            if (dopasowane.length === zapisaneIds.length) {
+              odtworzone = dopasowane;
+            }
+          }
+        }
+
+        if (odtworzone) {
+          CELE = odtworzone;
+          if (aktualnyEtap > CELE.length) {
+            aktualnyEtap = CELE.length;
+            localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
+          }
+        } else {
+          CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
+          aktualnyEtap = 0;
+          zapiszStanTrasy();
+        }
+
+        zbudujPasekPostepu();
+        aktualizujUI();
+      } catch (err) {
+        document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
+        document.getElementById("targetDesc").textContent = "";
+        document.getElementById("targetRadius").style.display = "none";
+        document.getElementById("targetMapLink").style.display = "none";
+        document.getElementById("fullRouteLink").style.display = "none";
+        document.getElementById("wynik").textContent =
+          "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
+        console.error(err);
+      }
+    }
+
+    function zbudujPasekPostepu() {
+      const progressBar = document.getElementById("progressBar");
+      progressBar.innerHTML = "";
+
+      CELE.forEach((cel, idx) => {
+        const stepDiv = document.createElement("div");
+        stepDiv.className = "step";
+        stepDiv.id = `step-${idx}`;
+        stepDiv.textContent = `${idx + 1}. ${cel.nazwa}`;
+        progressBar.appendChild(stepDiv);
+      });
+    }
+
+    suwak.addEventListener("input", () => {
+      marginesLabel.textContent = suwak.value;
+      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
+        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+      }
+    });
+
+    checkboxGps.addEventListener("change", () => {
+      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
+        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+      }
+    });
+
+    function aktualizujUI() {
+      for (let i = 0; i < CELE.length; i++) {
+        const el = document.getElementById(`step-${i}`);
+        if (!el) continue;
+        el.className = "step";
+        if (i < aktualnyEtap) el.classList.add("done");
+        else if (i === aktualnyEtap) el.classList.add("active");
+      }
+
+      const targetBox = document.getElementById("targetBox");
+      const targetName = document.getElementById("targetName");
+      const targetRadius = document.getElementById("targetRadius");
+      const targetDesc = document.getElementById("targetDesc");
+      const targetMapLink = document.getElementById("targetMapLink");
+      const checkBtn = document.getElementById("checkBtn");
+
+      aktualizujLinkCalejTrasy();
+
+      if (aktualnyEtap >= CELE.length) {
+        targetBox.style.background = "#dcfce7";
+        targetBox.style.borderColor = "#86efac";
+        targetName.textContent = `Wszystkie ${CELE.length} wylosowane punkty zaliczone!`;
+        targetRadius.style.display = "none";
+        targetDesc.textContent = "Możesz wylosować nową trasę albo powtórzyć ten sam zestaw.";
+        targetMapLink.style.display = "none";
+        checkBtn.disabled = true;
+        checkBtn.style.opacity = "0.6";
+        checkBtn.textContent = "Trasa ukończona";
+      } else {
+        const cel = CELE[aktualnyEtap];
+        const promien = Number(cel.promien);
+
+        targetBox.style.background = "#eff6ff";
+        targetBox.style.borderColor = "#bfdbfe";
+        targetName.textContent = cel.nazwa;
+
+        targetRadius.textContent = `Wymagany promień: ${promien} m`;
+        targetRadius.style.display = "inline-block";
+
+        targetDesc.textContent = cel.opis || "";
+        targetMapLink.href = `https://www.google.com/maps/search/?api=1&query=${cel.lat},${cel.lon}`;
+        targetMapLink.style.display = "inline-block";
+
+        checkBtn.disabled = false;
+        checkBtn.style.opacity = "1";
+        checkBtn.textContent = `Sprawdź: ${cel.nazwa}`;
+      }
+    }
+
+    function sprawdzLokalizacje() {
+      const wynik = document.getElementById("wynik");
+
+      if (!navigator.geolocation) {
+        wynik.textContent = "Twoja przeglądarka nie obsługuje geolokalizacji.";
+        return;
+      }
+
+      wynik.textContent = "Pobieranie lokalizacji...";
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          ostatniOdczyt = {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+            acc: position.coords.accuracy
+          };
+          aktualizujLinkCalejTrasy();
+          ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
+        },
+        (error) => {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              wynik.textContent = "Odmówiono dostępu do lokalizacji.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              wynik.textContent = "Informacje o lokalizacji są niedostępne.";
+              break;
+            case error.TIMEOUT:
+              wynik.textContent = "Upłynął limit czasu żądania.";
+              break;
+            default:
+              wynik.textContent = "Wystąpił nieznany błąd.";
+          }
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    }
+
+    function ocenPozycje(lat, lon, acc) {
+      const wynik = document.getElementById("wynik");
+      if (aktualnyEtap >= CELE.length) return;
+
+      const cel = CELE[aktualnyEtap];
+      const promienCelu = Number(cel.promien);
+      const marginesSuwak = Number(suwak.value);
+      const gpsBonus = checkboxGps.checked ? Math.round(acc) : 0;
+
+      const progZaliczenia = promienCelu + marginesSuwak + gpsBonus;
+      const dystans = odlegloscMetry(lat, lon, cel.lat, cel.lon);
+      const trafiony = dystans <= progZaliczenia;
+
+      let statusHtml = "";
+
+      if (trafiony) {
+        const zaliczonyNazwa = cel.nazwa;
+        aktualnyEtap++;
+        localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
+        aktualizujUI();
+
+        if (aktualnyEtap < CELE.length) {
+          statusHtml = `
+            <div class="status inside">
+              Zaliczono: ${zaliczonyNazwa}!<br>
+              Nowy cel: <strong>${CELE[aktualnyEtap].nazwa}</strong>
+            </div>
+          `;
+        } else {
+          statusHtml = `
+            <div class="status finished">
+              Gratulacje! Dotarłeś do ${zaliczonyNazwa} i ukończyłeś całą wylosowaną trasę!
+            </div>
+          `;
+        }
+      } else {
+        statusHtml = `
+          <div class="status outside">
+            Poza promieniem celu (${Math.round(dystans)} m / ${progZaliczenia} m).
+          </div>
+        `;
+      }
+
+      const celDoNawigacji = aktualnyEtap < CELE.length ? CELE[aktualnyEtap] : null;
+      let nawigacjaLinkHtml = "";
+
+      if (celDoNawigacji) {
+        const dirUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat.toFixed(6)},${lon.toFixed(6)}&destination=${celDoNawigacji.lat},${celDoNawigacji.lon}&travelmode=walking`;
+        nawigacjaLinkHtml = `<a href="${dirUrl}" target="_blank" rel="noopener">Nawiguj pieszo do: ${celDoNawigacji.nazwa}</a>`;
+      }
+
+      const mojaPozycjaUrl = `https://www.google.com/maps/search/?api=1&query=${lat.toFixed(6)},${lon.toFixed(6)}`;
+
+      wynik.innerHTML = `
+        ${statusHtml}
+        <strong>Odległość do środka celu:</strong> ${Math.round(dystans)} m<br>
+        <strong>Promień celu:</strong> ${promienCelu} m
+        (dodatki: suwak ${marginesSuwak} m${checkboxGps.checked ? ` + GPS ${gpsBonus} m` : ""}; próg: <strong>${progZaliczenia} m</strong>)<br>
+        <strong>Twoje GPS:</strong> ${lat.toFixed(6)}, ${lon.toFixed(6)} (±${Math.round(acc)} m)
+        <div class="result-links">
+          <a href="${mojaPozycjaUrl}" target="_blank" rel="noopener">Pokaż moją pozycję w Mapach Google</a>
+          ${nawigacjaLinkHtml}
+        </div>
+      `;
+    }
+
+    zaladujCele();
+  </script>
+
+</body>
+</html>

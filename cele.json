@@ -14,8 +14,8 @@
     "nazwa": "Park Szczęśliwicki",
     "wikiQuery": "Park Szczęśliwicki Warszawa",
     "opis": "Największy teren zielony na Ochocie, położony między ulicami Włodarzewską, Drawską, Szczęśliwicką i Dickensa. Jego główną atrakcją jest usypana po wojnie z gruzów Warszawy Górka Szczęśliwicka (152 m n.p.m.) z całorocznym stokiem narciarskim, wyciągiem krzesełkowym i kolejką grawitacyjną. U podnóża wzgórza znajdują się dwa malownicze stawy wędkarskie, rozległe trawniki, ścieżki biegowe oraz sezonowy odkryty basen.",
-    "lat": 52.20710,
-    "lon": 20.95920
+    "lat": 52.2071,
+    "lon": 20.9592
   },
   {
     "id": "blue-city",
@@ -32,7 +32,7 @@
     "nazwa": "Fort Rakowiec (Korotyńskiego)",
     "wikiQuery": "Fort Rakowiec Warszawa",
     "opis": "Pozostałości dawnego fortu M (Rakowiec), wchodzącego w skład wewnętrznego pierścienia umocnień Twierdzy Warszawa, wzniesionego przez władze carskie w latach 80. XIX wieku. Położony po południowej stronie ul. Korotyńskiego obiekt zachował czytelny zarys wałów ziemnych oraz część ceglanych schronów i kaponier. Dziś stanowi dziki, zacieniony teren spacerowy o unikalnym, historyczno-przyrodniczym klimacie.",
-    "lat": 52.20280,
+    "lat": 52.2028,
     "lon": 20.97465
   },
   {
@@ -41,7 +41,7 @@
     "nazwa": "Kolonia Lubeckiego",
     "wikiQuery": "Kolonia Lubeckiego Warszawa",
     "opis": "Zabytkowe osiedle mieszkaniowe z lat 20. i 30. XX wieku, położone w kwartale ulic Grójeckiej, Wawelskiej, Filtrowej i Lekarskiej. Zaprojektowane w duchu modernizmu i historyzmu z elementami dworkowymi, składa się z kameralnych budynków wielorodzinnych otoczonych bujną zielenią, wewnętrznymi dziedzińcami i alejkami. To jeden z najlepiej zachowanych przykładów międzywojennej architektury spółdzielczej i urzędniczej w stolicy.",
-    "lat": 52.21970,
+    "lat": 52.2197,
     "lon": 20.98915
   },
   {
@@ -50,8 +50,8 @@
     "nazwa": "Zespół Stacji Filtrów (ul. Koszykowa / Krzywickiego)",
     "wikiQuery": "Filtry Lindleya Warszawa",
     "opis": "Monumentalny zespół zabytkowych wodociągów zaprojektowany przez brytyjskiego inżyniera Williama Lindleya i uruchomiony w 1886 roku. Ceglana zabudowa z charakterystyczną neogotycką wieżą ciśnień, halami filtrów powolnych oraz zbiornikami wody czystej stanowi perłę XIX-wiecznej architektury przemysłowej. Cały kompleks do dziś pełni swoją pierwotną funkcję, uzdatniając wodę dla mieszkańców Warszawy.",
-    "lat": 52.22320,
-    "lon": 20.99630
+    "lat": 52.2232,
+    "lon": 20.9963
   },
   {
     "id": "plac-narutowicza",
@@ -59,8 +59,8 @@
     "nazwa": "Plac Gabriela Narutowicza",
     "wikiQuery": "Plac Narutowicza Warszawa",
     "opis": "Centralny punkt komunikacyjny i historyczny Starej Ochoty, ukształtowany w okresie międzywojennym u zbiegu ulic Grójeckiej, Filtrowej i Uniwersyteckiej. Na środku placu znajduje się zabytkowa pętla tramwajowa otoczona klinkierową nawierzchnią, a całość domyka monumentalny kościół Niepokalanego Poczęcia NMP (św. Jakuba) oraz gmach Domu Studenckiego Akademik. Wokół placu koncentrują się lokalne kawiarnie, księgarnie i przedwojenne kamienice.",
-    "lat": 52.21830,
-    "lon": 20.98220
+    "lat": 52.2183,
+    "lon": 20.9822
   },
   {
     "id": "park-malickiego",
@@ -68,8 +68,8 @@
     "nazwa": "Park im. Zdzisława Malickiego",
     "wikiQuery": "Park Zdzisława Malickiego Warszawa",
     "opis": "Kameralny, niezwykle malowniczy park dzielnicowy na Rakowcu, rozciągający się wzdłuż ulic Księcia Trojdena, Pruszkowskiej i Pawińskiego. Jego sercem jest duży, naturalny staw będący pozostałością dawnych glinianek, wokół którego poprowadzono zacienione alejki i ustawiono liczne ławki. Park nosi imię architekta Zdzisława Malickiego, głównego projektanta powojennego osiedla Rakowiec.",
-    "lat": 52.20160,
-    "lon": 20.98040
+    "lat": 52.2016,
+    "lon": 20.9804
   },
   {
     "id": "kolonia-staszica",
@@ -77,8 +77,8 @@
     "nazwa": "Kolonia Staszica",
     "wikiQuery": "Kolonia Staszica Warszawa",
     "opis": "Spokojna, willowa enklawa z lat 20. XX wieku, położona między ulicami Filtrową, Krzywickiego, Wawelską i aleją Niepodległości. Zaprojektowana w idei miasta-ogrodu z łukowato poprowadzonymi uliczkami (m.in. Langiewicza, Prezydencką czy Lekarską), zachwyca kameralnymi willami zatopionymi w starodrzewie. W okresie międzywojennym zamieszkiwali tu przedstawiciele elity naukowej, kulturalnej i politycznej II Rzeczypospolitej.",
-    "lat": 52.21650,
-    "lon": 20.99980
+    "lat": 52.2165,
+    "lon": 20.9998
   },
   {
     "id": "teatr-ochoty",
@@ -87,7 +87,7 @@
     "wikiQuery": "Teatr Ochoty Warszawa",
     "opis": "Kameralny teatr dramatyczny mieszczący się przy ul. Mikołaja Reja 9, założony w 1970 roku przez wybitne małżeństwo aktorów i pedagogów — Halinę i Jana Machulskich. Od początku działalności słynął z bliskiego kontaktu widza ze sceną, odważnego repertuaru oraz prężnie działającego ogniska teatralnego dla młodzieży. Budynek teatru ukryty jest w spokojnej, zielonej części Starej Ochoty.",
     "lat": 52.21895,
-    "lon": 20.99510
+    "lon": 20.9951
   },
   {
     "id": "park-wielkopolski",
@@ -95,8 +95,8 @@
     "nazwa": "Park Wielkopolski",
     "wikiQuery": "Park Wielkopolski Warszawa",
     "opis": "Zadrzewiony skwer o regularnym, symetrycznym układzie, zaprojektowany w latach 30. XX wieku przez Leona Danielewicza wzdłuż ulic Filtrowej, Łęczyckiej i Wawelskiej. Stanowi naturalne przedłużenie zielonej osi łączącej Kolonię Lubeckiego z Kolonią Staszica. Wyróżnia się szpalerami starych drzew, geometrycznymi alejkami, rabatami kwiatowymi oraz spokojną, sąsiedzką atmosferą.",
-    "lat": 52.21790,
-    "lon": 20.99450
+    "lat": 52.2179,
+    "lon": 20.9945
   },
   {
     "id": "pomnik-barykada-wrzesnia",
@@ -105,7 +105,7 @@
     "wikiQuery": "Pomnik Barykada Września Warszawa",
     "opis": "Monumentalny, trzypanelowy pomnik z 1979 roku autorstwa Juliana Pałki, stojący u zbiegu ulic Grójeckiej i Bitwy Warszawskiej 1920 r. Upamiętnia heroiczną obronę Warszawy we wrześniu 1939 roku — dokładnie w tym miejscu znajdowała się główna barykada, na której polscy żołnierze i cywile zatrzymali natarcie niemieckich oddziałów pancernych. Forma rzeźby przypomina spiętrzone płyty chodnikowe, szyny i przeszkody przeciwczołgowe.",
     "lat": 52.21515,
-    "lon": 20.97750
+    "lon": 20.9775
   },
   {
     "id": "pole-mokotowskie",
@@ -113,8 +113,8 @@
     "nazwa": "Pole Mokotowskie",
     "wikiQuery": "Pole Mokotowskie Warszawa",
     "opis": "Rozległy zespół parkowy na styku Mokotowa, Ochoty i Śródmieścia, powstały na dawnych terenach wyścigów konnych i lotniska mokotowskiego. Charakteryzuje się otwartymi polanami, stawami, licznymi ścieżkami pieszo-rowerowymi oraz gęstą siecią lokali gastronomicznych w otoczeniu zieleni. To jedno z najpopularniejszych miejsc rekreacji i spotkań w południowej części miasta.",
-    "lat": 52.21160,
-    "lon": 20.99350
+    "lat": 52.2116,
+    "lon": 20.9935
   },
   {
     "id": "park-morskie-oko",
@@ -122,8 +122,8 @@
     "nazwa": "Park Morskie Oko",
     "wikiQuery": "Park Morskie Oko Warszawa",
     "opis": "Zabytkowy park na Starym Mokotowie, urządzony wokół dawnego wyrobiska gliny i pałacyku Szusterów (siedziby Towarzystwa Przyjaciół Sztuk Pięknych). Wyróżnia się urozmaiconą rzeźbą terenu, stawem, kaskadą oraz klasycystyczną zabudową w sąsiedztwie ulic Puławskiej, Rakowieckiej i Morskie Oko. Łączy walory przyrodnicze z elegancką historią dawnego Mokotowa.",
-    "lat": 52.20890,
-    "lon": 21.02380
+    "lat": 52.2089,
+    "lon": 21.0238
   },
   {
     "id": "krolikarnia",
@@ -131,8 +131,8 @@
     "nazwa": "Królikarnia i park rzeźby",
     "wikiQuery": "Królikarnia Warszawa",
     "opis": "Klasycystyczny pałac z końca XVIII wieku położony na skarpie warszawskiej w południowej części Mokotowa, otoczony rozległym parkiem ze starodrzewem. W budynku działa Muzeum Rzeźby im. Xawerego Dunikowskiego, a w samym parku rozmieszczone są plenerowe rzeźby i obiekty artystyczne. Miejsce oferuje spokojne spacery oraz widoki w stronę doliny Wisły.",
-    "lat": 52.19380,
-    "lon": 21.02460
+    "lat": 52.1938,
+    "lon": 21.0246
   },
   {
     "id": "ogrod-saski",
@@ -140,8 +140,8 @@
     "nazwa": "Ogród Saski",
     "wikiQuery": "Ogród Saski Warszawa",
     "opis": "Jeden z najstarszych publicznych parków miejskich w Polsce, udostępniony mieszkańcom w XVIII wieku jako założenie pałacowe Osi Saskiej. Wyróżnia się symetrycznymi alejami, zabytkowymi rzeźbami barokowymi, fontanną Marconiego oraz sąsiedztwem Grobu Nieznanego Żołnierza. Doskonały punkt na klasyczny spacer w samym centrum miasta.",
-    "lat": 52.24140,
-    "lon": 21.00520
+    "lat": 52.2414,
+    "lon": 21.0052
   },
   {
     "id": "plac-zbawiciela",
@@ -149,8 +149,8 @@
     "nazwa": "Plac Zbawiciela",
     "wikiQuery": "Plac Zbawiciela Warszawa",
     "opis": "Charakterystyczny plac miejski na pograniczu Śródmieścia Południowego i Mokotowa, zrealizowany w XVIII wieku według projektu Osi Stanisławowskiej. Dominuje nad nim kościół Najświętszego Zbawiciela, a wokół rozciąga się tętniąca życiem strefa kawiarni, restauracji i modernistycznych kamienic. Stanowi naturalny łącznik między Marszałkowską, Mokotowską i Nowowiejską.",
-    "lat": 52.21960,
-    "lon": 21.01560
+    "lat": 52.2196,
+    "lon": 21.0156
   },
   {
     "id": "park-swietokrzyski",
@@ -158,8 +158,8 @@
     "nazwa": "Park Świętokrzyski",
     "wikiQuery": "Park Świętokrzyski Warszawa",
     "opis": "Miejski skwer położony bezpośrednio przy Pałacu Kultury i Nauki w Śródmieściu, z widokiem na panoramę wysokościowców centrum. Stanowi zieloną enklawę wśród intensywnej zabudowy biurowo-usługowej i ważny ciąg pieszy w stronę Marszałkowskiej oraz Świętokrzyskiej. Łączy nowoczesny kontekst centrum z alejkami i ławkami w cieniu drzew.",
-    "lat": 52.23360,
-    "lon": 21.00780
+    "lat": 52.2336,
+    "lon": 21.0078
   },
   {
     "id": "park-moczydlo",
@@ -167,8 +167,8 @@
     "nazwa": "Park Moczydło",
     "wikiQuery": "Park Moczydło Warszawa",
     "opis": "Rozległy park na Woli w rejonie ulic Górczewskiej, Deotymy i Prymasa Tysiąclecia, powstały na terenach dawnych cegielni i glinianek. Charakteryzuje się pagórkowatym ukształtowaniem, stawami, ścieżkami spacerowymi oraz kompleksem rekreacyjnym ze wzgórzem i basenami. Łączy industrialną przeszłość Woli z otwartą przestrzenią zieleni.",
-    "lat": 52.23560,
-    "lon": 20.95540
+    "lat": 52.2356,
+    "lon": 20.9554
   },
   {
     "id": "park-szymanskiego",
@@ -176,8 +176,8 @@
     "nazwa": "Park im. Edwarda Szymańskiego",
     "wikiQuery": "Park Szymańskiego Warszawa",
     "opis": "Malowniczy park na wolskim Kole, rozciągający się między ulicami Elekcyjną, Wolską, Obozową i Prymasa Tysiąclecia. Słynie z pofałdowanego terenu, kaskad wodnych, stawów, drewnianych kładek oraz bogatej roślinności. To jeden z najbardziej urozmaiconych krajobrazowo parków w tej części Warszawy.",
-    "lat": 52.23890,
-    "lon": 20.96120
+    "lat": 52.2389,
+    "lon": 20.9612
   },
   {
     "id": "muzeum-powstania-warszawskiego",
@@ -185,7 +185,1177 @@
     "nazwa": "Muzeum Powstania Warszawskiego (ul. Grzybowska)",
     "wikiQuery": "Muzeum Powstania Warszawskiego",
     "opis": "Instytucja kultury i pamięci mieszcząca się w dawnym tramwajowym elektrowniowym budynku przy ul. Grzybowskiej 79 na Woli, otwarta w 2004 roku. Prezentuje historię zrywu z 1944 roku oraz codziennego życia powstańczej Warszawy poprzez multimedialne ekspozycje, pamiątki i archiwalia. Przy muzeum znajduje się także Park Wolności z Murem Pamięci.",
-    "lat": 52.23250,
-    "lon": 20.98010
+    "lat": 52.2325,
+    "lon": 20.9801
+  },
+  {
+    "id": "park-gorczewska",
+    "dzielnica": "Bemowo",
+    "nazwa": "Park Górczewska",
+    "wikiQuery": "Park Górczewska Warszawa",
+    "opis": "Rozległy park na Jelonkach z alejkami, polanami i amfiteatrem. Dobry punkt na spokojny spacer wśród zieleni zachodniej Warszawy.",
+    "lat": 52.2334519,
+    "lon": 20.9066377
+  },
+  {
+    "id": "fort-bema",
+    "dzielnica": "Bemowo",
+    "nazwa": "Fort Bema",
+    "wikiQuery": "Fort Bema Warszawa",
+    "opis": "Pozostałości fortu Twierdzy Warszawa otoczone parkiem i fosą. Ścieżki prowadzą między starymi drzewami, mostkami i zabytkowymi umocnieniami.",
+    "lat": 52.2594552,
+    "lon": 20.9327278
+  },
+  {
+    "id": "fort-blizne",
+    "dzielnica": "Bemowo",
+    "nazwa": "Fort Blizne",
+    "wikiQuery": "Fort Blizne Warszawa",
+    "opis": "Ceglano-ziemny fort dawnego pierścienia obronnego Warszawy. Spacer w jego sąsiedztwie pozwala zobaczyć militarną przeszłość Bemowa.",
+    "lat": 52.2467122,
+    "lon": 20.8999761
+  },
+  {
+    "id": "kosciol-matki-bozej-ostrobramskiej-na-boernerowie",
+    "dzielnica": "Bemowo",
+    "nazwa": "Kościół Matki Bożej Ostrobramskiej na Boernerowie",
+    "wikiQuery": "Kościół Matki Bożej Ostrobramskiej na Boernerowie Warszawa",
+    "opis": "Świątynia w zielonym Boernerowie. Jej otoczenie pozwala poznawać kameralną zabudowę i ogrodowy charakter dawnego osiedla łącznościowców.",
+    "lat": 52.2624617,
+    "lon": 20.8978329
+  },
+  {
+    "id": "skwer-im-pulkownika-ignacego-boernera",
+    "dzielnica": "Bemowo",
+    "nazwa": "Skwer im. pułkownika Ignacego Boernera",
+    "wikiQuery": "Skwer im. pułkownika Ignacego Boernera Warszawa",
+    "opis": "Zielony skwer na Boernerowie upamiętniający patrona osiedla. Dobry przystanek podczas spaceru po kameralnych uliczkach dawnej osady łącznościowców.",
+    "lat": 52.2627189,
+    "lon": 20.8983905
+  },
+  {
+    "id": "osiedle-przyjazn",
+    "dzielnica": "Bemowo",
+    "nazwa": "Osiedle Przyjaźń",
+    "wikiQuery": "Osiedle Przyjaźń Warszawa",
+    "opis": "Zespół drewnianych domków i zielonych uliczek na Jelonkach, związany z budową Pałacu Kultury i Nauki. Wyróżnia się kameralną skalą i charakterystyczną architekturą.",
+    "lat": 52.237498,
+    "lon": 20.9190181
+  },
+  {
+    "id": "pomnik-powstancow-zgrupowania-ak-zywiciel",
+    "dzielnica": "Bemowo",
+    "nazwa": "Pomnik Powstańców Zgrupowania AK Żywiciel",
+    "wikiQuery": "Pomnik Powstańców Zgrupowania AK Żywiciel Warszawa",
+    "opis": "Miejsce pamięci w rejonie ulicy Westerplatte na Boernerowie. Przypomina o walkach powstańczych i historii leśnych obrzeży Warszawy.",
+    "lat": 52.2653545,
+    "lon": 20.8979497
+  },
+  {
+    "id": "park-henrykowski",
+    "dzielnica": "Białołęka",
+    "nazwa": "Park Henrykowski",
+    "wikiQuery": "Park Henrykowski Warszawa",
+    "opis": "Park na Henrykowie z alejkami i starymi drzewami. Nadaje się na krótki spacer po zielonej części Białołęki.",
+    "lat": 52.3312843,
+    "lon": 20.9677315
+  },
+  {
+    "id": "park-picassa",
+    "dzielnica": "Białołęka",
+    "nazwa": "Park Picassa",
+    "wikiQuery": "Park Picassa Warszawa",
+    "opis": "Teren rekreacyjny na Tarchominie, niedaleko Wisły. Łączy alejki, przestrzenie do odpoczynku i bliskość nadwiślańskich tras spacerowych.",
+    "lat": 52.312022,
+    "lon": 20.9525935
+  },
+  {
+    "id": "park-ireny-jarockiej",
+    "dzielnica": "Białołęka",
+    "nazwa": "Park Ireny Jarockiej",
+    "wikiQuery": "Park Ireny Jarockiej Warszawa",
+    "opis": "Niewielki park na Tarchominie nazwany na cześć piosenkarki. To sąsiedzka przestrzeń spacerowa z zielenią i miejscami odpoczynku.",
+    "lat": 52.3344069,
+    "lon": 20.9471052
+  },
+  {
+    "id": "park-magiczna",
+    "dzielnica": "Białołęka",
+    "nazwa": "Park Magiczna",
+    "wikiQuery": "Park Magiczna Warszawa",
+    "opis": "Park rekreacyjny przy ulicy Magicznej na wschodniej Białołęce. Oferuje alejki i otwarte przestrzenie wśród współczesnej zabudowy mieszkaniowej.",
+    "lat": 52.3123058,
+    "lon": 21.0586817
+  },
+  {
+    "id": "park-ogrody-mehoffera",
+    "dzielnica": "Białołęka",
+    "nazwa": "Park Ogrody Mehoffera",
+    "wikiQuery": "Park Ogrody Mehoffera Warszawa",
+    "opis": "Park na Białołęce z alejkami i miejscami odpoczynku. Stanowi zielony przystanek podczas spaceru po okolicznych osiedlach.",
+    "lat": 52.3251451,
+    "lon": 20.9465699
+  },
+  {
+    "id": "kosciol-sw-jakuba-apostola-w-tarchominie",
+    "dzielnica": "Białołęka",
+    "nazwa": "Kościół św. Jakuba Apostoła w Tarchominie",
+    "wikiQuery": "Kościół św. Jakuba Apostoła w Tarchominie Warszawa",
+    "opis": "Zabytkowy ceglany kościół na dawnym Tarchominie, należący do najstarszych zachowanych świątyń Warszawy. Jego otoczenie przypomina wiejską historię tej części miasta.",
+    "lat": 52.3194072,
+    "lon": 20.9407681
+  },
+  {
+    "id": "sluza-zeran",
+    "dzielnica": "Białołęka",
+    "nazwa": "Śluza Żerań",
+    "wikiQuery": "Śluza Żerań Warszawa",
+    "opis": "Budowla hydrotechniczna łącząca Kanał Żerański z Wisłą. Jej okolice pokazują przemysłowo-portowe oblicze północnej Warszawy.",
+    "lat": 52.2967736,
+    "lon": 20.9884948
+  },
+  {
+    "id": "las-bielanski",
+    "dzielnica": "Bielany",
+    "nazwa": "Las Bielański",
+    "wikiQuery": "Las Bielański Warszawa",
+    "opis": "Zabytkowy las na skarpie wiślanej, chroniący pozostałości dawnej puszczy. Spacer prowadzi wśród starych dębów, grabów i urozmaiconego terenu.",
+    "lat": 52.2929546,
+    "lon": 20.9585984
+  },
+  {
+    "id": "las-lindego",
+    "dzielnica": "Bielany",
+    "nazwa": "Las Lindego",
+    "wikiQuery": "Las Lindego Warszawa",
+    "opis": "Leśny teren między bielańskimi osiedlami, przecięty siecią wygodnych ścieżek. Dobre miejsce na zacieniony spacer bez wyjeżdżania z miasta.",
+    "lat": 52.2865306,
+    "lon": 20.9447998
+  },
+  {
+    "id": "park-olszyna",
+    "dzielnica": "Bielany",
+    "nazwa": "Park Olszyna",
+    "wikiQuery": "Park Olszyna Warszawa",
+    "opis": "Park na pograniczu bielańskich osiedli z alejkami i bujną zielenią. Jest lokalnym miejscem odpoczynku i krótkich spacerów.",
+    "lat": 52.2693988,
+    "lon": 20.9590435
+  },
+  {
+    "id": "park-herberta",
+    "dzielnica": "Bielany",
+    "nazwa": "Park Herberta",
+    "wikiQuery": "Park Herberta Warszawa",
+    "opis": "Park imienia Zbigniewa Herberta na Bielanach. Łączy tereny rekreacyjne i alejki w otoczeniu osiedlowej zieleni.",
+    "lat": 52.2733893,
+    "lon": 20.9556336
+  },
+  {
+    "id": "park-stawy-kellera",
+    "dzielnica": "Bielany",
+    "nazwa": "Park Stawy Kellera",
+    "wikiQuery": "Park Stawy Kellera Warszawa",
+    "opis": "Niewielki park ze stawami i starodrzewem przy ulicy Gdańskiej. Jego ukształtowanie i woda nadają mu kameralny, krajobrazowy charakter.",
+    "lat": 52.2776056,
+    "lon": 20.967613
+  },
+  {
+    "id": "kosciol-pokamedulski-na-bielanach",
+    "dzielnica": "Bielany",
+    "nazwa": "Kościół pokamedulski na Bielanach",
+    "wikiQuery": "Kościół pokamedulski na Bielanach Warszawa",
+    "opis": "Barokowa świątynia i otoczenie dawnego klasztoru kamedułów przy ulicy Dewajtis. Zespół jest ważnym historycznym punktem spaceru po Lesie Bielańskim.",
+    "lat": 52.295851,
+    "lon": 20.9601061
+  },
+  {
+    "id": "stawy-brustmana",
+    "dzielnica": "Bielany",
+    "nazwa": "Stawy Brustmana",
+    "wikiQuery": "Stawy Brustmana Warszawa",
+    "opis": "Zespół stawów w sercu Wawrzyszewa z alejkami i zielenią wokół brzegów. To dobry punkt na obserwowanie ptaków wodnych i sąsiedzki spacer.",
+    "lat": 52.2825947,
+    "lon": 20.9335975
+  },
+  {
+    "id": "fort-wawrzyszew",
+    "dzielnica": "Bielany",
+    "nazwa": "Fort Wawrzyszew",
+    "wikiQuery": "Fort Wawrzyszew Warszawa",
+    "opis": "Dawny fort Twierdzy Warszawa z zachowanymi elementami umocnień. Jego okolice przypominają o wojskowej historii północno-zachodnich obrzeży miasta.",
+    "lat": 52.2774333,
+    "lon": 20.9068751
+  },
+  {
+    "id": "park-dreszera",
+    "dzielnica": "Mokotów",
+    "nazwa": "Park Dreszera",
+    "wikiQuery": "Park Dreszera Warszawa",
+    "opis": "Regularnie zaprojektowany park na Starym Mokotowie, otoczony miejskimi ulicami. Alejki i stare drzewa tworzą spokojną przestrzeń między Puławską a aleją Niepodległości.",
+    "lat": 52.1974081,
+    "lon": 21.0214231
+  },
+  {
+    "id": "park-arkadia",
+    "dzielnica": "Mokotów",
+    "nazwa": "Park Arkadia",
+    "wikiQuery": "Park Arkadia Warszawa",
+    "opis": "Park u podnóża skarpy warszawskiej, sąsiadujący z Królikarnią. Wyróżnia się stawami i alejkami biegnącymi wśród zieleni dolnego Mokotowa.",
+    "lat": 52.1906776,
+    "lon": 21.0282392
+  },
+  {
+    "id": "park-sielecki",
+    "dzielnica": "Mokotów",
+    "nazwa": "Park Sielecki",
+    "wikiQuery": "Park Sielecki Warszawa",
+    "opis": "Historyczny park na Sielcach ze stawem i starymi drzewami. Jest zacisznym przystankiem podczas spaceru po Dolnym Mokotowie.",
+    "lat": 52.1991517,
+    "lon": 21.0408602
+  },
+  {
+    "id": "park-promenada",
+    "dzielnica": "Mokotów",
+    "nazwa": "Park Promenada",
+    "wikiQuery": "Park Promenada Warszawa",
+    "opis": "Zielony pas na mokotowskiej skarpie, połączony spacerowo z Morskim Okiem. Ścieżki i schody prowadzą między górnym i dolnym tarasem dzielnicy.",
+    "lat": 52.2038893,
+    "lon": 21.0303021
+  },
+  {
+    "id": "fort-czerniakow",
+    "dzielnica": "Mokotów",
+    "nazwa": "Fort Czerniaków",
+    "wikiQuery": "Fort Czerniaków Warszawa",
+    "opis": "Zabytkowy fort na Sadybie otoczony zielenią. Jego ceglana architektura i militarne dzieje urozmaicają spacer po kameralnej części Mokotowa.",
+    "lat": 52.1825307,
+    "lon": 21.0671487
+  },
+  {
+    "id": "jeziorko-czerniakowskie",
+    "dzielnica": "Mokotów",
+    "nazwa": "Jeziorko Czerniakowskie",
+    "wikiQuery": "Jeziorko Czerniakowskie Warszawa",
+    "opis": "Naturalny zbiornik wodny objęty ochroną rezerwatową, położony na Sadybie. Spacer po dostępnych ścieżkach pozwala oglądać wodę, trzcinowiska i ptaki.",
+    "lat": 52.1927834,
+    "lon": 21.0716181
+  },
+  {
+    "id": "palac-szustra",
+    "dzielnica": "Mokotów",
+    "nazwa": "Pałac Szustra",
+    "wikiQuery": "Pałac Szustra Warszawa",
+    "opis": "Zabytkowy pałac w otoczeniu parku Morskie Oko. Charakterystyczna architektura rezydencji jest jednym z symboli historycznego Mokotowa.",
+    "lat": 52.2041249,
+    "lon": 21.0257736
+  },
+  {
+    "id": "park-dolinka-sluzewska",
+    "dzielnica": "Mokotów",
+    "nazwa": "Park Dolinka Służewska",
+    "wikiQuery": "Park Dolinka Służewska Warszawa",
+    "opis": "Zielona dolina Potoku Służewieckiego z alejkami, łąkami i stawami. Łączy przyrodniczy krajobraz ze spacerowymi trasami Służewa.",
+    "lat": 52.1692721,
+    "lon": 21.035438
+  },
+  {
+    "id": "hale-banacha",
+    "dzielnica": "Ochota",
+    "nazwa": "Hale Banacha",
+    "wikiQuery": "Hale Banacha Warszawa",
+    "opis": "Zespół hal targowych przy ulicy Banacha, związany z codziennym życiem Ochoty. Ciekawy przystanek dla osób lubiących miejskie targowiska i lokalny handel.",
+    "lat": 52.2090165,
+    "lon": 20.9764801
+  },
+  {
+    "id": "kosciol-sw-jakuba-na-ochocie",
+    "dzielnica": "Ochota",
+    "nazwa": "Kościół św. Jakuba na Ochocie",
+    "wikiQuery": "Kościół św. Jakuba na Ochocie Warszawa",
+    "opis": "Monumentalna ceglana świątynia przy placu Narutowicza. Jej bryła i arkadowe otoczenie należą do najbardziej rozpoznawalnych elementów Starej Ochoty.",
+    "lat": 52.2194607,
+    "lon": 20.9829904
+  },
+  {
+    "id": "dom-studencki-akademik",
+    "dzielnica": "Ochota",
+    "nazwa": "Dom Studencki Akademik",
+    "wikiQuery": "Dom Studencki Akademik Warszawa",
+    "opis": "Charakterystyczny gmach przy placu Narutowicza, związany z historią warszawskiego życia akademickiego. Warto obejrzeć jego monumentalną bryłę z otaczających ulic.",
+    "lat": 52.2176351,
+    "lon": 20.9840055
+  },
+  {
+    "id": "reduta-ordona",
+    "dzielnica": "Ochota",
+    "nazwa": "Reduta Ordona",
+    "wikiQuery": "Reduta Ordona Warszawa",
+    "opis": "Miejsce pamięci związane z obroną Warszawy w 1831 roku. Stanowi historyczny akcent spaceru po rejonie ulicy Na Bateryjce.",
+    "lat": 52.2148458,
+    "lon": 20.9593014
+  },
+  {
+    "id": "och-teatr",
+    "dzielnica": "Ochota",
+    "nazwa": "Och-Teatr",
+    "wikiQuery": "Och-Teatr Warszawa",
+    "opis": "Teatr mieszczący się w budynku dawnego kina Ochota przy ulicy Grójeckiej. To rozpoznawalny punkt kulturalny w zwartej zabudowie dzielnicy.",
+    "lat": 52.2141819,
+    "lon": 20.9801508
+  },
+  {
+    "id": "gorka-szczesliwicka",
+    "dzielnica": "Ochota",
+    "nazwa": "Górka Szczęśliwicka",
+    "wikiQuery": "Górka Szczęśliwicka Warszawa",
+    "opis": "Charakterystyczne sztuczne wzgórze w Parku Szczęśliwickim. Jego okolice łączą tereny sportowe, spacerowe alejki i widoki na zachodnią Warszawę.",
+    "lat": 52.204131,
+    "lon": 20.9574667
+  },
+  {
+    "id": "park-skaryszewski",
+    "dzielnica": "Praga-Południe",
+    "nazwa": "Park Skaryszewski",
+    "wikiQuery": "Park Skaryszewski Warszawa",
+    "opis": "Rozległy park krajobrazowy ze stawami, rzeźbami i starymi drzewami. To jeden z najważniejszych terenów spacerowych prawobrzeżnej Warszawy.",
+    "lat": 52.2422656,
+    "lon": 21.055568
+  },
+  {
+    "id": "jeziorko-kamionkowskie",
+    "dzielnica": "Praga-Południe",
+    "nazwa": "Jeziorko Kamionkowskie",
+    "wikiQuery": "Jeziorko Kamionkowskie Warszawa",
+    "opis": "Zbiornik wodny przy Parku Skaryszewskim i historycznym Kamionku. Jego brzegi oferują spokojny spacer i widoki na parkową zieleń.",
+    "lat": 52.2450993,
+    "lon": 21.0546792
+  },
+  {
+    "id": "park-obwodu-praga-armii-krajowej",
+    "dzielnica": "Praga-Południe",
+    "nazwa": "Park Obwodu Praga Armii Krajowej",
+    "wikiQuery": "Park Obwodu Praga Armii Krajowej Warszawa",
+    "opis": "Park na Grochowie z alejkami i miejscami do odpoczynku. Nazwa upamiętnia żołnierzy praskiego obwodu Armii Krajowej.",
+    "lat": 52.2466922,
+    "lon": 21.0730845
+  },
+  {
+    "id": "park-polinskiego",
+    "dzielnica": "Praga-Południe",
+    "nazwa": "Park Polińskiego",
+    "wikiQuery": "Park Polińskiego Warszawa",
+    "opis": "Zielona przestrzeń Grochowa urządzona między osiedlami mieszkaniowymi. Nadaje się na spokojny spacer zacienionymi alejkami.",
+    "lat": 52.2488416,
+    "lon": 21.0901708
+  },
+  {
+    "id": "park-znicza",
+    "dzielnica": "Praga-Południe",
+    "nazwa": "Park Znicza",
+    "wikiQuery": "Park Znicza Warszawa",
+    "opis": "Kameralny park na Gocławku, otoczony zabudową mieszkaniową. Jego alejki i zieleń tworzą przyjemny sąsiedzki przystanek.",
+    "lat": 52.2378021,
+    "lon": 21.0958196
+  },
+  {
+    "id": "soho-factory",
+    "dzielnica": "Praga-Południe",
+    "nazwa": "Soho Factory",
+    "wikiQuery": "Soho Factory Warszawa",
+    "opis": "Zespół dawnych zabudowań przemysłowych na Kamionku. Ceglane hale i współczesne adaptacje tworzą ciekawy krajobraz miejskiego spaceru.",
+    "lat": 52.2493257,
+    "lon": 21.0591922
+  },
+  {
+    "id": "ulica-francuska",
+    "dzielnica": "Praga-Południe",
+    "nazwa": "Ulica Francuska",
+    "wikiQuery": "Ulica Francuska Warszawa",
+    "opis": "Główna spacerowa ulica Saskiej Kępy, znana z kawiarni i kameralnej zabudowy. Po drodze warto zaglądać w zielone boczne uliczki willowej dzielnicy.",
+    "lat": 52.2324263,
+    "lon": 21.0555541
+  },
+  {
+    "id": "park-praski",
+    "dzielnica": "Praga-Północ",
+    "nazwa": "Park Praski",
+    "wikiQuery": "Park Praski Warszawa",
+    "opis": "Historyczny park przy alei Solidarności, sąsiadujący z warszawskim zoo. Łączy stare drzewa, alejki i charakterystyczną rzeźbę żyrafy.",
+    "lat": 52.2534864,
+    "lon": 21.0264865
+  },
+  {
+    "id": "katedra-sw-floriana",
+    "dzielnica": "Praga-Północ",
+    "nazwa": "Katedra św. Floriana",
+    "wikiQuery": "Katedra św. Floriana Warszawa",
+    "opis": "Neogotycka świątynia o dwóch wysokich wieżach, górująca nad starą Pragą. Jej plac i otoczenie są dobrym punktem rozpoczęcia spaceru po dzielnicy.",
+    "lat": 52.2517635,
+    "lon": 21.0308379
+  },
+  {
+    "id": "centrum-praskie-koneser",
+    "dzielnica": "Praga-Północ",
+    "nazwa": "Centrum Praskie Koneser",
+    "wikiQuery": "Centrum Praskie Koneser Warszawa",
+    "opis": "Zrewitalizowany zespół dawnej wytwórni wódek przy ulicy Ząbkowskiej. Ceglana zabudowa otacza plac z lokalami, kulturą i przestrzenią do odpoczynku.",
+    "lat": 52.2555027,
+    "lon": 21.0452825
+  },
+  {
+    "id": "bazar-rozyckiego",
+    "dzielnica": "Praga-Północ",
+    "nazwa": "Bazar Różyckiego",
+    "wikiQuery": "Bazar Różyckiego Warszawa",
+    "opis": "Historyczne targowisko między ulicami Targową a Brzeską. Miejsce jest silnie związane z handlową tradycją i tożsamością Pragi.",
+    "lat": 52.2523052,
+    "lon": 21.0400789
+  },
+  {
+    "id": "muzeum-warszawskiej-pragi",
+    "dzielnica": "Praga-Północ",
+    "nazwa": "Muzeum Warszawskiej Pragi",
+    "wikiQuery": "Muzeum Warszawskiej Pragi Warszawa",
+    "opis": "Muzeum przy ulicy Targowej poświęcone historii prawobrzeżnej Warszawy. Budynki i dziedziniec są częścią zabytkowej tkanki starej Pragi.",
+    "lat": 52.2517051,
+    "lon": 21.0394503
+  },
+  {
+    "id": "cerkiew-sw-marii-magdaleny",
+    "dzielnica": "Praga-Północ",
+    "nazwa": "Cerkiew św. Marii Magdaleny",
+    "wikiQuery": "Cerkiew św. Marii Magdaleny Warszawa",
+    "opis": "Prawosławna cerkiew przy alei Solidarności, rozpoznawalna dzięki pięciu kopułom. To ważny ślad wielowyznaniowej historii Warszawy.",
+    "lat": 52.2548093,
+    "lon": 21.0332568
+  },
+  {
+    "id": "plaza-rusalka",
+    "dzielnica": "Praga-Północ",
+    "nazwa": "Plaża Rusałka",
+    "wikiQuery": "Plaża Rusałka Warszawa",
+    "opis": "Nadwiślański teren wypoczynkowy po praskiej stronie rzeki. Oferuje widok na Stare Miasto i dostęp do spacerowych ścieżek w łęgowym krajobrazie.",
+    "lat": 52.2540869,
+    "lon": 21.0194158
+  },
+  {
+    "id": "akademia-sztuki-wojennej",
+    "dzielnica": "Rembertów",
+    "nazwa": "Akademia Sztuki Wojennej",
+    "wikiQuery": "Akademia Sztuki Wojennej Warszawa",
+    "opis": "Kampus dawnej Akademii Obrony Narodowej przy alei generała Chruściela. Monumentalna zabudowa przypomina o wojskowej tradycji Rembertowa; punkt spacerowy znajduje się przy zewnętrznym dojściu.",
+    "lat": 52.2686916,
+    "lon": 21.1743721
+  },
+  {
+    "id": "rezerwat-kaweczyn",
+    "dzielnica": "Rembertów",
+    "nazwa": "Rezerwat Kawęczyn",
+    "wikiQuery": "Rezerwat Kawęczyn Warszawa",
+    "opis": "Leśny rezerwat przyrody na wschodzie Warszawy. Chroni zróżnicowane zbiorowiska leśne, a jego otoczenie nadaje się na przyrodniczy spacer.",
+    "lat": 52.2511705,
+    "lon": 21.1436771
+  },
+  {
+    "id": "kosciol-matki-boskiej-zwycieskiej-w-rembertowie",
+    "dzielnica": "Rembertów",
+    "nazwa": "Kościół Matki Boskiej Zwycięskiej w Rembertowie",
+    "wikiQuery": "Kościół Matki Boskiej Zwycięskiej w Rembertowie Warszawa",
+    "opis": "Świątynia związana z wojskową i parafialną historią Rembertowa. Jej otoczenie można połączyć ze spacerem po najstarszej części dzielnicy.",
+    "lat": 52.2524359,
+    "lon": 21.1691158
+  },
+  {
+    "id": "stacja-warszawa-rembertow",
+    "dzielnica": "Rembertów",
+    "nazwa": "Stacja Warszawa Rembertów",
+    "wikiQuery": "Stacja Warszawa Rembertów Warszawa",
+    "opis": "Węzeł kolejowy, wokół którego rozwijała się miejscowość i późniejsza dzielnica. Jest praktycznym punktem orientacyjnym i początkiem spaceru po Rembertowie.",
+    "lat": 52.2571084,
+    "lon": 21.158478
+  },
+  {
+    "id": "rynek-starego-miasta",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Rynek Starego Miasta",
+    "wikiQuery": "Rynek Starego Miasta Warszawa",
+    "opis": "Historyczny plac otoczony odbudowanymi kamienicami, z pomnikiem Syrenki pośrodku. To jeden z najbardziej rozpoznawalnych punktów spacerowych Warszawy.",
+    "lat": 52.249798,
+    "lon": 21.0121668
+  },
+  {
+    "id": "plac-zamkowy",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Plac Zamkowy",
+    "wikiQuery": "Plac Zamkowy Warszawa",
+    "opis": "Reprezentacyjny plac z kolumną Zygmunta i widokiem na Zamek Królewski. Łączy Stare Miasto z Traktem Królewskim.",
+    "lat": 52.2478685,
+    "lon": 21.0137433
+  },
+  {
+    "id": "barbakan-warszawski",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Barbakan Warszawski",
+    "wikiQuery": "Barbakan Warszawski Warszawa",
+    "opis": "Fragment dawnych umocnień miejskich między Starym a Nowym Miastem. Ceglane mury i sąsiednie uliczki są ciekawym celem spaceru historycznego.",
+    "lat": 52.2505875,
+    "lon": 21.010017
+  },
+  {
+    "id": "rynek-nowego-miasta",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Rynek Nowego Miasta",
+    "wikiQuery": "Rynek Nowego Miasta Warszawa",
+    "opis": "Spokojniejszy od staromiejskiego rynek z historycznymi kościołami i otwartą przestrzenią. Dobrze łączy się ze spacerem ulicą Freta i nad Wisłę.",
+    "lat": 52.2529105,
+    "lon": 21.0083736
+  },
+  {
+    "id": "multimedialny-park-fontann",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Multimedialny Park Fontann",
+    "wikiQuery": "Multimedialny Park Fontann Warszawa",
+    "opis": "Zespół fontann u podnóża Nowego Miasta. Otwarte przestrzenie i bliskość Wisły sprawiają, że jest popularnym punktem spacerowym także poza pokazami.",
+    "lat": 52.253969,
+    "lon": 21.0112835
+  },
+  {
+    "id": "ogrod-krasinskich",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Ogród Krasińskich",
+    "wikiQuery": "Ogród Krasińskich Warszawa",
+    "opis": "Historyczny ogród przy Pałacu Krasińskich z alejkami, polanami i starymi drzewami. To zielona przerwa między Muranowem a Nowym Miastem.",
+    "lat": 52.2481502,
+    "lon": 21.0022938
+  },
+  {
+    "id": "lazienki-krolewskie",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Łazienki Królewskie",
+    "wikiQuery": "Łazienki Królewskie Warszawa",
+    "opis": "Rozległy zespół pałacowo-ogrodowy ze stawami i historycznymi pawilonami. Spacer pozwala zobaczyć Pałac na Wyspie oraz różne części królewskiego ogrodu.",
+    "lat": 52.2126209,
+    "lon": 21.0339496
+  },
+  {
+    "id": "park-ujazdowski",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Park Ujazdowski",
+    "wikiQuery": "Park Ujazdowski Warszawa",
+    "opis": "Zabytkowy park krajobrazowy przy Alejach Ujazdowskich. Wyróżnia się stawem, mostkiem, rzeźbami i kameralnymi alejkami.",
+    "lat": 52.2220389,
+    "lon": 21.0257926
+  },
+  {
+    "id": "zamek-ujazdowski",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Zamek Ujazdowski",
+    "wikiQuery": "Zamek Ujazdowski Warszawa",
+    "opis": "Historyczny zamek na skarpie, mieszczący centrum sztuki współczesnej. Z otoczenia rozciąga się widok w kierunku Agrykoli i Kanału Piaseczyńskiego.",
+    "lat": 52.219513,
+    "lon": 21.0307682
+  },
+  {
+    "id": "ogrod-biblioteki-uniwersyteckiej",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Ogród Biblioteki Uniwersyteckiej",
+    "wikiQuery": "Ogród Biblioteki Uniwersyteckiej Warszawa",
+    "opis": "Ogród przy Bibliotece Uniwersyteckiej na Powiślu, znany z zielonych tarasów na dachu. Dolny ogród i architektura biblioteki tworzą atrakcyjny punkt spaceru.",
+    "lat": 52.2436084,
+    "lon": 21.0240077
+  },
+  {
+    "id": "centrum-nauki-kopernik",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Centrum Nauki Kopernik",
+    "wikiQuery": "Centrum Nauki Kopernik Warszawa",
+    "opis": "Charakterystyczny budynek nad Wisłą na Powiślu. Jego otoczenie łączy bulwary, zieleń i nowoczesną architekturę nauki.",
+    "lat": 52.241776,
+    "lon": 21.0286002
+  },
+  {
+    "id": "palac-kultury-i-nauki",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Pałac Kultury i Nauki",
+    "wikiQuery": "Pałac Kultury i Nauki Warszawa",
+    "opis": "Jeden z najbardziej rozpoznawalnych gmachów Warszawy. Warto obejść jego otoczenie, zwracając uwagę na monumentalne wejścia, rzeźby i zmieniającą się panoramę centrum.",
+    "lat": 52.2317657,
+    "lon": 21.0057979
+  },
+  {
+    "id": "ulica-prozna",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Ulica Próżna",
+    "wikiQuery": "Ulica Próżna Warszawa",
+    "opis": "Krótka ulica z zachowanymi kamienicami w rejonie placu Grzybowskiego. Przypomina o przedwojennej zabudowie i żydowskiej historii tej części miasta.",
+    "lat": 52.2364512,
+    "lon": 21.0054084
+  },
+  {
+    "id": "pomnik-bohaterow-getta",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Pomnik Bohaterów Getta",
+    "wikiQuery": "Pomnik Bohaterów Getta Warszawa",
+    "opis": "Pomnik na Muranowie upamiętniający powstanie w getcie warszawskim. Wraz z sąsiedztwem muzeum POLIN tworzy ważne miejsce pamięci.",
+    "lat": 52.2497446,
+    "lon": 20.9942223
+  },
+  {
+    "id": "elektrownia-powisle",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Elektrownia Powiśle",
+    "wikiQuery": "Elektrownia Powiśle Warszawa",
+    "opis": "Dawny zakład energetyczny przekształcony w kompleks handlowo-gastronomiczny. Zachowane elementy przemysłowe kontrastują ze współczesną zabudową Powiśla.",
+    "lat": 52.2403101,
+    "lon": 21.0278547
+  },
+  {
+    "id": "park-brodnowski",
+    "dzielnica": "Targówek",
+    "nazwa": "Park Bródnowski",
+    "wikiQuery": "Park Bródnowski Warszawa",
+    "opis": "Rozległy park między osiedlami Bródna, ze stawami i alejkami. Na jego terenie można spotkać prace należące do Parku Rzeźby na Bródnie.",
+    "lat": 52.290394,
+    "lon": 21.0369106
+  },
+  {
+    "id": "las-brodnowski",
+    "dzielnica": "Targówek",
+    "nazwa": "Las Bródnowski",
+    "wikiQuery": "Las Bródnowski Warszawa",
+    "opis": "Kompleks leśny z siecią ścieżek i terenami rekreacyjnymi. Spacer łączy kontakt z przyrodą z poznawaniem dawnych dziejów Bródna.",
+    "lat": 52.2950192,
+    "lon": 21.0645778
+  },
+  {
+    "id": "grodzisko-na-brodnie",
+    "dzielnica": "Targówek",
+    "nazwa": "Grodzisko na Bródnie",
+    "wikiQuery": "Grodzisko na Bródnie Warszawa",
+    "opis": "Pozostałości wczesnośredniowiecznego grodu w Lesie Bródnowskim. To jeden z najstarszych archeologicznych śladów osadnictwa na terenie dzisiejszej Warszawy.",
+    "lat": 52.2972404,
+    "lon": 21.05898
+  },
+  {
+    "id": "park-wiecha",
+    "dzielnica": "Targówek",
+    "nazwa": "Park Wiecha",
+    "wikiQuery": "Park Wiecha Warszawa",
+    "opis": "Park na Targówku Mieszkaniowym nazwany na cześć Stefana Wiecheckiego. Alejki i zielone wnętrza sąsiadują z teatrem i osiedlową zabudową.",
+    "lat": 52.2718954,
+    "lon": 21.0510177
+  },
+  {
+    "id": "teatr-rampa",
+    "dzielnica": "Targówek",
+    "nazwa": "Teatr Rampa",
+    "wikiQuery": "Teatr Rampa Warszawa",
+    "opis": "Teatr przy ulicy Kołowej, położony obok Parku Wiecha. Jego otoczenie jest lokalnym punktem spotkań i spacerów.",
+    "lat": 52.2726563,
+    "lon": 21.0494985
+  },
+  {
+    "id": "cmentarz-brodnowski",
+    "dzielnica": "Targówek",
+    "nazwa": "Cmentarz Bródnowski",
+    "wikiQuery": "Cmentarz Bródnowski Warszawa",
+    "opis": "Rozległa historyczna nekropolia z alejami starych drzew i zabytkowymi nagrobkami. Spacer ma tu charakter refleksyjny i pozwala poznawać historię warszawskich rodzin.",
+    "lat": 52.2800459,
+    "lon": 21.0355166
+  },
+  {
+    "id": "drewniany-kosciol-sw-wincentego-a-paulo",
+    "dzielnica": "Targówek",
+    "nazwa": "Drewniany kościół św. Wincentego a Paulo",
+    "wikiQuery": "Drewniany kościół św. Wincentego a Paulo Warszawa",
+    "opis": "Drewniana świątynia na Cmentarzu Bródnowskim, wyróżniająca się konstrukcją i historycznym wystrojem. Jest ważnym zabytkiem dawnego Bródna.",
+    "lat": 52.2785165,
+    "lon": 21.0425375
+  },
+  {
+    "id": "park-czechowicki",
+    "dzielnica": "Ursus",
+    "nazwa": "Park Czechowicki",
+    "wikiQuery": "Park Czechowicki Warszawa",
+    "opis": "Park ze stawem, alejkami i zielenią na Czechowicach. Jeden z głównych terenów wypoczynkowych Ursusa.",
+    "lat": 52.1921239,
+    "lon": 20.8846103
+  },
+  {
+    "id": "park-achera",
+    "dzielnica": "Ursus",
+    "nazwa": "Park Achera",
+    "wikiQuery": "Park Achera Warszawa",
+    "opis": "Kameralny park z oczkiem wodnym i starymi drzewami. Jego nazwa nawiązuje do dawnych właścicieli miejscowego majątku.",
+    "lat": 52.1958104,
+    "lon": 20.8954612
+  },
+  {
+    "id": "park-hassow",
+    "dzielnica": "Ursus",
+    "nazwa": "Park Hassów",
+    "wikiQuery": "Park Hassów Warszawa",
+    "opis": "Teren zielony na Gołąbkach, związany z historią rodziny Hassów. Jest spokojnym przystankiem wśród willowych uliczek Ursusa.",
+    "lat": 52.1969501,
+    "lon": 20.873877
+  },
+  {
+    "id": "park-eko",
+    "dzielnica": "Ursus",
+    "nazwa": "Park EKO",
+    "wikiQuery": "Park EKO Warszawa",
+    "opis": "Park urządzony na Szamotach w sąsiedztwie nowej zabudowy. Zieleń i alejki przypominają o przemianie poprzemysłowej części Ursusa.",
+    "lat": 52.19938,
+    "lon": 20.8745368
+  },
+  {
+    "id": "stacja-warszawa-ursus",
+    "dzielnica": "Ursus",
+    "nazwa": "Stacja Warszawa Ursus",
+    "wikiQuery": "Stacja Warszawa Ursus Warszawa",
+    "opis": "Stacja kolejowa w historycznym centrum dzielnicy. Jej otoczenie jest dobrym punktem rozpoczęcia spaceru po starym Ursusie.",
+    "lat": 52.1964007,
+    "lon": 20.8852512
+  },
+  {
+    "id": "kosciol-sw-jozefa-w-ursusie",
+    "dzielnica": "Ursus",
+    "nazwa": "Kościół św. Józefa w Ursusie",
+    "wikiQuery": "Kościół św. Józefa w Ursusie Warszawa",
+    "opis": "Świątynia przy ulicy Cierlickiej, związana z rozwojem robotniczego Ursusa. Można ją obejrzeć podczas spaceru po starszej części dzielnicy.",
+    "lat": 52.1937753,
+    "lon": 20.885751
+  },
+  {
+    "id": "las-kabacki",
+    "dzielnica": "Ursynów",
+    "nazwa": "Las Kabacki",
+    "wikiQuery": "Las Kabacki Warszawa",
+    "opis": "Rozległy rezerwat leśny na południu Warszawy. Leśne drogi i polany umożliwiają dłuższy spacer z dala od miejskiego ruchu.",
+    "lat": 52.1183158,
+    "lon": 21.0554901
+  },
+  {
+    "id": "park-im-romana-kozlowskiego",
+    "dzielnica": "Ursynów",
+    "nazwa": "Park im. Romana Kozłowskiego",
+    "wikiQuery": "Park im. Romana Kozłowskiego Warszawa",
+    "opis": "Park przy Kopie Cwila z alejkami, zielenią i przestrzenią rekreacyjną. Jest jednym z charakterystycznych terenów spacerowych północnego Ursynowa.",
+    "lat": 52.1641401,
+    "lon": 21.0230283
+  },
+  {
+    "id": "kopa-cwila",
+    "dzielnica": "Ursynów",
+    "nazwa": "Kopa Cwila",
+    "wikiQuery": "Kopa Cwila Warszawa",
+    "opis": "Sztuczne wzgórze wśród ursynowskich osiedli. Z jego wierzchołka można obejrzeć okoliczną zabudowę i parkowy krajobraz.",
+    "lat": 52.1643056,
+    "lon": 21.0222367
+  },
+  {
+    "id": "park-przy-bazantarni",
+    "dzielnica": "Ursynów",
+    "nazwa": "Park Przy Bażantarni",
+    "wikiQuery": "Park Przy Bażantarni Warszawa",
+    "opis": "Duży teren rekreacyjny na Natolinie z alejkami i otwartymi przestrzeniami. Nadaje się na rodzinny spacer po południowej części Ursynowa.",
+    "lat": 52.137065,
+    "lon": 21.0674463
+  },
+  {
+    "id": "park-polskich-wynalazcow",
+    "dzielnica": "Ursynów",
+    "nazwa": "Park Polskich Wynalazców",
+    "wikiQuery": "Park Polskich Wynalazców Warszawa",
+    "opis": "Park na Ursynowie łączący zieleń z przestrzenią rekreacyjną. Jego nazwa przypomina o polskich osiągnięciach naukowych i technicznych.",
+    "lat": 52.1530017,
+    "lon": 21.0514139
+  },
+  {
+    "id": "kosciol-sw-katarzyny-na-sluzewie",
+    "dzielnica": "Ursynów",
+    "nazwa": "Kościół św. Katarzyny na Służewie",
+    "wikiQuery": "Kościół św. Katarzyny na Służewie Warszawa",
+    "opis": "Historyczna świątynia na skarpie, związana z jedną z najstarszych parafii w Warszawie. Okolica przypomina o dawnej wsi Służew.",
+    "lat": 52.1720832,
+    "lon": 21.0448536
+  },
+  {
+    "id": "rezerwat-im-krola-jana-sobieskiego",
+    "dzielnica": "Wawer",
+    "nazwa": "Rezerwat im. Króla Jana Sobieskiego",
+    "wikiQuery": "Rezerwat im. Króla Jana Sobieskiego Warszawa",
+    "opis": "Leśny rezerwat na obrzeżach Marysina Wawerskiego. Chroni fragmenty naturalnych drzewostanów i jest ważnym punktem przyrodniczej mapy dzielnicy.",
+    "lat": 52.2323086,
+    "lon": 21.1656412
+  },
+  {
+    "id": "plaza-romantyczna",
+    "dzielnica": "Wawer",
+    "nazwa": "Plaża Romantyczna",
+    "wikiQuery": "Plaża Romantyczna Warszawa",
+    "opis": "Nadwiślański teren wypoczynkowy w Wawrze. Oferuje otwarty widok na rzekę i dostęp do naturalnych tras spacerowych wzdłuż jej brzegu.",
+    "lat": 52.1711834,
+    "lon": 21.1399044
+  },
+  {
+    "id": "zakole-wawerskie",
+    "dzielnica": "Wawer",
+    "nazwa": "Zakole Wawerskie",
+    "wikiQuery": "Zakole Wawerskie Warszawa",
+    "opis": "Podmokłe łąki i zarośla w dolinie Wisły, cenne dla ptaków i przyrody miejskiej. Okolicę najlepiej poznawać z istniejących dróg i ścieżek.",
+    "lat": 52.2290434,
+    "lon": 21.1310742
+  },
+  {
+    "id": "kosciol-wniebowziecia-nmp-w-zerzniu",
+    "dzielnica": "Wawer",
+    "nazwa": "Kościół Wniebowzięcia NMP w Zerzniu",
+    "wikiQuery": "Kościół Wniebowzięcia NMP w Zerzniu Warszawa",
+    "opis": "Świątynia związana z historyczną wsią Zerzeń. Jej otoczenie pozwala zobaczyć starszą warstwę osadniczą szybko zmieniającego się Wawra.",
+    "lat": 52.196371,
+    "lon": 21.1351303
+  },
+  {
+    "id": "stacja-warszawa-falenica",
+    "dzielnica": "Wawer",
+    "nazwa": "Stacja Warszawa Falenica",
+    "wikiQuery": "Stacja Warszawa Falenica Warszawa",
+    "opis": "Historyczny punkt kolejowej linii otwockiej, wokół którego rozwijała się Falenica. Spacer po okolicy pozwala szukać drewnianej architektury letniskowej.",
+    "lat": 52.1583798,
+    "lon": 21.2142926
+  },
+  {
+    "id": "wawerskie-centrum-kultury",
+    "dzielnica": "Wawer",
+    "nazwa": "Wawerskie Centrum Kultury",
+    "wikiQuery": "Wawerskie Centrum Kultury Warszawa",
+    "opis": "Ośrodek kultury przy ulicy Żegańskiej w Międzylesiu. Jego okolice łączą miejskie centrum lokalne z historią przemysłowej części Wawra.",
+    "lat": 52.2145812,
+    "lon": 21.1355636
+  },
+  {
+    "id": "kosciol-opatrznosci-bozej-w-wesolej",
+    "dzielnica": "Wesoła",
+    "nazwa": "Kościół Opatrzności Bożej w Wesołej",
+    "wikiQuery": "Kościół Opatrzności Bożej w Wesołej Warszawa",
+    "opis": "Świątynia na zalesionym wzgórzu, znana z wystroju autorstwa Jerzego Nowosielskiego. Jej architektura i leśne otoczenie tworzą charakterystyczny punkt dzielnicy.",
+    "lat": 52.2521734,
+    "lon": 21.2128277
+  },
+  {
+    "id": "osrodek-kultury-wesola",
+    "dzielnica": "Wesoła",
+    "nazwa": "Ośrodek Kultury Wesoła",
+    "wikiQuery": "Ośrodek Kultury Wesoła Warszawa",
+    "opis": "Lokalny ośrodek kultury przy ulicy Starzyńskiego. Może być punktem wyjścia do spaceru po starszej, zielonej zabudowie Wesołej.",
+    "lat": 52.2505361,
+    "lon": 21.2436405
+  },
+  {
+    "id": "stacja-warszawa-wesola",
+    "dzielnica": "Wesoła",
+    "nazwa": "Stacja Warszawa Wesoła",
+    "wikiQuery": "Stacja Warszawa Wesoła Warszawa",
+    "opis": "Stacja kolejowa w centralnej części dzielnicy. Łączy spacer po Wesołej z wygodnym dojazdem z centrum Warszawy.",
+    "lat": 52.2540876,
+    "lon": 21.2240854
+  },
+  {
+    "id": "stacja-warszawa-wola-grzybowska",
+    "dzielnica": "Wesoła",
+    "nazwa": "Stacja Warszawa Wola Grzybowska",
+    "wikiQuery": "Stacja Warszawa Wola Grzybowska Warszawa",
+    "opis": "Przystanek kolejowy przy północno-wschodniej części Wesołej. Okoliczna niska zabudowa sąsiaduje z terenami leśnymi.",
+    "lat": 52.2528227,
+    "lon": 21.2508564
+  },
+  {
+    "id": "plac-wojska-polskiego-w-wesolej",
+    "dzielnica": "Wesoła",
+    "nazwa": "Plac Wojska Polskiego w Wesołej",
+    "wikiQuery": "Plac Wojska Polskiego w Wesołej Warszawa",
+    "opis": "Lokalny plac w dzielnicy o silnych tradycjach wojskowych. Jest punktem orientacyjnym podczas spaceru po osiedlowej części Wesołej.",
+    "lat": 52.2571325,
+    "lon": 21.2275707
+  },
+  {
+    "id": "kosciol-sw-brata-alberta-w-wesolej",
+    "dzielnica": "Wesoła",
+    "nazwa": "Kościół św. Brata Alberta w Wesołej",
+    "wikiQuery": "Kościół św. Brata Alberta w Wesołej Warszawa",
+    "opis": "Świątynia na osiedlu Zielona, otoczona niską zabudową i zielenią. Jej okolice nadają się na spokojny spacer po tej części dzielnicy.",
+    "lat": 52.2460195,
+    "lon": 21.19007
+  },
+  {
+    "id": "palac-w-wilanowie",
+    "dzielnica": "Wilanów",
+    "nazwa": "Pałac w Wilanowie",
+    "wikiQuery": "Pałac w Wilanowie Warszawa",
+    "opis": "Barokowa rezydencja Jana III Sobieskiego, jeden z najważniejszych zabytków Warszawy. Punkt spacerowy znajduje się przy dojściu do zespołu pałacowego.",
+    "lat": 52.1650986,
+    "lon": 21.090469
+  },
+  {
+    "id": "kosciol-sw-anny-w-wilanowie",
+    "dzielnica": "Wilanów",
+    "nazwa": "Kościół św. Anny w Wilanowie",
+    "wikiQuery": "Kościół św. Anny w Wilanowie Warszawa",
+    "opis": "Zabytkowa świątynia sąsiadująca z zespołem pałacowym. Wraz z pobliską zabudową pokazuje historyczne centrum Wilanowa.",
+    "lat": 52.1661352,
+    "lon": 21.0875457
+  },
+  {
+    "id": "swiatynia-opatrznosci-bozej",
+    "dzielnica": "Wilanów",
+    "nazwa": "Świątynia Opatrzności Bożej",
+    "wikiQuery": "Świątynia Opatrzności Bożej Warszawa",
+    "opis": "Monumentalna świątynia w Miasteczku Wilanów, rozpoznawalna dzięki dużej kopule. Jej otoczenie pozwala zobaczyć współczesną część dzielnicy.",
+    "lat": 52.1586125,
+    "lon": 21.0721133
+  },
+  {
+    "id": "park-kultury-w-powsinie",
+    "dzielnica": "Ursynów",
+    "nazwa": "Park Kultury w Powsinie",
+    "wikiQuery": "Park Kultury w Powsinie Warszawa",
+    "opis": "Rozległy park rekreacyjny na południowych obrzeżach Warszawy. Alejki i polany łączą się z trasami prowadzącymi w stronę Lasu Kabackiego.",
+    "lat": 52.1135086,
+    "lon": 21.0907812
+  },
+  {
+    "id": "ogrod-botaniczny-pan-w-powsinie",
+    "dzielnica": "Ursynów",
+    "nazwa": "Ogród Botaniczny PAN w Powsinie",
+    "wikiQuery": "Ogród Botaniczny PAN w Powsinie Warszawa",
+    "opis": "Ogród prezentujący bogate kolekcje roślin w południowej części miasta. To cel dłuższego spaceru po ogrodowych alejkach i różnych grupach nasadzeń.",
+    "lat": 52.107562,
+    "lon": 21.0961445
+  },
+  {
+    "id": "rezerwat-morysin",
+    "dzielnica": "Wilanów",
+    "nazwa": "Rezerwat Morysin",
+    "wikiQuery": "Rezerwat Morysin Warszawa",
+    "opis": "Leśny rezerwat na dawnych terenach parkowych rezydencji wilanowskiej. Pozwala poznawać przyrodniczy krajobraz w sąsiedztwie pałacu, z zachowaniem zasad ochrony rezerwatu.",
+    "lat": 52.1737278,
+    "lon": 21.0999865
+  },
+  {
+    "id": "kosciol-sw-elzbiety-w-powsinie",
+    "dzielnica": "Wilanów",
+    "nazwa": "Kościół św. Elżbiety w Powsinie",
+    "wikiQuery": "Kościół św. Elżbiety w Powsinie Warszawa",
+    "opis": "Historyczny kościół w dawnym centrum Powsina. Otoczenie świątyni zachowuje ślady dawnej podwarszawskiej miejscowości.",
+    "lat": 52.123757,
+    "lon": 21.1023386
+  },
+  {
+    "id": "park-kombatantow",
+    "dzielnica": "Włochy",
+    "nazwa": "Park Kombatantów",
+    "wikiQuery": "Park Kombatantów Warszawa",
+    "opis": "Park przy stawach na Starych Włochach z historycznym drzewostanem. Łączy spokojne alejki i krajobraz dawnego założenia rezydencjonalnego.",
+    "lat": 52.2072251,
+    "lon": 20.9123121
+  },
+  {
+    "id": "park-koziorozca",
+    "dzielnica": "Włochy",
+    "nazwa": "Park Koziorożca",
+    "wikiQuery": "Park Koziorożca Warszawa",
+    "opis": "Kameralny park we Włochach, położony w sąsiedztwie niskiej zabudowy. Dobry punkt na krótki spacer po zachodniej części dzielnicy.",
+    "lat": 52.2098331,
+    "lon": 20.9113875
+  },
+  {
+    "id": "fort-wlochy",
+    "dzielnica": "Włochy",
+    "nazwa": "Fort Włochy",
+    "wikiQuery": "Fort Włochy Warszawa",
+    "opis": "Jeden z fortów dawnej Twierdzy Warszawa, zachowujący czytelny układ umocnień. Jego zielone otoczenie jest ciekawym celem spaceru historycznego.",
+    "lat": 52.1957077,
+    "lon": 20.9146167
+  },
+  {
+    "id": "fort-okecie",
+    "dzielnica": "Włochy",
+    "nazwa": "Fort Okęcie",
+    "wikiQuery": "Fort Okęcie Warszawa",
+    "opis": "Pozostałości carskiego fortu na południu Warszawy. Miejsce przypomina o dawnym pierścieniu obronnym i historii okolic Okęcia.",
+    "lat": 52.1845036,
+    "lon": 20.9461889
+  },
+  {
+    "id": "palac-koelichenow",
+    "dzielnica": "Włochy",
+    "nazwa": "Pałac Koelichenów",
+    "wikiQuery": "Pałac Koelichenów Warszawa",
+    "opis": "Historyczny pałac w Parku Kombatantów, związany z dawnymi właścicielami Włoch. Jest jednym z najbardziej charakterystycznych zabytków dzielnicy.",
+    "lat": 52.2066575,
+    "lon": 20.9120842
+  },
+  {
+    "id": "stacja-warszawa-wlochy",
+    "dzielnica": "Włochy",
+    "nazwa": "Stacja Warszawa Włochy",
+    "wikiQuery": "Stacja Warszawa Włochy Warszawa",
+    "opis": "Ważny punkt kolejowy pomiędzy Starymi a Nowymi Włochami. Okoliczne ulice są dobrym początkiem spaceru po dawnej miejscowości ogrodowej.",
+    "lat": 52.206084,
+    "lon": 20.9145689
+  },
+  {
+    "id": "park-sowinskiego",
+    "dzielnica": "Wola",
+    "nazwa": "Park Sowińskiego",
+    "wikiQuery": "Park Sowińskiego Warszawa",
+    "opis": "Park wokół pomnika generała Józefa Sowińskiego z alejkami i amfiteatrem. Wraz z sąsiednimi parkami tworzy duży zielony obszar Woli.",
+    "lat": 52.2308463,
+    "lon": 20.9481463
+  },
+  {
+    "id": "park-powstancow-warszawy",
+    "dzielnica": "Wola",
+    "nazwa": "Park Powstańców Warszawy",
+    "wikiQuery": "Park Powstańców Warszawy Warszawa",
+    "opis": "Park pamięci sąsiadujący z Cmentarzem Powstańców Warszawy. Spacerowe alejki prowadzą w przestrzeni poświęconej ofiarom powstania i ludności cywilnej.",
+    "lat": 52.2267034,
+    "lon": 20.9379215
+  },
+  {
+    "id": "cmentarz-powazkowski",
+    "dzielnica": "Wola",
+    "nazwa": "Cmentarz Powązkowski",
+    "wikiQuery": "Cmentarz Powązkowski Warszawa",
+    "opis": "Historyczna nekropolia z zabytkowymi nagrobkami i rzeźbami. Spacer alejami jest zarazem spotkaniem z historią sztuki i biografiami warszawiaków.",
+    "lat": 52.2504443,
+    "lon": 20.9686826
+  },
+  {
+    "id": "cmentarz-zydowski-przy-okopowej",
+    "dzielnica": "Wola",
+    "nazwa": "Cmentarz Żydowski przy Okopowej",
+    "wikiQuery": "Cmentarz Żydowski przy Okopowej Warszawa",
+    "opis": "Rozległa zabytkowa nekropolia z macewami i grobowcami ważnych postaci. To jedno z najważniejszych świadectw żydowskiej historii Warszawy.",
+    "lat": 52.2439392,
+    "lon": 20.9777075
+  },
+  {
+    "id": "browary-warszawskie",
+    "dzielnica": "Wola",
+    "nazwa": "Browary Warszawskie",
+    "wikiQuery": "Browary Warszawskie Warszawa",
+    "opis": "Dawny teren browaru przy ulicy Grzybowskiej, przekształcony w miejski kompleks. Historyczne budynki i nowe przejścia tworzą ciekawą trasę architektonicznego spaceru.",
+    "lat": 52.2350113,
+    "lon": 20.9878588
+  },
+  {
+    "id": "fabryka-norblina",
+    "dzielnica": "Wola",
+    "nazwa": "Fabryka Norblina",
+    "wikiQuery": "Fabryka Norblina Warszawa",
+    "opis": "Zrewitalizowany zespół dawnej fabryki przy ulicy Żelaznej. W przestrzeni kompleksu zachowano ślady przemysłu i wyeksponowano część historycznych maszyn.",
+    "lat": 52.2322765,
+    "lon": 20.9908312
+  },
+  {
+    "id": "muzeum-gazowni-warszawskiej",
+    "dzielnica": "Wola",
+    "nazwa": "Muzeum Gazowni Warszawskiej",
+    "wikiQuery": "Muzeum Gazowni Warszawskiej Warszawa",
+    "opis": "Zabytkowy zespół gazowni przy ulicy Kasprzaka z charakterystyczną ceglaną architekturą. Jego okolice pozwalają poznać przemysłową historię Woli.",
+    "lat": 52.2265487,
+    "lon": 20.96628
+  },
+  {
+    "id": "reduta-wolska",
+    "dzielnica": "Wola",
+    "nazwa": "Reduta Wolska",
+    "wikiQuery": "Reduta Wolska Warszawa",
+    "opis": "Miejsce związane z obroną Warszawy w 1831 roku, w sąsiedztwie kościoła św. Wawrzyńca. Ważny punkt historycznej trasy wzdłuż ulicy Wolskiej.",
+    "lat": 52.2263737,
+    "lon": 20.9415096
+  },
+  {
+    "id": "park-zeromskiego",
+    "dzielnica": "Żoliborz",
+    "nazwa": "Park Żeromskiego",
+    "wikiQuery": "Park Żeromskiego Warszawa",
+    "opis": "Park wokół dawnego fortu Sokolnickiego, niedaleko placu Wilsona. Alejki, starodrzew i historyczna zabudowa tworzą charakterystyczny krajobraz Żoliborza.",
+    "lat": 52.2682717,
+    "lon": 20.9886676
+  },
+  {
+    "id": "park-fosa-i-stoki-cytadeli",
+    "dzielnica": "Żoliborz",
+    "nazwa": "Park Fosa i Stoki Cytadeli",
+    "wikiQuery": "Park Fosa i Stoki Cytadeli Warszawa",
+    "opis": "Zielone tereny otaczające mury Cytadeli Warszawskiej. Urozmaicone ścieżki prowadzą wzdłuż umocnień i dawnych fos.",
+    "lat": 52.2689948,
+    "lon": 20.9990023
+  },
+  {
+    "id": "cytadela-warszawska",
+    "dzielnica": "Żoliborz",
+    "nazwa": "Cytadela Warszawska",
+    "wikiQuery": "Cytadela Warszawska Warszawa",
+    "opis": "Rozległa XIX-wieczna twierdza, dziś mieszcząca instytucje muzealne. Jej architektura i otoczenie łączą historię wojskową z nowymi przestrzeniami spacerowymi.",
+    "lat": 52.2644768,
+    "lon": 20.9998334
+  },
+  {
+    "id": "plac-wilsona",
+    "dzielnica": "Żoliborz",
+    "nazwa": "Plac Wilsona",
+    "wikiQuery": "Plac Wilsona Warszawa",
+    "opis": "Centralny plac Starego Żoliborza, otoczony charakterystyczną zabudową i zielenią. To naturalny punkt rozpoczęcia spaceru po dzielnicy.",
+    "lat": 52.2692619,
+    "lon": 20.9844973
+  },
+  {
+    "id": "plac-sloneczny",
+    "dzielnica": "Żoliborz",
+    "nazwa": "Plac Słoneczny",
+    "wikiQuery": "Plac Słoneczny Warszawa",
+    "opis": "Kameralny plac o kolistym układzie w willowej części Żoliborza. Niska zabudowa i zieleń pokazują ogrodowy charakter przedwojennej dzielnicy.",
+    "lat": 52.2695983,
+    "lon": 20.9936219
+  },
+  {
+    "id": "plac-henkla",
+    "dzielnica": "Żoliborz",
+    "nazwa": "Plac Henkla",
+    "wikiQuery": "Plac Henkla Warszawa",
+    "opis": "Zielony plac wśród zabudowy Żoliborza Urzędniczego. Dobry przystanek podczas spaceru po kameralnych, przedwojennych uliczkach.",
+    "lat": 52.2658062,
+    "lon": 20.9792143
+  },
+  {
+    "id": "park-kepa-potocka-czesc-bielanska",
+    "dzielnica": "Bielany",
+    "nazwa": "Park Kępa Potocka (część bielańska)",
+    "wikiQuery": "Park Kępa Potocka (część bielańska) Warszawa",
+    "opis": "Bielańska część parku nad starorzeczem Wisły, tworząca zieloną kontynuację terenów żoliborskich. Ścieżki biegną wśród drzew, polan i wody.",
+    "lat": 52.2879623,
+    "lon": 20.9787975
+  },
+  {
+    "id": "sady-zoliborskie",
+    "dzielnica": "Żoliborz",
+    "nazwa": "Sady Żoliborskie",
+    "wikiQuery": "Sady Żoliborskie Warszawa",
+    "opis": "Zespół osiedlowej zieleni i zabudowy znany z zachowanych drzew owocowych. Spacer pozwala zobaczyć ceniony przykład powojennego planowania mieszkaniowego.",
+    "lat": 52.2620035,
+    "lon": 20.9682716
+  },
+  {
+    "id": "ratusz-rembertow",
+    "dzielnica": "Rembertów",
+    "nazwa": "Ratusz Rembertów",
+    "wikiQuery": "Ratusz Rembertów Warszawa",
+    "opis": "Siedziba władz dzielnicy przy alei generała Chruściela. Jest rozpoznawalnym punktem lokalnego centrum i orientacyjnym przystankiem spaceru po Rembertowie.",
+    "lat": 52.2588869,
+    "lon": 21.1618796
   }
 ]

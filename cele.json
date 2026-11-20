@@ -1,6 +1,7 @@
 [
   {
     "id": "pieciu-siostr",
+    "dzielnica": "Ochota",
     "nazwa": "Park Pięciu Sióstr",
     "wikiQuery": "Park Pięciu Sióstr Warszawa",
     "opis": "Zmodernizowany park linearny na Ochocie, rozciągający się wzdłuż ul. Bitwy Warszawskiej 1920 r. między ul. Szczęśliwicką a Białobrzeską (dawniej znany jako Park Zachodni). Wyróżnia się alejkami spacerowymi, bogatymi nasadzeniami bylin i drzew, strefami relaksu z leżakami oraz plenerową siłownią. Nazwa upamiętnia pięć sióstr Wołłowiczówien, które zginęły w czasie II wojny światowej i powstania warszawskiego.",
@@ -9,6 +10,7 @@
   },
   {
     "id": "szczesliwicki",
+    "dzielnica": "Ochota",
     "nazwa": "Park Szczęśliwicki",
     "wikiQuery": "Park Szczęśliwicki Warszawa",
     "opis": "Największy teren zielony na Ochocie, położony między ulicami Włodarzewską, Drawską, Szczęśliwicką i Dickensa. Jego główną atrakcją jest usypana po wojnie z gruzów Warszawy Górka Szczęśliwicka (152 m n.p.m.) z całorocznym stokiem narciarskim, wyciągiem krzesełkowym i kolejką grawitacyjną. U podnóża wzgórza znajdują się dwa malownicze stawy wędkarskie, rozległe trawniki, ścieżki biegowe oraz sezonowy odkryty basen.",
@@ -17,6 +19,7 @@
   },
   {
     "id": "blue-city",
+    "dzielnica": "Ochota",
     "nazwa": "CH Blue City",
     "wikiQuery": "Blue City Warszawa",
     "opis": "Duże centrum handlowo-rozrywkowe w Alejach Jerozolimskich (na styku Ochoty i Włoch, w rejonie ul. Opaczewskiej), otwarte w 2004 roku. Obiekt słynie z wielopoziomowej architektury zwieńczonej szklaną kopułą oraz wysokiego atrium z charakterystyczną fontanną i rozbudowaną strefą gastronomiczną. Oprócz sklepów i kina mieści się tu również przestrzeń sportowo-rekreacyjna oraz biurowa.",
@@ -25,6 +28,7 @@
   },
   {
     "id": "fort-korotynskiego",
+    "dzielnica": "Ochota",
     "nazwa": "Fort Rakowiec (Korotyńskiego)",
     "wikiQuery": "Fort Rakowiec Warszawa",
     "opis": "Pozostałości dawnego fortu M (Rakowiec), wchodzącego w skład wewnętrznego pierścienia umocnień Twierdzy Warszawa, wzniesionego przez władze carskie w latach 80. XIX wieku. Położony po południowej stronie ul. Korotyńskiego obiekt zachował czytelny zarys wałów ziemnych oraz część ceglanych schronów i kaponier. Dziś stanowi dziki, zacieniony teren spacerowy o unikalnym, historyczno-przyrodniczym klimacie.",
@@ -33,6 +37,7 @@
   },
   {
     "id": "kolonia-lubeckiego",
+    "dzielnica": "Ochota",
     "nazwa": "Kolonia Lubeckiego",
     "wikiQuery": "Kolonia Lubeckiego Warszawa",
     "opis": "Zabytkowe osiedle mieszkaniowe z lat 20. i 30. XX wieku, położone w kwartale ulic Grójeckiej, Wawelskiej, Filtrowej i Lekarskiej. Zaprojektowane w duchu modernizmu i historyzmu z elementami dworkowymi, składa się z kameralnych budynków wielorodzinnych otoczonych bujną zielenią, wewnętrznymi dziedzińcami i alejkami. To jeden z najlepiej zachowanych przykładów międzywojennej architektury spółdzielczej i urzędniczej w stolicy.",
@@ -41,6 +46,7 @@
   },
   {
     "id": "stacja-filtry",
+    "dzielnica": "Ochota",
     "nazwa": "Zespół Stacji Filtrów (ul. Koszykowa / Krzywickiego)",
     "wikiQuery": "Filtry Lindleya Warszawa",
     "opis": "Monumentalny zespół zabytkowych wodociągów zaprojektowany przez brytyjskiego inżyniera Williama Lindleya i uruchomiony w 1886 roku. Ceglana zabudowa z charakterystyczną neogotycką wieżą ciśnień, halami filtrów powolnych oraz zbiornikami wody czystej stanowi perłę XIX-wiecznej architektury przemysłowej. Cały kompleks do dziś pełni swoją pierwotną funkcję, uzdatniając wodę dla mieszkańców Warszawy.",
@@ -49,6 +55,7 @@
   },
   {
     "id": "plac-narutowicza",
+    "dzielnica": "Ochota",
     "nazwa": "Plac Gabriela Narutowicza",
     "wikiQuery": "Plac Narutowicza Warszawa",
     "opis": "Centralny punkt komunikacyjny i historyczny Starej Ochoty, ukształtowany w okresie międzywojennym u zbiegu ulic Grójeckiej, Filtrowej i Uniwersyteckiej. Na środku placu znajduje się zabytkowa pętla tramwajowa otoczona klinkierową nawierzchnią, a całość domyka monumentalny kościół Niepokalanego Poczęcia NMP (św. Jakuba) oraz gmach Domu Studenckiego Akademik. Wokół placu koncentrują się lokalne kawiarnie, księgarnie i przedwojenne kamienice.",
@@ -57,6 +64,7 @@
   },
   {
     "id": "park-malickiego",
+    "dzielnica": "Ochota",
     "nazwa": "Park im. Zdzisława Malickiego",
     "wikiQuery": "Park im. Zdzisława Malickiego Warszawa",
     "opis": "Kameralny, niezwykle malowniczy park dzielnicowy na Rakowcu, rozciągający się wzdłuż ulic Księcia Trojdena, Pruszkowskiej i Pawińskiego. Jego sercem jest duży, naturalny staw będący pozostałością dawnych glinianek, wokół którego poprowadzono zacienione alejki i ustawiono liczne ławki. Park nosi imię architekta Zdzisława Malickiego, głównego projektanta powojennego osiedla Rakowiec.",
@@ -65,6 +73,7 @@
   },
   {
     "id": "kolonia-staszica",
+    "dzielnica": "Ochota",
     "nazwa": "Kolonia Staszica",
     "wikiQuery": "Kolonia Staszica Warszawa",
     "opis": "Spokojna, willowa enklawa z lat 20. XX wieku, położona między ulicami Filtrową, Krzywickiego, Wawelską i aleją Niepodległości. Zaprojektowana w idei miasta-ogrodu z łukowato poprowadzonymi uliczkami (m.in. Langiewicza, Prezydencką czy Lekarską), zachwyca kameralnymi willami zatopionymi w starodrzewie. W okresie międzywojennym zamieszkiwali tu przedstawiciele elity naukowej, kulturalnej i politycznej II Rzeczypospolitej.",
@@ -73,6 +82,7 @@
   },
   {
     "id": "teatr-ochoty",
+    "dzielnica": "Ochota",
     "nazwa": "Teatr Ochoty (ul. Reja)",
     "wikiQuery": "Teatr Ochoty Warszawa",
     "opis": "Kameralny teatr dramatyczny mieszczący się przy ul. Mikołaja Reja 9, założony w 1970 roku przez wybitne małżeństwo aktorów i pedagogów — Halinę i Jana Machulskich. Od początku działalności słynął z bliskiego kontaktu widza ze sceną, odważnego repertuaru oraz prężnie działającego ogniska teatralnego dla młodzieży. Budynek teatru ukryty jest w spokojnej, zielonej części Starej Ochoty.",
@@ -81,6 +91,7 @@
   },
   {
     "id": "park-wielkopolski",
+    "dzielnica": "Ochota",
     "nazwa": "Park Wielkopolski",
     "wikiQuery": "Park Wielkopolski Warszawa",
     "opis": "Zadrzewiony skwer o regularnym, symetrycznym układzie, zaprojektowany w latach 30. XX wieku przez Leona Danielewicza wzdłuż ulic Filtrowej, Łęczyckiej i Wawelskiej. Stanowi naturalne przedłużenie zielonej osi łączącej Kolonię Lubeckiego z Kolonią Staszica. Wyróżnia się szpalerami starych drzew, geometrycznymi alejkami, rabatami kwiatowymi oraz spokojną, sąsiedzką atmosferą.",
@@ -89,10 +100,92 @@
   },
   {
     "id": "pomnik-barykada-wrzesnia",
+    "dzielnica": "Ochota",
     "nazwa": "Pomnik Barykada Września",
     "wikiQuery": "Pomnik Barykada Września Warszawa",
     "opis": "Monumentalny, trzypanelowy pomnik z 1979 roku autorstwa Juliana Pałki, stojący u zbiegu ulic Grójeckiej i Bitwy Warszawskiej 1920 r. Upamiętnia heroiczną obronę Warszawy we wrześniu 1939 roku — dokładnie w tym miejscu znajdowała się główna barykada, na której polscy żołnierze i cywile zatrzymali natarcie niemieckich oddziałów pancernych. Forma rzeźby przypomina spiętrzone płyty chodnikowe, szyny i przeszkody przeciwczołgowe.",
     "lat": 52.21515,
     "lon": 20.97750
+  },
+  {
+    "id": "pole-mokotowskie",
+    "dzielnica": "Mokotów",
+    "nazwa": "Pole Mokotowskie",
+    "wikiQuery": "Pole Mokotowskie Warszawa",
+    "opis": "Rozległy zespół parkowy na styku Mokotowa, Ochoty i Śródmieścia, powstały na dawnych terenach wyścigów konnych i lotniska mokotowskiego. Charakteryzuje się otwartymi polanami, stawami, licznymi ścieżkami pieszo-rowerowymi oraz gęstą siecią lokali gastronomicznych w otoczeniu zieleni. To jedno z najpopularniejszych miejsc rekreacji i spotkań w południowej części miasta.",
+    "lat": 52.21160,
+    "lon": 20.99350
+  },
+  {
+    "id": "park-morskie-oko",
+    "dzielnica": "Mokotów",
+    "nazwa": "Park Morskie Oko",
+    "wikiQuery": "Park Morskie Oko Warszawa",
+    "opis": "Zabytkowy park na Starym Mokotowie, urządzony wokół dawnego wyrobiska gliny i pałacyku Szusterów (siedziby Towarzystwa Przyjaciół Sztuk Pięknych). Wyróżnia się urozmaiconą rzeźbą terenu, stawem, kaskadą oraz klasycystyczną zabudową w sąsiedztwie ulic Puławskiej, Rakowieckiej i Morskie Oko. Łączy walory przyrodnicze z elegancką historią dawnego Mokotowa.",
+    "lat": 52.20890,
+    "lon": 21.02380
+  },
+  {
+    "id": "krolikarnia",
+    "dzielnica": "Mokotów",
+    "nazwa": "Królikarnia i park rzeźby",
+    "wikiQuery": "Królikarnia Warszawa",
+    "opis": "Klasycystyczny pałac z końca XVIII wieku położony na skarpie warszawskiej w południowej części Mokotowa, otoczony rozległym parkiem ze starodrzewem. W budynku działa Muzeum Rzeźby im. Xawerego Dunikowskiego, a w samym parku rozmieszczone są plenerowe rzeźby i obiekty artystyczne. Miejsce oferuje spokojne spacery oraz widoki w stronę doliny Wisły.",
+    "lat": 52.19380,
+    "lon": 21.02460
+  },
+  {
+    "id": "ogrod-saski",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Ogród Saski",
+    "wikiQuery": "Ogród Saski Warszawa",
+    "opis": "Jeden z najstarszych publicznych parków miejskich w Polsce, udostępniony mieszkańcom w XVIII wieku jako założenie pałacowe Osi Saskiej. Wyróżnia się symetrycznymi alejami, zabytkowymi rzeźbami barokowymi, fontanną Marconiego oraz sąsiedztwem Grobu Nieznanego Żołnierza. Doskonały punkt na klasyczny spacer w samym centrum miasta.",
+    "lat": 52.24140,
+    "lon": 21.00520
+  },
+  {
+    "id": "plac-zbawiciela",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Plac Zbawiciela",
+    "wikiQuery": "Plac Zbawiciela Warszawa",
+    "opis": "Charakterystyczny plac miejski na pograniczu Śródmieścia Południowego i Mokotowa, zrealizowany w XVIII wieku według projektu Osi Stanisławowskiej. Dominuje nad nim kościół Najświętszego Zbawiciela, a wokół rozciąga się tętniąca życiem strefa kawiarni, restauracji i modernistycznych kamienic. Stanowi naturalny łącznik między Marszałkowską, Mokotowską i Nowowiejską.",
+    "lat": 52.21960,
+    "lon": 21.01560
+  },
+  {
+    "id": "park-swietokrzyski",
+    "dzielnica": "Śródmieście",
+    "nazwa": "Park Świętokrzyski",
+    "wikiQuery": "Park Świętokrzyski Warszawa",
+    "opis": "Miejski skwer położony bezpośrednio przy Pałacu Kultury i Nauki w Śródmieściu, z widokiem na panoramę wysokościowców centrum. Stanowi zieloną enklawę wśród intensywnej zabudowy biurowo-usługowej i ważny ciąg pieszy w stronę Marszałkowskiej oraz Świętokrzyskiej. Łączy nowoczesny kontekst centrum z alejkami i ławkami w cieniu drzew.",
+    "lat": 52.23360,
+    "lon": 21.00780
+  },
+  {
+    "id": "park-moczydlo",
+    "dzielnica": "Wola",
+    "nazwa": "Park Moczydło",
+    "wikiQuery": "Park Moczydło Warszawa",
+    "opis": "Rozległy park na Woli w rejonie ulic Górczewskiej, Deotymy i Prymasa Tysiąclecia, powstały na terenach dawnych cegielni i glinianek. Charakteryzuje się pagórkowatym ukształtowaniem, stawami, ścieżkami spacerowymi oraz kompleksem rekreacyjnym ze wzgórzem i basenami. Łączy industrialną przeszłość Woli z otwartą przestrzenią zieleni.",
+    "lat": 52.23560,
+    "lon": 20.95540
+  },
+  {
+    "id": "park-szymanskiego",
+    "dzielnica": "Wola",
+    "nazwa": "Park im. Edwarda Szymańskiego",
+    "wikiQuery": "Park Szymańskiego Warszawa",
+    "opis": "Malowniczy park na wolskim Kole, rozciągający się między ulicami Elekcyjną, Wolską, Obozową i Prymasa Tysiąclecia. Słynie z pofałdowanego terenu, kaskad wodnych, stawów, drewnianych kładek oraz bogatej roślinności. To jeden z najbardziej urozmaiconych krajobrazowo parków w tej części Warszawy.",
+    "lat": 52.23890,
+    "lon": 20.96120
+  },
+  {
+    "id": "muzeum-powstania-warszawskiego",
+    "dzielnica": "Wola",
+    "nazwa": "Muzeum Powstania Warszawskiego (ul. Grzybowska)",
+    "wikiQuery": "Muzeum Powstania Warszawskiego",
+    "opis": "Instytucja kultury i pamięci mieszcząca się w dawnym tramwajowym elektrowniowym budynku przy ul. Grzybowskiej 79 na Woli, otwarta w 2004 roku. Prezentuje historię zrywu z 1944 roku oraz codziennego życia powstańczej Warszawy poprzez multimedialne ekspozycje, pamiątki i archiwalia. Przy muzeum znajduje się także Park Wolności z Murem Pamięci.",
+    "lat": 52.23250,
+    "lon": 20.98010
   }
 ]

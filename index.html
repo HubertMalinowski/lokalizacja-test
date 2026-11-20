@@ -432,30 +432,8 @@
       overflow-wrap: break-word;
     }
 
-    .reroll-btn {
-      appearance: none;
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--line);
-      background: var(--warm-soft);
-      color: var(--warm);
-      font-size: clamp(0.8rem, 2.7cqw, 0.88rem);
-      font-weight: 700;
-      line-height: 1.25;
-      cursor: pointer;
-      transition: background-color 0.15s ease, border-color 0.15s ease;
-      overflow-wrap: anywhere;
-    }
 
-    .reroll-btn:hover {
-      background: #e8cdd2;
-      border-color: #c89ca5;
-    }
 
-    .reroll-btn:active {
-      transform: scale(0.99);
-    }
 
     /* Gdy szerokość ekranu jest większa niż wysokość (landscape): obrazek i opis obok siebie */
     @media (orientation: landscape) {
@@ -507,9 +485,6 @@
         flex: 2;
       }
 
-      .reroll-btn {
-        flex: 1;
-      }
     }
 
     .app.district-mode { max-width: 820px; }
@@ -590,26 +565,22 @@
       max-height: 78dvh;
     }
     .district-mode .map-labels text { stroke: #f5ecdf; }
+
+    .route-screen { margin-top: clamp(2rem, 6vw, 3.5rem); scroll-margin-top: 1.5rem; }
+    .route-heading { margin: 0 0 1rem; color: var(--accent); font-size: clamp(1.35rem, 4vw, 1.8rem); letter-spacing: -0.03em; }
+    .route-heading:focus { outline: none; }
+    .map-district.is-selected path { fill: var(--accent); stroke: var(--accent-hover); stroke-width: 2.5; }
+    @media (prefers-reduced-motion: reduce) { .map-district path { transition: none; } }
   </style>
 </head>
 <body>
 
   <main class="app district-mode">
     <header class="topbar">
-      <h1 class="site-title" tabindex="-1">SPACEROWO-WWA</h1>
-      <div class="brand">
-        <span class="brand-dot"></span>
-        <span id="headerTitle">Warszawa • Spacer</span>
-      </div>
-      <div class="topbar-right">
-        <span class="route-hint" id="routeSummary">Wybór dzielnicy</span>
-        <button type="button" class="change-district-btn" id="changeDistrictBtn" onclick="otworzWyborDzielnicy()" style="display:none;">
-          Dzielnica
-        </button>
-      </div>
+      <h1 class="site-title">SPACEROWO-WWA</h1>
     </header>
 
-    <!-- Widok 1: Wybór dzielnicy -->
+    <!-- Mapa pozostaje widoczna po wybraniu dzielnicy. -->
     <section class="district-screen" id="districtScreen" aria-label="Wybór dzielnicy">
       <div class="district-map-wrap">
         <svg class="warsaw-map" viewBox="0 0 649.3 680.0" role="group" aria-labelledby="mapTitle mapDescription" xmlns="http://www.w3.org/2000/svg">
@@ -623,8 +594,9 @@
       <div id="districtList" hidden></div>
     </section>
 
-    <!-- Widok 2: Trasa i karta wybranego miejsca -->
-    <section class="route-screen" id="routeScreen" aria-label="Trasa spacerowa">
+    <!-- Trasa wybranej dzielnicy pojawia się poniżej mapy. -->
+    <section class="route-screen" id="routeScreen" aria-labelledby="selectedDistrictTitle">
+      <h2 class="route-heading" id="selectedDistrictTitle" tabindex="-1"></h2>
       <nav class="tabs" id="tabsBar" aria-label="Wybór punktu na trasie"></nav>
 
       <article class="place-card" id="targetBox">
@@ -635,7 +607,7 @@
         </div>
 
         <div class="place-body">
-          <h1 class="place-name" id="targetName" tabindex="-1">Ładowanie trasy...</h1>
+          <h3 class="place-name" id="targetName" tabindex="-1">Ładowanie trasy...</h3>
           <div class="place-coords" id="targetCoords"></div>
           <p class="place-desc" id="targetDesc"></p>
         </div>
@@ -660,18 +632,12 @@
           </svg>
           <span class="route-btn-label">Pokaż trasę w Mapach Google</span>
         </a>
-        <button type="button" class="reroll-btn" id="rerollBtn" onclick="wylosujNowaTrase()">
-          Wylosuj nową trasę
-        </button>
       </div>
     </section>
   </main>
 
   <script>
     const LICZBA_CELOW_W_RUNDZIE = 3;
-    const STORAGE_DZIELNICA_KEY = "warszawa_wybrana_dzielnica_v1";
-    const STORAGE_IDS_KEY = "warszawa_wylosowane_ids_v1";
-    const STORAGE_WYBRANY_KEY = "warszawa_wybrany_indeks_v1";
 
     let wszystkieCele = [];
     let stanCelow = "loading";
@@ -694,12 +660,18 @@
         return;
       }
       wybierzDzielniceILosuj(nazwa);
-      document.getElementById("targetName").focus({ preventScroll: true });
+      const heading = document.getElementById("selectedDistrictTitle");
+      heading.focus({ preventScroll: true });
+      document.getElementById("routeScreen").scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+        block: "start"
+      });
     }
 
     function przygotujMape() {
       document.getElementById("districtList").textContent = "Wczytywanie miejsc…";
       document.querySelectorAll(".map-district").forEach((region) => {
+        region.setAttribute("aria-pressed", "false");
         const wybierz = () => wybierzDzielniceZMapy(region.dataset.district);
         region.addEventListener("click", wybierz);
         region.addEventListener("keydown", (event) => {
@@ -711,9 +683,9 @@
       });
     }
 
-    let aktywnaDzielnica = localStorage.getItem(STORAGE_DZIELNICA_KEY) || "";
+    let aktywnaDzielnica = "";
     let CELE = [];
-    let wybranyIndeks = Number(localStorage.getItem(STORAGE_WYBRANY_KEY) || 0);
+    let wybranyIndeks = 0;
     let numerZadaniaZdjecia = 0;
 
     function dopasujPojedynczaLinie(el, maxPx, minPx) {
@@ -775,83 +747,6 @@
       return kopia.slice(0, Math.min(ile, kopia.length));
     }
 
-    function zapiszStan() {
-      localStorage.setItem(STORAGE_DZIELNICA_KEY, aktywnaDzielnica);
-      localStorage.setItem(STORAGE_IDS_KEY, JSON.stringify(CELE.map((c) => c.id)));
-      localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
-      if (history.state?.spacerowo?.view === "route") zapiszTraseWHistorii();
-    }
-
-    function pokazEkran(widok) {
-      const districtScreen = document.getElementById("districtScreen");
-      const routeScreen = document.getElementById("routeScreen");
-      const changeBtn = document.getElementById("changeDistrictBtn");
-      const headerTitle = document.getElementById("headerTitle");
-      const routeSummary = document.getElementById("routeSummary");
-
-      document.querySelector(".app").classList.toggle("district-mode", widok === "districts");
-      if (widok === "districts") {
-        districtScreen.style.display = "flex";
-        routeScreen.style.display = "none";
-        changeBtn.style.display = "none";
-        headerTitle.textContent = "Warszawa • Dzielnice";
-        routeSummary.textContent = "18 dzielnic";
-      } else {
-        districtScreen.style.display = "none";
-        routeScreen.style.display = "block";
-        changeBtn.style.display = "inline-block";
-        headerTitle.textContent = `${aktywnaDzielnica} • Spacer`;
-        routeSummary.textContent = `${CELE.length} ${CELE.length === 1 ? "punkt" : CELE.length < 5 ? "punkty" : "punktów"}`;
-      }
-    }
-
-    function zapiszTraseWHistorii(nowyWpis = false) {
-      const state = {
-        ...history.state,
-        spacerowo: {
-          view: "route",
-          district: aktywnaDzielnica,
-          ids: CELE.map((cel) => cel.id),
-          index: wybranyIndeks
-        }
-      };
-      if (nowyWpis) history.pushState(state, "");
-      else history.replaceState(state, "");
-    }
-
-    function przywrocWidokZHistorii() {
-      const state = history.state?.spacerowo;
-      if (state?.view === "route" && stanCelow === "ready" && Array.isArray(state.ids)) {
-        const dostepne = new Map(pobierzCeleWDzielnicy(state.district).map((cel) => [cel.id, cel]));
-        const cele = state.ids.map((id) => dostepne.get(id)).filter(Boolean);
-        if (cele.length && cele.length === state.ids.length) {
-          aktywnaDzielnica = state.district;
-          CELE = cele;
-          wybranyIndeks = Number.isInteger(state.index) && state.index >= 0 && state.index < CELE.length ? state.index : 0;
-          zapiszStan();
-          zbudujPrzelaczniki();
-          pokazEkran("route");
-          aktualizujUI();
-          return;
-        }
-      }
-      pokazEkran("districts");
-      document.querySelector(".site-title").focus({ preventScroll: true });
-    }
-
-    function otworzWyborDzielnicy() {
-      if (history.state?.spacerowo?.view === "route") {
-        history.back();
-        return;
-      }
-      aktywnaDzielnica = "";
-      localStorage.removeItem(STORAGE_DZIELNICA_KEY);
-      localStorage.removeItem(STORAGE_IDS_KEY);
-      localStorage.removeItem(STORAGE_WYBRANY_KEY);
-      zbudujListeDzielnic();
-      pokazEkran("districts");
-    }
-
     function zbudujListeDzielnic() {
       const container = document.getElementById("districtList");
       const regions = [...document.querySelectorAll(".map-district")];
@@ -890,31 +785,21 @@
       aktywnaDzielnica = dzielnica;
       CELE = losujUnikalne(kandydaci, LICZBA_CELOW_W_RUNDZIE);
       wybranyIndeks = 0;
-      zapiszStan();
 
-      zapiszTraseWHistorii(true);
       zbudujPrzelaczniki();
-      pokazEkran("route");
+      document.getElementById("selectedDistrictTitle").textContent = aktywnaDzielnica;
+      document.getElementById("routeScreen").style.display = "block";
+      document.querySelectorAll(".map-district").forEach((region) => {
+        const selected = kluczDzielnicy(region.dataset.district) === kluczDzielnicy(aktywnaDzielnica);
+        region.classList.toggle("is-selected", selected);
+        region.setAttribute("aria-pressed", String(selected));
+      });
       aktualizujUI();
     }
 
     function wybierzCel(idx) {
       if (idx < 0 || idx >= CELE.length) return;
       wybranyIndeks = idx;
-      zapiszStan();
-      aktualizujUI();
-    }
-
-    function wylosujNowaTrase() {
-      if (!aktywnaDzielnica) {
-        otworzWyborDzielnicy();
-        return;
-      }
-      const kandydaci = pobierzCeleWDzielnicy(aktywnaDzielnica);
-      CELE = losujUnikalne(kandydaci, LICZBA_CELOW_W_RUNDZIE);
-      wybranyIndeks = 0;
-      zapiszStan();
-      zbudujPrzelaczniki();
       aktualizujUI();
     }
 
@@ -935,8 +820,6 @@
         tabsBar.appendChild(btn);
       });
 
-      document.getElementById("routeSummary").textContent =
-        `${CELE.length} ${CELE.length === 1 ? "punkt" : CELE.length < 5 ? "punkty" : "punktów"}`;
     }
 
     async function pobierzUrlZWikimedia(query) {
@@ -1081,48 +964,16 @@
         stanCelow = "ready";
         zbudujListeDzielnic();
 
-        const kandydaciWDzielnicy = aktywnaDzielnica ? pobierzCeleWDzielnicy(aktywnaDzielnica) : [];
-        const zapisaneIdsRaw = localStorage.getItem(STORAGE_IDS_KEY);
-        let odtworzone = null;
-
-        if (aktywnaDzielnica && kandydaciWDzielnicy.length > 0 && zapisaneIdsRaw) {
-          const zapisaneIds = JSON.parse(zapisaneIdsRaw);
-          if (Array.isArray(zapisaneIds) && zapisaneIds.length > 0) {
-            const mapa = new Map(kandydaciWDzielnicy.map((c) => [c.id, c]));
-            const dopasowane = zapisaneIds.map((id) => mapa.get(id)).filter(Boolean);
-            if (dopasowane.length === zapisaneIds.length) {
-              odtworzone = dopasowane;
-            }
-          }
-        }
-
-        if (odtworzone) {
-          CELE = odtworzone;
-          if (wybranyIndeks >= CELE.length) {
-            wybranyIndeks = 0;
-          }
-          zbudujPrzelaczniki();
-          aktualizujUI();
-          pokazEkran("districts");
-        } else {
-          pokazEkran("districts");
-        }
-        przywrocWidokZHistorii();
       } catch (err) {
         stanCelow = "error";
         document.querySelectorAll(".map-district").forEach((region) => region.classList.add("is-empty"));
         document.getElementById("districtMessage").textContent = "Mapa jest gotowa. Aby uruchomić trasy, umieść poprawny cele.json obok index.html i otwórz stronę przez serwer.";
         document.getElementById("districtList").innerHTML =
           `<div class="status-msg"><strong>Błąd wczytywania trasy:</strong> nie udało się wczytać pliku <code>cele.json</code>. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik <code>cele.json</code> leży obok <code>index.html</code>.</div>`;
-        pokazEkran("districts");
         console.error(err);
       }
     }
 
-    if (!history.state?.spacerowo) {
-      history.replaceState({ ...history.state, spacerowo: { view: "districts" } }, "");
-    }
-    window.addEventListener("popstate", przywrocWidokZHistorii);
     window.addEventListener("resize", dopasujNapisyDoSzerokosci);
     przygotujMape();
     zaladujCele();

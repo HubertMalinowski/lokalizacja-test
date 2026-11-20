@@ -385,28 +385,50 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      gap: 0.5rem;
+      gap: 0.65rem;
       width: 100%;
-      padding: 0.88rem 1rem;
-      border-radius: var(--radius-md);
-      background: var(--accent);
-      color: #ffffff;
+      min-width: 0;
+      min-height: 48px;
+      padding: 0.8rem 1.15rem;
+      border: 1px solid #dadce0;
+      border-radius: 999px;
+      background: #fff;
+      color: #1967d2;
+      font-family: "Google Sans", Roboto, "Segoe UI", Arial, sans-serif;
       font-size: clamp(0.84rem, 3cqw, 0.96rem);
-      font-weight: 700;
-      line-height: 1.25;
+      font-weight: 500;
+      line-height: 1.4;
+      text-align: center;
       text-decoration: none;
-      box-shadow: 0 6px 18px rgba(29, 92, 70, 0.2);
-      transition: background-color 0.15s ease, transform 0.12s ease;
-      overflow-wrap: anywhere;
+      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.12);
+      transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
     }
 
     .route-btn:hover {
-      background: var(--accent-hover);
+      background: #f8faff;
+      border-color: #c2d7f5;
+      box-shadow: 0 2px 5px rgba(60, 64, 67, 0.18);
+    }
+
+    .route-btn:focus-visible {
+      outline: 3px solid #1a73e8;
+      outline-offset: 3px;
     }
 
     .route-btn:active {
+      background: #e8f0fe;
       transform: scale(0.99);
+    }
+
+    .route-btn-icon {
+      width: 24px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .route-btn-label {
+      min-width: 0;
+      overflow-wrap: break-word;
     }
 
     .reroll-btn {
@@ -536,8 +558,23 @@
       </article>
 
       <div class="actions">
-        <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
-          Otwórz całą trasę (spacer) w Mapach Google
+        <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Pokaż całą trasę spacerową w Mapach Google (otwiera się w nowej karcie)" style="display:none;">
+          <svg class="route-btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id="google-maps-pin-clip">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 8 9 14 10.5 18.5a1.58 1.58 0 0 0 3 0C15 26 24 20 24 12 24 5.37 18.63 0 12 0Z"/>
+              </clipPath>
+            </defs>
+            <g clip-path="url(#google-maps-pin-clip)">
+              <path fill="#34a853" d="M0 0h24v32H0z"/>
+              <path fill="#4285f4" d="M0 0h24v7L7 24 0 17z"/>
+              <path fill="#1a73e8" d="M0 0h17L0 17z"/>
+              <path fill="#ea4335" d="m0 5 8 8-8 8z"/>
+              <path fill="#fbbc04" d="m0 21 8-8 5 5L0 31z"/>
+            </g>
+            <circle cx="12" cy="12" r="4.5" fill="#fff"/>
+          </svg>
+          <span class="route-btn-label">Pokaż trasę w Mapach Google</span>
         </a>
         <button type="button" class="reroll-btn" id="rerollBtn" onclick="wylosujNowaTrase()">
           Wylosuj nową trasę

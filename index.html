@@ -12,6 +12,7 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
+      padding: 1rem 0;
       background: #f4f4f9;
       color: #222;
     }
@@ -62,11 +63,28 @@
       font-weight: 700;
       color: #1e3a8a;
     }
+    .photo-status {
+      font-size: 0.78rem;
+      color: #475569;
+      margin-top: 8px;
+      display: none;
+    }
+    .target-box .photo {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-top: 8px;
+      border: 1px solid #bfdbfe;
+      display: none;
+      background: #e2e8f0;
+    }
     .target-box .desc {
       font-size: 0.88rem;
       color: #334155;
-      margin-top: 8px;
+      margin-top: 10px;
       line-height: 1.45;
+      text-align: left;
     }
     .route-btn {
       display: block;
@@ -110,6 +128,8 @@
 
     <div class="target-box" id="targetBox">
       <div class="name" id="targetName">Ładowanie trasy...</div>
+      <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
+      <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
       <div class="desc" id="targetDesc"></div>
     </div>
 
@@ -197,6 +217,37 @@
       });
     }
 
+    function ustawZdjecie(cel) {
+      const photoEl = document.getElementById("targetPhoto");
+      const statusEl = document.getElementById("photoStatus");
+
+      if (!cel.zdjecie) {
+        photoEl.onload = null;
+        photoEl.onerror = null;
+        photoEl.removeAttribute("src");
+        photoEl.style.display = "none";
+        statusEl.style.display = "none";
+        return;
+      }
+
+      photoEl.style.display = "none";
+      statusEl.textContent = "Ładowanie zdjęcia...";
+      statusEl.style.display = "block";
+
+      photoEl.onload = () => {
+        statusEl.style.display = "none";
+        photoEl.style.display = "block";
+      };
+
+      photoEl.onerror = () => {
+        statusEl.style.display = "none";
+        photoEl.style.display = "none";
+      };
+
+      photoEl.alt = cel.nazwa;
+      photoEl.src = cel.zdjecie;
+    }
+
     function aktualizujUI() {
       if (!CELE.length) return;
 
@@ -214,6 +265,7 @@
       const cel = CELE[wybranyIndeks];
       document.getElementById("targetName").textContent = cel.nazwa;
       document.getElementById("targetDesc").textContent = cel.opis || "";
+      ustawZdjecie(cel);
 
       const fullRouteLink = document.getElementById("fullRouteLink");
       fullRouteLink.href = zbudujLinkCalejTrasy(CELE);

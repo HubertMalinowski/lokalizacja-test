@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gra terenowa — promień celu</title>
+  <title>Trasa — wybór celów</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -24,154 +24,75 @@
       max-width: 400px;
       width: 92%;
     }
-    h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.3rem;
-    }
-    .progress {
+    .tabs {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 6px;
-      margin: 1rem 0;
+      margin-bottom: 1rem;
     }
-    .step {
+    .tab-btn {
       flex: 1 1 30%;
-      padding: 8px 4px;
+      padding: 8px 6px;
       border-radius: 8px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 600;
       background: #e2e8f0;
       color: #475569;
+      border: none;
+      cursor: pointer;
     }
-    .step.active {
+    .tab-btn:hover {
+      background: #cbd5e1;
+      color: #1e293b;
+    }
+    .tab-btn.active {
       background: #2563eb;
-      color: white;
-    }
-    .step.done {
-      background: #16a34a;
       color: white;
     }
     .target-box {
       background: #eff6ff;
       border: 1px solid #bfdbfe;
-      padding: 12px;
+      padding: 14px;
       border-radius: 10px;
       margin-bottom: 1rem;
-    }
-    .target-box .label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #1d4ed8;
-      font-weight: 700;
     }
     .target-box .name {
       font-size: 1.15rem;
       font-weight: 700;
-      margin-top: 4px;
       color: #1e3a8a;
     }
-    .target-box .radius-badge {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: #dbeafe;
-      color: #1e40af;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
     .target-box .desc {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: #334155;
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-    .map-link {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 12px;
-      background: #ffffff;
-      color: #1d4ed8;
-      border: 1px solid #93c5fd;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .map-link:hover {
-      background: #dbeafe;
+      margin-top: 8px;
+      line-height: 1.45;
     }
     .route-btn {
       display: block;
-      margin-top: 0.75rem;
-      padding: 10px 14px;
+      padding: 12px 14px;
       background: #eef2ff;
       color: #1e40af;
       border: 1px solid #c7d2fe;
       border-radius: 8px;
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       font-weight: 600;
       text-decoration: none;
     }
     .route-btn:hover {
       background: #e0e7ff;
     }
-    .control-group {
-      margin: 1rem 0;
-      text-align: left;
-      background: #f8fafc;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid #e2e8f0;
-    }
-    .control-group label {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-    }
-    input[type="range"] {
-      width: 100%;
-      cursor: pointer;
-    }
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      font-size: 0.83rem;
-      color: #475569;
-    }
-    button.primary {
-      background: #16a34a;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-    }
-    button.primary:hover:not(:disabled) {
-      background: #15803d;
-    }
     .actions-row {
       display: flex;
-      gap: 8px;
       justify-content: center;
-      margin-top: 1.25rem;
-      flex-wrap: wrap;
+      margin-top: 1.15rem;
     }
     button.secondary {
       background: transparent;
       color: #475569;
       border: 1px solid #cbd5e1;
-      padding: 8px 12px;
-      font-size: 0.8rem;
+      padding: 8px 14px;
+      font-size: 0.82rem;
       font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
@@ -180,120 +101,37 @@
       background: #f1f5f9;
       color: #1e293b;
     }
-    #wynik {
-      margin-top: 1.25rem;
-      line-height: 1.55;
-      font-size: 0.92rem;
-    }
-    .result-links {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 10px;
-    }
-    .result-links a {
-      color: #1d4ed8;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .result-links a:hover {
-      text-decoration: underline;
-    }
-    .status {
-      font-size: 1.05rem;
-      font-weight: 700;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .inside {
-      background: #dcfce7;
-      color: #166534;
-    }
-    .outside {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-    .finished {
-      background: #fef9c3;
-      color: #854d0e;
-      border: 1px solid #fde047;
-    }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h2>Trasa: Ochota</h2>
-
-    <div class="progress" id="progressBar"></div>
+    <div class="tabs" id="tabsBar"></div>
 
     <div class="target-box" id="targetBox">
-      <div class="label">Aktualny cel</div>
       <div class="name" id="targetName">Ładowanie trasy...</div>
-      <div class="radius-badge" id="targetRadius" style="display:none;"></div>
       <div class="desc" id="targetDesc"></div>
-      <a class="map-link" id="targetMapLink" href="#" target="_blank" rel="noopener" style="display:none;">
-        Pokaż cel w Mapach Google
-      </a>
     </div>
-
-    <div class="control-group">
-      <label for="margines">
-        <span>Dodatkowy margines błędu:</span>
-        <span><strong id="marginesWartosc">0</strong> m</span>
-      </label>
-      <input type="range" id="margines" min="0" max="200" step="5" value="0">
-
-      <div class="checkbox-row">
-        <input type="checkbox" id="uwzglednijGps">
-        <label for="uwzglednijGps" style="margin:0; font-weight:normal; cursor:pointer;">
-          Dolicz niepewność odczytu GPS (<code>accuracy</code>)
-        </label>
-      </div>
-    </div>
-
-    <button class="primary" id="checkBtn" onclick="sprawdzLokalizacje()" disabled>Ładowanie...</button>
 
     <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
       Otwórz całą trasę (spacer) w Mapach Google
     </a>
 
-    <div id="wynik"></div>
-
     <div class="actions-row">
       <button class="secondary" onclick="wylosujNowaTrase()">Wylosuj nową trasę (3 miejsca)</button>
-      <button class="secondary" onclick="powtorzTenSamZestaw()">Powtórz tę trójkę</button>
     </div>
   </div>
 
   <script>
     const LICZBA_CELOW_W_RUNDZIE = 3;
-    const STORAGE_IDS_KEY = "ochota_wylosowane_ids_v2";
-    const STORAGE_ETAP_KEY = "ochota_etap_v2";
+    const STORAGE_IDS_KEY = "ochota_wylosowane_ids_v3";
+    const STORAGE_WYBRANY_KEY = "ochota_wybrany_indeks_v3";
 
     let wszystkieCele = [];
     let CELE = [];
-    let aktualnyEtap = Number(localStorage.getItem(STORAGE_ETAP_KEY) || 0);
-    let ostatniOdczyt = null;
+    let wybranyIndeks = Number(localStorage.getItem(STORAGE_WYBRANY_KEY) || 0);
 
-    const suwak = document.getElementById("margines");
-    const marginesLabel = document.getElementById("marginesWartosc");
-    const checkboxGps = document.getElementById("uwzglednijGps");
-
-    function odlegloscMetry(lat1, lon1, lat2, lon2) {
-      const R = 6371000;
-      const toRad = (deg) => (deg * Math.PI) / 180;
-      const dLat = toRad(lat2 - lat1);
-      const dLon = toRad(lon2 - lon1);
-      const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-      return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-
-    function zbudujLinkCalejTrasy(cele, startCoords = null) {
+    function zbudujLinkCalejTrasy(cele) {
       if (!cele || cele.length === 0) return "#";
 
       const ostatni = cele[cele.length - 1];
@@ -312,21 +150,7 @@
         );
       }
 
-      if (startCoords) {
-        params.set("origin", `${startCoords.lat.toFixed(6)},${startCoords.lon.toFixed(6)}`);
-      }
-
       return `https://www.google.com/maps/dir/?${params.toString()}`;
-    }
-
-    function aktualizujLinkCalejTrasy() {
-      const fullRouteLink = document.getElementById("fullRouteLink");
-      if (!CELE || CELE.length === 0) {
-        fullRouteLink.style.display = "none";
-        return;
-      }
-      fullRouteLink.href = zbudujLinkCalejTrasy(CELE, ostatniOdczyt);
-      fullRouteLink.style.display = "block";
     }
 
     function losujUnikalne(lista, ile) {
@@ -338,27 +162,62 @@
       return kopia.slice(0, Math.min(ile, kopia.length));
     }
 
-    function zapiszStanTrasy() {
+    function zapiszStan() {
       localStorage.setItem(STORAGE_IDS_KEY, JSON.stringify(CELE.map((c) => c.id)));
-      localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
+      localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
+    }
+
+    function wybierzCel(idx) {
+      if (idx < 0 || idx >= CELE.length) return;
+      wybranyIndeks = idx;
+      localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
+      aktualizujUI();
     }
 
     function wylosujNowaTrase() {
       CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
-      aktualnyEtap = 0;
-      ostatniOdczyt = null;
-      document.getElementById("wynik").innerHTML = "";
-      zapiszStanTrasy();
-      zbudujPasekPostepu();
+      wybranyIndeks = 0;
+      zapiszStan();
+      zbudujPrzelaczniki();
       aktualizujUI();
     }
 
-    function powtorzTenSamZestaw() {
-      aktualnyEtap = 0;
-      ostatniOdczyt = null;
-      document.getElementById("wynik").innerHTML = "";
-      localStorage.setItem(STORAGE_ETAP_KEY, "0");
-      aktualizujUI();
+    function zbudujPrzelaczniki() {
+      const tabsBar = document.getElementById("tabsBar");
+      tabsBar.innerHTML = "";
+
+      CELE.forEach((cel, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "tab-btn";
+        btn.id = `tab-${idx}`;
+        btn.textContent = `${idx + 1}. ${cel.nazwa}`;
+        btn.addEventListener("click", () => wybierzCel(idx));
+        tabsBar.appendChild(btn);
+      });
+    }
+
+    function aktualizujUI() {
+      if (!CELE.length) return;
+
+      if (wybranyIndeks < 0 || wybranyIndeks >= CELE.length) {
+        wybranyIndeks = 0;
+      }
+
+      CELE.forEach((_, idx) => {
+        const btn = document.getElementById(`tab-${idx}`);
+        if (btn) {
+          btn.classList.toggle("active", idx === wybranyIndeks);
+        }
+      });
+
+      const cel = CELE[wybranyIndeks];
+      document.getElementById("targetName").textContent = cel.nazwa;
+      document.getElementById("targetDesc").textContent = cel.opis || "";
+
+      const fullRouteLink = document.getElementById("fullRouteLink");
+      fullRouteLink.href = zbudujLinkCalejTrasy(CELE);
+      fullRouteLink.style.display = "block";
     }
 
     async function zaladujCele() {
@@ -387,212 +246,24 @@
 
         if (odtworzone) {
           CELE = odtworzone;
-          if (aktualnyEtap > CELE.length) {
-            aktualnyEtap = CELE.length;
-            localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
+          if (wybranyIndeks >= CELE.length) {
+            wybranyIndeks = 0;
           }
         } else {
           CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
-          aktualnyEtap = 0;
-          zapiszStanTrasy();
+          wybranyIndeks = 0;
+          zapiszStan();
         }
 
-        zbudujPasekPostepu();
+        zbudujPrzelaczniki();
         aktualizujUI();
       } catch (err) {
         document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
-        document.getElementById("targetDesc").textContent = "";
-        document.getElementById("targetRadius").style.display = "none";
-        document.getElementById("targetMapLink").style.display = "none";
-        document.getElementById("fullRouteLink").style.display = "none";
-        document.getElementById("wynik").textContent =
+        document.getElementById("targetDesc").textContent =
           "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
+        document.getElementById("fullRouteLink").style.display = "none";
         console.error(err);
       }
-    }
-
-    function zbudujPasekPostepu() {
-      const progressBar = document.getElementById("progressBar");
-      progressBar.innerHTML = "";
-
-      CELE.forEach((cel, idx) => {
-        const stepDiv = document.createElement("div");
-        stepDiv.className = "step";
-        stepDiv.id = `step-${idx}`;
-        stepDiv.textContent = `${idx + 1}. ${cel.nazwa}`;
-        progressBar.appendChild(stepDiv);
-      });
-    }
-
-    suwak.addEventListener("input", () => {
-      marginesLabel.textContent = suwak.value;
-      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
-        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
-      }
-    });
-
-    checkboxGps.addEventListener("change", () => {
-      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
-        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
-      }
-    });
-
-    function aktualizujUI() {
-      for (let i = 0; i < CELE.length; i++) {
-        const el = document.getElementById(`step-${i}`);
-        if (!el) continue;
-        el.className = "step";
-        if (i < aktualnyEtap) el.classList.add("done");
-        else if (i === aktualnyEtap) el.classList.add("active");
-      }
-
-      const targetBox = document.getElementById("targetBox");
-      const targetName = document.getElementById("targetName");
-      const targetRadius = document.getElementById("targetRadius");
-      const targetDesc = document.getElementById("targetDesc");
-      const targetMapLink = document.getElementById("targetMapLink");
-      const checkBtn = document.getElementById("checkBtn");
-
-      aktualizujLinkCalejTrasy();
-
-      if (aktualnyEtap >= CELE.length) {
-        targetBox.style.background = "#dcfce7";
-        targetBox.style.borderColor = "#86efac";
-        targetName.textContent = `Wszystkie ${CELE.length} wylosowane punkty zaliczone!`;
-        targetRadius.style.display = "none";
-        targetDesc.textContent = "Możesz wylosować nową trasę albo powtórzyć ten sam zestaw.";
-        targetMapLink.style.display = "none";
-        checkBtn.disabled = true;
-        checkBtn.style.opacity = "0.6";
-        checkBtn.textContent = "Trasa ukończona";
-      } else {
-        const cel = CELE[aktualnyEtap];
-        const promien = Number(cel.promien);
-
-        targetBox.style.background = "#eff6ff";
-        targetBox.style.borderColor = "#bfdbfe";
-        targetName.textContent = cel.nazwa;
-
-        targetRadius.textContent = `Wymagany promień: ${promien} m`;
-        targetRadius.style.display = "inline-block";
-
-        targetDesc.textContent = cel.opis || "";
-        targetMapLink.href = `https://www.google.com/maps/search/?api=1&query=${cel.lat},${cel.lon}`;
-        targetMapLink.style.display = "inline-block";
-
-        checkBtn.disabled = false;
-        checkBtn.style.opacity = "1";
-        checkBtn.textContent = `Sprawdź: ${cel.nazwa}`;
-      }
-    }
-
-    function sprawdzLokalizacje() {
-      const wynik = document.getElementById("wynik");
-
-      if (!navigator.geolocation) {
-        wynik.textContent = "Twoja przeglądarka nie obsługuje geolokalizacji.";
-        return;
-      }
-
-      wynik.textContent = "Pobieranie lokalizacji...";
-
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          ostatniOdczyt = {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-            acc: position.coords.accuracy
-          };
-          aktualizujLinkCalejTrasy();
-          ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
-        },
-        (error) => {
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              wynik.textContent = "Odmówiono dostępu do lokalizacji.";
-              break;
-            case error.POSITION_UNAVAILABLE:
-              wynik.textContent = "Informacje o lokalizacji są niedostępne.";
-              break;
-            case error.TIMEOUT:
-              wynik.textContent = "Upłynął limit czasu żądania.";
-              break;
-            default:
-              wynik.textContent = "Wystąpił nieznany błąd.";
-          }
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0
-        }
-      );
-    }
-
-    function ocenPozycje(lat, lon, acc) {
-      const wynik = document.getElementById("wynik");
-      if (aktualnyEtap >= CELE.length) return;
-
-      const cel = CELE[aktualnyEtap];
-      const promienCelu = Number(cel.promien);
-      const marginesSuwak = Number(suwak.value);
-      const gpsBonus = checkboxGps.checked ? Math.round(acc) : 0;
-
-      const progZaliczenia = promienCelu + marginesSuwak + gpsBonus;
-      const dystans = odlegloscMetry(lat, lon, cel.lat, cel.lon);
-      const trafiony = dystans <= progZaliczenia;
-
-      let statusHtml = "";
-
-      if (trafiony) {
-        const zaliczonyNazwa = cel.nazwa;
-        aktualnyEtap++;
-        localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
-        aktualizujUI();
-
-        if (aktualnyEtap < CELE.length) {
-          statusHtml = `
-            <div class="status inside">
-              Zaliczono: ${zaliczonyNazwa}!<br>
-              Nowy cel: <strong>${CELE[aktualnyEtap].nazwa}</strong>
-            </div>
-          `;
-        } else {
-          statusHtml = `
-            <div class="status finished">
-              Gratulacje! Dotarłeś do ${zaliczonyNazwa} i ukończyłeś całą wylosowaną trasę!
-            </div>
-          `;
-        }
-      } else {
-        statusHtml = `
-          <div class="status outside">
-            Poza promieniem celu (${Math.round(dystans)} m / ${progZaliczenia} m).
-          </div>
-        `;
-      }
-
-      const celDoNawigacji = aktualnyEtap < CELE.length ? CELE[aktualnyEtap] : null;
-      let nawigacjaLinkHtml = "";
-
-      if (celDoNawigacji) {
-        const dirUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat.toFixed(6)},${lon.toFixed(6)}&destination=${celDoNawigacji.lat},${celDoNawigacji.lon}&travelmode=walking`;
-        nawigacjaLinkHtml = `<a href="${dirUrl}" target="_blank" rel="noopener">Nawiguj pieszo do: ${celDoNawigacji.nazwa}</a>`;
-      }
-
-      const mojaPozycjaUrl = `https://www.google.com/maps/search/?api=1&query=${lat.toFixed(6)},${lon.toFixed(6)}`;
-
-      wynik.innerHTML = `
-        ${statusHtml}
-        <strong>Odległość do środka celu:</strong> ${Math.round(dystans)} m<br>
-        <strong>Promień celu:</strong> ${promienCelu} m
-        (dodatki: suwak ${marginesSuwak} m${checkboxGps.checked ? ` + GPS ${gpsBonus} m` : ""}; próg: <strong>${progZaliczenia} m</strong>)<br>
-        <strong>Twoje GPS:</strong> ${lat.toFixed(6)}, ${lon.toFixed(6)} (±${Math.round(acc)} m)
-        <div class="result-links">
-          <a href="${mojaPozycjaUrl}" target="_blank" rel="noopener">Pokaż moją pozycję w Mapach Google</a>
-          ${nawigacjaLinkHtml}
-        </div>
-      `;
     }
 
     zaladujCele();

@@ -6,23 +6,23 @@
   <title>SPACEROWO-WWA</title>
   <style>
     :root {
-      --bg: #f6f4ef;
-      --surface: #fffdf9;
-      --surface-alt: #efeae0;
-      --ink: #1b2420;
-      --ink-muted: #55615b;
-      --line: #dfd8ca;
-      --accent: #1d5c46;
-      --accent-hover: #154635;
-      --accent-soft: #e3efe9;
-      --warm: #b4532a;
-      --warm-soft: #faece5;
+      --bg: #f5ecdf;
+      --surface: #fffbf5;
+      --surface-alt: #eadcca;
+      --ink: #35252a;
+      --ink-muted: #7c6669;
+      --line: #dcc8b8;
+      --accent: #76243e;
+      --accent-hover: #59192e;
+      --accent-soft: #f1e0e2;
+      --warm: #76243e;
+      --warm-soft: #f1e0e2;
       --danger-bg: #fdf1f0;
       --danger-line: #f3c6c2;
       --danger-ink: #8f241c;
       --radius-lg: 20px;
       --radius-md: 12px;
-      --shadow: 0 12px 32px rgba(27, 36, 32, 0.08);
+      --shadow: 0 12px 32px rgba(53, 37, 42, 0.08);
     }
 
     * {
@@ -39,8 +39,8 @@
         max(1.75rem, env(safe-area-inset-bottom))
         max(0.85rem, env(safe-area-inset-left));
       background:
-        radial-gradient(circle at 15% 0%, rgba(29, 92, 70, 0.07), transparent 45%),
-        radial-gradient(circle at 90% 10%, rgba(180, 83, 42, 0.07), transparent 40%),
+        radial-gradient(circle at 15% 0%, rgba(118, 36, 62, 0.07), transparent 45%),
+        radial-gradient(circle at 90% 10%, rgba(180, 143, 102, 0.07), transparent 40%),
         var(--bg);
       color: var(--ink);
       display: flex;
@@ -122,8 +122,8 @@
     }
 
     .change-district-btn:hover {
-      background: #e5decb;
-      border-color: #c8beab;
+      background: #e1cdb9;
+      border-color: #c6a591;
     }
 
     /* Ekran wyboru dzielnicy */
@@ -181,7 +181,7 @@
     .district-btn:hover {
       background: var(--accent-soft);
       border-color: var(--accent);
-      box-shadow: 0 6px 16px rgba(29, 92, 70, 0.1);
+      box-shadow: 0 6px 16px rgba(118, 36, 62, 0.1);
     }
 
     .district-btn:active {
@@ -245,7 +245,7 @@
     }
 
     .tab-btn:hover {
-      border-color: #c8beab;
+      border-color: #c6a591;
       color: var(--ink);
     }
 
@@ -257,7 +257,7 @@
       background: var(--accent);
       border-color: var(--accent);
       color: #ffffff;
-      box-shadow: 0 6px 16px rgba(29, 92, 70, 0.22);
+      box-shadow: 0 6px 16px rgba(118, 36, 62, 0.22);
     }
 
     .tab-num {
@@ -302,9 +302,9 @@
       top: 0.65rem;
       left: 0.65rem;
       z-index: 2;
-      background: rgba(27, 36, 32, 0.82);
+      background: rgba(53, 37, 42, 0.82);
       backdrop-filter: blur(6px);
-      color: #fffdf9;
+      color: #fffbf5;
       font-size: clamp(0.68rem, 1.8cqw, 0.76rem);
       font-weight: 700;
       letter-spacing: 0.04em;
@@ -371,7 +371,7 @@
       margin: 0.75rem 0 0;
       font-size: clamp(0.86rem, 3.1cqw, 0.98rem);
       line-height: 1.58;
-      color: #2c3732;
+      color: #4c353c;
       overflow-wrap: anywhere;
       hyphens: auto;
     }
@@ -449,8 +449,8 @@
     }
 
     .reroll-btn:hover {
-      background: #f6dfd4;
-      border-color: #e7c2b0;
+      background: #e8cdd2;
+      border-color: #c89ca5;
     }
 
     .reroll-btn:active {
@@ -513,20 +513,20 @@
     }
 
     .app.district-mode { max-width: 820px; }
-    .district-map-wrap { background: #f4f7f3; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 0.5rem; }
+    .district-map-wrap { background: #f5ecdf; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 0.5rem; }
     .warsaw-map { display: block; width: 100%; max-height: 67dvh; min-height: 300px; }
     .map-district { cursor: pointer; outline: none; }
-    .map-district path { fill: #dce9df; stroke: #fffdf9; stroke-width: 2; stroke-linejoin: round; fill-rule: evenodd; transition: fill 0.15s ease; }
-    .map-district:nth-of-type(3n) path { fill: #c9dfd0; }
-    .map-district.is-empty path { fill: #e6e5df; }
-    .map-district:hover path, .map-district:focus path { fill: #1d5c46; stroke: #143e30; stroke-width: 2.5; }
-    .map-labels text { fill: #183a2c; font-size: 12px; font-weight: 650; text-anchor: middle; dominant-baseline: middle; pointer-events: none; paint-order: stroke; stroke: #f4f7f3; stroke-width: 2px; stroke-linejoin: round; }
+    .map-district path { fill: #e2c8ab; stroke: #fffbf5; stroke-width: 2; stroke-linejoin: round; fill-rule: evenodd; transition: fill 0.15s ease; }
+    .map-district:nth-of-type(3n) path { fill: #d4b391; }
+    .map-district.is-empty path { fill: #e8dccb; }
+    .map-district:hover path, .map-district:focus path { fill: #76243e; stroke: #59192e; stroke-width: 2.5; }
+    .map-labels text { fill: #76243e; font-size: 12px; font-weight: 650; text-anchor: middle; dominant-baseline: middle; pointer-events: none; paint-order: stroke; stroke: #f5ecdf; stroke-width: 2px; stroke-linejoin: round; }
     .map-labels { pointer-events: none; }
     .map-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; padding: 0.6rem 0.35rem 0.15rem; font-size: 0.74rem; color: var(--ink-muted); }
     .map-caption a { color: var(--accent); }
     .map-message { margin: 0; min-height: 2.8em; padding: 0.7rem 0.85rem; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: 0.85rem; line-height: 1.45; }
     .district-alternative summary { cursor: pointer; padding: 0.5rem 0; font-weight: 650; color: var(--accent); }
-    .district-btn.is-empty { background: #f4f3ef; }
+    .district-btn.is-empty { background: #eee2d3; }
     .district-btn.is-empty .district-btn-meta { color: var(--ink-muted); background: var(--surface-alt); }
     @media (max-width: 480px) {
       .warsaw-map { min-height: 280px; max-height: none; }
@@ -535,6 +535,7 @@
 
     /* Minimalistyczna strona startowa: nazwa i mapa. */
     .site-title { display: none; }
+    .site-title:focus { outline: none; }
     .visually-hidden {
       position: absolute;
       width: 1px;
@@ -546,7 +547,7 @@
       white-space: nowrap;
       border: 0;
     }
-    body:has(.app.district-mode) { background: #fafaf7; }
+    body:has(.app.district-mode) { background: #f5ecdf; }
     .app.district-mode {
       max-width: 820px;
       padding: clamp(0.5rem, 2vw, 1.25rem);
@@ -565,7 +566,7 @@
     .district-mode .site-title {
       display: block;
       margin: 0;
-      color: #183a2c;
+      color: #76243e;
       font-family: "Arial Black", "Segoe UI", sans-serif;
       font-size: clamp(1.65rem, 6.7vw, 3.5rem);
       font-weight: 900;
@@ -588,14 +589,14 @@
       min-height: 0;
       max-height: 78dvh;
     }
-    .district-mode .map-labels text { stroke: #fafaf7; }
+    .district-mode .map-labels text { stroke: #f5ecdf; }
   </style>
 </head>
 <body>
 
   <main class="app district-mode">
     <header class="topbar">
-      <h1 class="site-title">SPACEROWO-WWA</h1>
+      <h1 class="site-title" tabindex="-1">SPACEROWO-WWA</h1>
       <div class="brand">
         <span class="brand-dot"></span>
         <span id="headerTitle">Warszawa • Spacer</span>
@@ -778,6 +779,7 @@
       localStorage.setItem(STORAGE_DZIELNICA_KEY, aktywnaDzielnica);
       localStorage.setItem(STORAGE_IDS_KEY, JSON.stringify(CELE.map((c) => c.id)));
       localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
+      if (history.state?.spacerowo?.view === "route") zapiszTraseWHistorii();
     }
 
     function pokazEkran(widok) {
@@ -803,7 +805,45 @@
       }
     }
 
+    function zapiszTraseWHistorii(nowyWpis = false) {
+      const state = {
+        ...history.state,
+        spacerowo: {
+          view: "route",
+          district: aktywnaDzielnica,
+          ids: CELE.map((cel) => cel.id),
+          index: wybranyIndeks
+        }
+      };
+      if (nowyWpis) history.pushState(state, "");
+      else history.replaceState(state, "");
+    }
+
+    function przywrocWidokZHistorii() {
+      const state = history.state?.spacerowo;
+      if (state?.view === "route" && stanCelow === "ready" && Array.isArray(state.ids)) {
+        const dostepne = new Map(pobierzCeleWDzielnicy(state.district).map((cel) => [cel.id, cel]));
+        const cele = state.ids.map((id) => dostepne.get(id)).filter(Boolean);
+        if (cele.length && cele.length === state.ids.length) {
+          aktywnaDzielnica = state.district;
+          CELE = cele;
+          wybranyIndeks = Number.isInteger(state.index) && state.index >= 0 && state.index < CELE.length ? state.index : 0;
+          zapiszStan();
+          zbudujPrzelaczniki();
+          pokazEkran("route");
+          aktualizujUI();
+          return;
+        }
+      }
+      pokazEkran("districts");
+      document.querySelector(".site-title").focus({ preventScroll: true });
+    }
+
     function otworzWyborDzielnicy() {
+      if (history.state?.spacerowo?.view === "route") {
+        history.back();
+        return;
+      }
       aktywnaDzielnica = "";
       localStorage.removeItem(STORAGE_DZIELNICA_KEY);
       localStorage.removeItem(STORAGE_IDS_KEY);
@@ -852,6 +892,7 @@
       wybranyIndeks = 0;
       zapiszStan();
 
+      zapiszTraseWHistorii(true);
       zbudujPrzelaczniki();
       pokazEkran("route");
       aktualizujUI();
@@ -860,7 +901,7 @@
     function wybierzCel(idx) {
       if (idx < 0 || idx >= CELE.length) return;
       wybranyIndeks = idx;
-      localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
+      zapiszStan();
       aktualizujUI();
     }
 
@@ -1066,6 +1107,7 @@
         } else {
           pokazEkran("districts");
         }
+        przywrocWidokZHistorii();
       } catch (err) {
         stanCelow = "error";
         document.querySelectorAll(".map-district").forEach((region) => region.classList.add("is-empty"));
@@ -1077,6 +1119,10 @@
       }
     }
 
+    if (!history.state?.spacerowo) {
+      history.replaceState({ ...history.state, spacerowo: { view: "districts" } }, "");
+    }
+    window.addEventListener("popstate", przywrocWidokZHistorii);
     window.addEventListener("resize", dopasujNapisyDoSzerokosci);
     przygotujMape();
     zaladujCele();

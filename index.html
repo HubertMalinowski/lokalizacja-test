@@ -3,92 +3,579 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#091f36">
-  <title>Zielona Warszawa | Trasy spacerowe po Ochocie</title>
-  <link rel="stylesheet" href="./styles.css">
+  <title>Ochota — Trasa spacerowa</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #fffdf9;
+      --surface-alt: #efeae0;
+      --ink: #1b2420;
+      --ink-muted: #55615b;
+      --line: #dfd8ca;
+      --accent: #1d5c46;
+      --accent-hover: #154635;
+      --accent-soft: #e3efe9;
+      --warm: #b4532a;
+      --warm-soft: #faece5;
+      --danger-bg: #fdf1f0;
+      --danger-line: #f3c6c2;
+      --danger-ink: #8f241c;
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 12px 32px rgba(27, 36, 32, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      padding: 1.25rem 0.85rem 2.25rem;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(29, 92, 70, 0.07), transparent 45%),
+        radial-gradient(circle at 90% 10%, rgba(180, 83, 42, 0.07), transparent 40%),
+        var(--bg);
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 440px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 1.15rem;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--warm);
+    }
+
+    .route-hint {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--surface-alt);
+      color: var(--ink-muted);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 0.55rem;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.12s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-height: 62px;
+    }
+
+    .tab-btn:hover {
+      border-color: #c8beab;
+      color: var(--ink);
+    }
+
+    .tab-btn:active {
+      transform: scale(0.98);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(29, 92, 70, 0.22);
+    }
+
+    .tab-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      opacity: 0.8;
+    }
+
+    .tab-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.22;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .place-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .media-wrap {
+      position: relative;
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .place-badge {
+      position: absolute;
+      top: 0.65rem;
+      left: 0.65rem;
+      z-index: 2;
+      background: rgba(27, 36, 32, 0.82);
+      backdrop-filter: blur(6px);
+      color: #fffdf9;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .photo {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .photo-status {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      padding: 0.9rem 1rem;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .photo-status.error {
+      background: var(--danger-bg);
+      color: var(--danger-ink);
+      border-top: 1px solid var(--danger-line);
+    }
+
+    .photo-status a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .place-body {
+      padding: 1rem 1.05rem 1.15rem;
+    }
+
+    .place-name {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    .place-coords {
+      margin-top: 0.35rem;
+      font-size: 0.74rem;
+      color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .place-desc {
+      margin: 0.8rem 0 0;
+      font-size: 0.92rem;
+      line-height: 1.58;
+      color: #2c3732;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .route-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(29, 92, 70, 0.2);
+      transition: background-color 0.15s ease, transform 0.12s ease;
+    }
+
+    .route-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .route-btn:active {
+      transform: scale(0.99);
+    }
+
+    .reroll-btn {
+      appearance: none;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: var(--warm-soft);
+      color: var(--warm);
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .reroll-btn:hover {
+      background: #f6dfd4;
+      border-color: #e7c2b0;
+    }
+
+    .reroll-btn:active {
+      transform: scale(0.99);
+    }
+  </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <path d="M24 43V9M24 17l-9-8M24 23l10-10M24 30 12-6M24 34l13-6"/>
-          <path d="M12 23c-7-7-1-19 11-20 13 0 22 15 12 24M12 23c-9 9-1 19 12 17 11 2 19-9 13-16"/>
-        </svg>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>Ochota • Spacer</span>
       </div>
-      <div>
-        <h1>Zielona Warszawa</h1>
-        <p class="hero-subtitle">Trasy spacerowe po Ochocie</p>
+      <div class="route-hint" id="routeSummary">3 punkty</div>
+    </header>
+
+    <nav class="tabs" id="tabsBar" aria-label="Wybór punktu na trasie"></nav>
+
+    <article class="place-card" id="targetBox">
+      <div class="media-wrap" id="photoBox">
+        <span class="place-badge" id="placeBadge">Przystanek 1</span>
+        <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
+        <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
       </div>
+
+      <div class="place-body">
+        <h1 class="place-name" id="targetName">Ładowanie trasy...</h1>
+        <div class="place-coords" id="targetCoords"></div>
+        <p class="place-desc" id="targetDesc"></p>
+      </div>
+    </article>
+
+    <div class="actions">
+      <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
+        Otwórz całą trasę (spacer) w Mapach Google
+      </a>
+      <button type="button" class="reroll-btn" onclick="wylosujNowaTrase()">
+        Wylosuj nową trasę (3 miejsca)
+      </button>
     </div>
-  </header>
-
-  <main class="page">
-    <div class="tabs-shell">
-      <nav class="tabs" id="tabsBar" role="tablist" aria-label="Miejsca na trasie"></nav>
-    </div>
-
-    <section class="card" aria-label="Szczegóły wybranego miejsca">
-      <div class="main-layout" id="targetBox" role="tabpanel">
-        <div class="photo-box" id="photoBox">
-          <div class="photo-status" id="photoStatus" role="status">Ładowanie zdjęcia...</div>
-          <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
-        </div>
-
-        <div class="target-content">
-          <div class="target-heading">
-            <span class="target-icon" id="targetIcon" aria-hidden="true"></span>
-            <div class="name" id="targetName">Ładowanie trasy...</div>
-          </div>
-          <p class="location">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2a8 8 0 0 0-8 8c0 5.2 8 12 8 12s8-6.8 8-12a8 8 0 0 0-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-            </svg>
-            <span id="targetLocation">Ochota, Warszawa</span>
-          </p>
-          <div class="desc" id="targetDesc"></div>
-        </div>
-      </div>
-
-      <div class="feature-grid" id="featureGrid" aria-label="Cechy miejsca"></div>
-
-      <div class="actions-row">
-        <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
-          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="5" cy="18" r="2"/>
-            <circle cx="19" cy="6" r="2"/>
-            <path d="M7 18h5a5 5 0 0 0 0-10h-1M17 6h-3"/>
-          </svg>
-          <span class="action-text">Otwórz całą trasę (spacer)<br>w Mapach Google</span>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M14 4h6v6M20 4l-9 9M20 14v6H4V4h6"/>
-          </svg>
-        </a>
-
-        <button type="button" class="secondary" id="rerollBtn">
-          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            <path d="M4 5h3c5 0 5 14 10 14h3M17 16l3 3-3 3M4 19h3c5 0 5-14 10-14h3M17 2l3 3-3 3"/>
-          </svg>
-          <span class="action-text">Wylosuj nową trasę<br><small>(3 miejsca)</small></span>
-        </button>
-      </div>
-    </section>
-
-    <div class="map-footer" aria-hidden="true">
-      <svg viewBox="0 0 1100 140" preserveAspectRatio="none">
-        <path d="M50 115 Q150 20 250 96T450 75T680 95T900 50T1070 82" fill="none" stroke="#a12639" stroke-width="3" stroke-dasharray="8 7"/>
-        <g fill="#a12639" stroke="#fff" stroke-width="3">
-          <path d="M250 88a12 12 0 1 1 24 0c0 8-12 21-12 21s-12-13-12-21Z"/>
-          <path d="M670 75a12 12 0 1 1 24 0c0 8-12 21-12 21s-12-13-12-21Z"/>
-          <path d="M1000 74a12 12 0 1 1 24 0c0 8-12 21-12 21s-12-13-12-21Z"/>
-        </g>
-      </svg>
-    </div>
-
-    <p class="footer-text">Odkrywaj Ochotę krok po kroku</p>
   </main>
 
-  <script src="./icons.js" defer></script>
-  <script src="./app.js" defer></script>
+  <script>
+    const LICZBA_CELOW_W_RUNDZIE = 3;
+    const STORAGE_IDS_KEY = "ochota_wylosowane_ids_v4";
+    const STORAGE_WYBRANY_KEY = "ochota_wybrany_indeks_v4";
+
+    let wszystkieCele = [];
+    let CELE = [];
+    let wybranyIndeks = Number(localStorage.getItem(STORAGE_WYBRANY_KEY) || 0);
+    let numerZadaniaZdjecia = 0;
+
+    function zbudujLinkCalejTrasy(cele) {
+      if (!cele || cele.length === 0) return "#";
+
+      const ostatni = cele[cele.length - 1];
+      const posrednie = cele.slice(0, -1);
+
+      const params = new URLSearchParams({
+        api: "1",
+        destination: `${ostatni.lat},${ostatni.lon}`,
+        travelmode: "walking"
+      });
+
+      if (posrednie.length > 0) {
+        params.set(
+          "waypoints",
+          posrednie.map((c) => `${c.lat},${c.lon}`).join("|")
+        );
+      }
+
+      return `https://www.google.com/maps/dir/?${params.toString()}`;
+    }
+
+    function losujUnikalne(lista, ile) {
+      const kopia = [...lista];
+      for (let i = kopia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [kopia[i], kopia[j]] = [kopia[j], kopia[i]];
+      }
+      return kopia.slice(0, Math.min(ile, kopia.length));
+    }
+
+    function zapiszStan() {
+      localStorage.setItem(STORAGE_IDS_KEY, JSON.stringify(CELE.map((c) => c.id)));
+      localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
+    }
+
+    function wybierzCel(idx) {
+      if (idx < 0 || idx >= CELE.length) return;
+      wybranyIndeks = idx;
+      localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
+      aktualizujUI();
+    }
+
+    function wylosujNowaTrase() {
+      CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
+      wybranyIndeks = 0;
+      zapiszStan();
+      zbudujPrzelaczniki();
+      aktualizujUI();
+    }
+
+    function zbudujPrzelaczniki() {
+      const tabsBar = document.getElementById("tabsBar");
+      tabsBar.innerHTML = "";
+
+      CELE.forEach((cel, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "tab-btn";
+        btn.id = `tab-${idx}`;
+        btn.innerHTML = `
+          <span class="tab-num">0${idx + 1}</span>
+          <span class="tab-title">${cel.nazwa}</span>
+        `;
+        btn.addEventListener("click", () => wybierzCel(idx));
+        tabsBar.appendChild(btn);
+      });
+
+      document.getElementById("routeSummary").textContent = `${CELE.length} punkty`;
+    }
+
+    async function pobierzUrlZWikimedia(query) {
+      const url = new URL("https://commons.wikimedia.org/w/api.php");
+      url.searchParams.set("action", "query");
+      url.searchParams.set("format", "json");
+      url.searchParams.set("origin", "*");
+      url.searchParams.set("generator", "search");
+      url.searchParams.set("gsrnamespace", "6");
+      url.searchParams.set("gsrsearch", query);
+      url.searchParams.set("gsrlimit", "5");
+      url.searchParams.set("prop", "imageinfo");
+      url.searchParams.set("iiprop", "url|mime");
+      url.searchParams.set("iiurlwidth", "800");
+
+      const resp = await fetch(url.toString());
+      if (!resp.ok) {
+        throw new Error(`Błąd HTTP Wikimedia API: ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      const pages = data?.query?.pages ? Object.values(data.query.pages) : [];
+
+      for (const page of pages) {
+        const info = page?.imageinfo?.[0];
+        if (!info) continue;
+        const mime = info.mime || "";
+        if (!mime.startsWith("image/") || mime.includes("svg")) continue;
+        const imgUrl = info.thumburl || info.url;
+        if (imgUrl) return imgUrl;
+      }
+
+      throw new Error(`Brak wyników graficznych dla zapytania: "${query}"`);
+    }
+
+    function ustawKomunikatZdjecia(html, isError = false) {
+      const statusEl = document.getElementById("photoStatus");
+      statusEl.innerHTML = html;
+      statusEl.className = isError ? "photo-status error" : "photo-status";
+      statusEl.style.display = "block";
+    }
+
+    async function ustawZdjecie(cel) {
+      const taskId = ++numerZadaniaZdjecia;
+      const photoBox = document.getElementById("photoBox");
+      const photoEl = document.getElementById("targetPhoto");
+
+      photoBox.style.display = "block";
+      photoEl.onload = null;
+      photoEl.onerror = null;
+      photoEl.style.display = "none";
+      photoEl.removeAttribute("src");
+
+      let zrodloUrl = cel.zdjecie || "";
+
+      if (!zrodloUrl && cel.wikiQuery) {
+        ustawKomunikatZdjecia(`Szukam zdjęcia w Wikimedia Commons dla: <code>${cel.wikiQuery}</code>...`);
+        try {
+          zrodloUrl = await pobierzUrlZWikimedia(cel.wikiQuery);
+        } catch (err) {
+          if (taskId !== numerZadaniaZdjecia) return;
+          ustawKomunikatZdjecia(
+            `<strong>Problem z pobraniem zdjęcia:</strong> ${err.message}`,
+            true
+          );
+          return;
+        }
+      }
+
+      if (taskId !== numerZadaniaZdjecia) return;
+
+      if (!zrodloUrl) {
+        ustawKomunikatZdjecia(
+          `<strong>Brak zdjęcia:</strong> obiekt w <code>cele.json</code> nie ma pola <code>zdjecie</code> ani <code>wikiQuery</code>.`,
+          true
+        );
+        return;
+      }
+
+      ustawKomunikatZdjecia(`Pobieranie obrazu z: <a href="${zrodloUrl}" target="_blank" rel="noopener">${zrodloUrl}</a>`);
+
+      photoEl.onload = () => {
+        if (taskId !== numerZadaniaZdjecia) return;
+        document.getElementById("photoStatus").style.display = "none";
+        photoEl.style.display = "block";
+      };
+
+      photoEl.onerror = () => {
+        if (taskId !== numerZadaniaZdjecia) return;
+        photoEl.style.display = "none";
+        ustawKomunikatZdjecia(
+          `<strong>Nie udało się załadować obrazka</strong> (błąd sieci, blokada lub niepoprawny URL).<br>Link: <a href="${zrodloUrl}" target="_blank" rel="noopener">${zrodloUrl}</a>`,
+          true
+        );
+      };
+
+      photoEl.alt = cel.nazwa;
+      photoEl.src = zrodloUrl;
+    }
+
+    function aktualizujUI() {
+      if (!CELE.length) return;
+
+      if (wybranyIndeks < 0 || wybranyIndeks >= CELE.length) {
+        wybranyIndeks = 0;
+      }
+
+      CELE.forEach((_, idx) => {
+        const btn = document.getElementById(`tab-${idx}`);
+        if (btn) {
+          btn.classList.toggle("active", idx === wybranyIndeks);
+        }
+      });
+
+      const cel = CELE[wybranyIndeks];
+      document.getElementById("placeBadge").textContent = `Przystanek ${wybranyIndeks + 1} z ${CELE.length}`;
+      document.getElementById("targetName").textContent = cel.nazwa;
+      document.getElementById("targetCoords").textContent =
+        typeof cel.lat === "number" && typeof cel.lon === "number"
+          ? `${cel.lat.toFixed(5)}° N, ${cel.lon.toFixed(5)}° E`
+          : "";
+      document.getElementById("targetDesc").textContent = cel.opis || "";
+      ustawZdjecie(cel);
+
+      const fullRouteLink = document.getElementById("fullRouteLink");
+      fullRouteLink.href = zbudujLinkCalejTrasy(CELE);
+      fullRouteLink.style.display = "flex";
+    }
+
+    async function zaladujCele() {
+      try {
+        const response = await fetch("./cele.json");
+        if (!response.ok) throw new Error(`Błąd HTTP: ${response.status}`);
+        wszystkieCele = await response.json();
+
+        if (!Array.isArray(wszystkieCele) || wszystkieCele.length === 0) {
+          throw new Error("Brak celów w cele.json");
+        }
+
+        const zapisaneIdsRaw = localStorage.getItem(STORAGE_IDS_KEY);
+        let odtworzone = null;
+
+        if (zapisaneIdsRaw) {
+          const zapisaneIds = JSON.parse(zapisaneIdsRaw);
+          if (Array.isArray(zapisaneIds) && zapisaneIds.length > 0) {
+            const mapa = new Map(wszystkieCele.map((c) => [c.id, c]));
+            const dopasowane = zapisaneIds.map((id) => mapa.get(id)).filter(Boolean);
+            if (dopasowane.length === zapisaneIds.length) {
+              odtworzone = dopasowane;
+            }
+          }
+        }
+
+        if (odtworzone) {
+          CELE = odtworzone;
+          if (wybranyIndeks >= CELE.length) {
+            wybranyIndeks = 0;
+          }
+        } else {
+          CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
+          wybranyIndeks = 0;
+          zapiszStan();
+        }
+
+        zbudujPrzelaczniki();
+        aktualizujUI();
+      } catch (err) {
+        document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
+        document.getElementById("targetDesc").textContent =
+          "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
+        document.getElementById("photoBox").style.display = "none";
+        document.getElementById("fullRouteLink").style.display = "none";
+        console.error(err);
+      }
+    }
+
+    zaladujCele();
+  </script>
+
 </body>
 </html>

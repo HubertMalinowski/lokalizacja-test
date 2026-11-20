@@ -63,19 +63,34 @@
       font-weight: 700;
       color: #1e3a8a;
     }
+    .photo-box {
+      margin-top: 10px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #bfdbfe;
+      background: #f8fafc;
+    }
     .photo-status {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: #475569;
-      margin-top: 8px;
-      display: none;
+      padding: 10px;
+      text-align: left;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .photo-status.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border-top: 1px solid #fecaca;
+    }
+    .photo-status a {
+      color: #1d4ed8;
+      font-weight: 600;
     }
     .target-box .photo {
       width: 100%;
       height: 190px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-top: 8px;
-      border: 1px solid #bfdbfe;
       display: none;
       background: #e2e8f0;
     }
@@ -128,8 +143,12 @@
 
     <div class="target-box" id="targetBox">
       <div class="name" id="targetName">Ładowanie trasy...</div>
-      <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
-      <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
+
+      <div class="photo-box" id="photoBox">
+        <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
+        <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
+      </div>
+
       <div class="desc" id="targetDesc"></div>
     </div>
 
@@ -144,12 +163,13 @@
 
   <script>
     const LICZBA_CELOW_W_RUNDZIE = 3;
-    const STORAGE_IDS_KEY = "ochota_wylosowane_ids_v3";
-    const STORAGE_WYBRANY_KEY = "ochota_wybrany_indeks_v3";
+    const STORAGE_IDS_KEY = "ochota_wylosowane_ids_v4";
+    const STORAGE_WYBRANY_KEY = "ochota_wybrany_indeks_v4";
 
     let wszystkieCele = [];
     let CELE = [];
     let wybranyIndeks = Number(localStorage.getItem(STORAGE_WYBRANY_KEY) || 0);
+    let numerZadaniaZdjecia = 0;
 
     function zbudujLinkCalejTrasy(cele) {
       if (!cele || cele.length === 0) return "#";
@@ -217,35 +237,102 @@
       });
     }
 
-    function ustawZdjecie(cel) {
-      const photoEl = document.getElementById("targetPhoto");
-      const statusEl = document.getElementById("photoStatus");
+    async function pobierzUrlZWikimedia(query) {
+      const url = new URL("https://commons.wikimedia.org/w/api.php");
+      url.searchParams.set("action", "query");
+      url.searchParams.set("format", "json");
+      url.searchParams.set("origin", "*");
+      url.searchParams.set("generator", "search");
+      url.searchParams.set("gsrnamespace", "6"); // przestrzeń nazw File:
+      url.searchParams.set("gsrsearch", query);
+      url.searchParams.set("gsrlimit", "5");
+      url.searchParams.set("prop", "imageinfo");
+      url.searchParams.set("iiprop", "url|mime");
+      url.searchParams.set("iiurlwidth", "800");
 
-      if (!cel.zdjecie) {
-        photoEl.onload = null;
-        photoEl.onerror = null;
-        photoEl.removeAttribute("src");
-        photoEl.style.display = "none";
-        statusEl.style.display = "none";
+      const resp = await fetch(url.toString());
+      if (!resp.ok) {
+        throw new Error(`Błąd HTTP Wikimedia API: ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      const pages = data?.query?.pages ? Object.values(data.query.pages) : [];
+
+      for (const page of pages) {
+        const info = page?.imageinfo?.[0];
+        if (!info) continue;
+        const mime = info.mime || "";
+        if (!mime.startsWith("image/") || mime.includes("svg")) continue;
+        const imgUrl = info.thumburl || info.url;
+        if (imgUrl) return imgUrl;
+      }
+
+      throw new Error(`Brak wyników graficznych dla zapytania: "${query}"`);
+    }
+
+    function ustawKomunikatZdjecia(html, isError = false) {
+      const statusEl = document.getElementById("photoStatus");
+      statusEl.innerHTML = html;
+      statusEl.className = isError ? "photo-status error" : "photo-status";
+      statusEl.style.display = "block";
+    }
+
+    async function ustawZdjecie(cel) {
+      const taskId = ++numerZadaniaZdjecia;
+      const photoBox = document.getElementById("photoBox");
+      const photoEl = document.getElementById("targetPhoto");
+
+      photoBox.style.display = "block";
+      photoEl.onload = null;
+      photoEl.onerror = null;
+      photoEl.style.display = "none";
+      photoEl.removeAttribute("src");
+
+      let zrodloUrl = cel.zdjecie || "";
+
+      if (!zrodloUrl && cel.wikiQuery) {
+        ustawKomunikatZdjecia(`Szukam zdjęcia w Wikimedia Commons dla: <code>${cel.wikiQuery}</code>...`);
+        try {
+          zrodloUrl = await pobierzUrlZWikimedia(cel.wikiQuery);
+        } catch (err) {
+          if (taskId !== numerZadaniaZdjecia) return;
+          ustawKomunikatZdjecia(
+            `<strong>Problem z pobraniem zdjęcia:</strong> ${err.message}`,
+            true
+          );
+          return;
+        }
+      }
+
+      if (taskId !== numerZadaniaZdjecia) return;
+
+      if (!zrodloUrl) {
+        ustawKomunikatZdjecia(
+          `<strong>Brak zdjęcia:</strong> obiekt w <code>cele.json</code> nie ma pola <code>zdjecie</code> ani <code>wikiQuery</code>.`,
+          true
+        );
         return;
       }
 
-      photoEl.style.display = "none";
-      statusEl.textContent = "Ładowanie zdjęcia...";
-      statusEl.style.display = "block";
+      ustawKomunikatZdjecia(`Pobieranie obrazu z: <a href="${zrodloUrl}" target="_blank" rel="noopener">${zrodloUrl}</a>`);
 
       photoEl.onload = () => {
-        statusEl.style.display = "none";
+        if (taskId !== numerZadaniaZdjecia) return;
+        document.getElementById("photoStatus").style.display = "none";
         photoEl.style.display = "block";
       };
 
       photoEl.onerror = () => {
-        statusEl.style.display = "none";
+        if (taskId !== numerZadaniaZdjecia) return;
         photoEl.style.display = "none";
+        ustawKomunikatZdjecia(
+          `<strong>Nie udało się załadować obrazka</strong> (błąd sieci, blokada lub niepoprawny URL).<br>Link: <a href="${zrodloUrl}" target="_blank" rel="noopener">${zrodloUrl}</a>`,
+          true
+        );
       };
 
       photoEl.alt = cel.nazwa;
-      photoEl.src = cel.zdjecie;
+      photoEl.src = zrodloUrl;
     }
 
     function aktualizujUI() {
@@ -313,6 +400,7 @@
         document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
         document.getElementById("targetDesc").textContent =
           "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
+        document.getElementById("photoBox").style.display = "none";
         document.getElementById("fullRouteLink").style.display = "none";
         console.error(err);
       }

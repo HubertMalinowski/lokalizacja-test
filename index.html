@@ -20,7 +20,7 @@
       --danger-bg: #fdf1f0;
       --danger-line: #f3c6c2;
       --danger-ink: #8f241c;
-      --radius-lg: clamp(16px, 2.5vw, 24px);
+      --radius-lg: 20px;
       --radius-md: 12px;
       --shadow: 0 12px 32px rgba(27, 36, 32, 0.08);
     }
@@ -29,18 +29,14 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100dvh;
-    }
-
     body {
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      min-height: 100dvh;
       padding:
-        max(1rem, env(safe-area-inset-top))
+        max(1.1rem, env(safe-area-inset-top))
         max(0.85rem, env(safe-area-inset-right))
-        max(1.5rem, env(safe-area-inset-bottom))
+        max(1.75rem, env(safe-area-inset-bottom))
         max(0.85rem, env(safe-area-inset-left));
       background:
         radial-gradient(circle at 15% 0%, rgba(29, 92, 70, 0.07), transparent 45%),
@@ -49,27 +45,26 @@
       color: var(--ink);
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .app {
       width: 100%;
-      max-width: 960px;
+      max-width: 440px;
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
-      padding: clamp(1rem, 2.5vw, 1.75rem);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: clamp(0.9rem, 2vw, 1.5rem);
+      padding: 1.15rem;
+      transition: max-width 0.2s ease;
     }
 
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.75rem;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
       padding-bottom: 0.75rem;
       border-bottom: 1px solid var(--line);
     }
@@ -78,7 +73,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+      font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -90,35 +85,19 @@
       height: 8px;
       border-radius: 50%;
       background: var(--warm);
-      flex-shrink: 0;
     }
 
     .route-hint {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--ink-muted);
-      font-weight: 600;
-      background: var(--surface-alt);
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-    }
-
-    .layout-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: clamp(0.9rem, 2vw, 1.5rem);
-      align-items: start;
-    }
-
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
+      font-weight: 500;
     }
 
     .tabs {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 0.45rem;
+      margin-bottom: 1rem;
     }
 
     .tab-btn {
@@ -133,7 +112,6 @@
       transition: transform 0.12s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       gap: 0.2rem;
       min-height: 62px;
       min-width: 0;
@@ -163,14 +141,13 @@
     }
 
     .tab-title {
-      font-size: clamp(0.75rem, 1.4vw, 0.85rem);
+      font-size: 0.78rem;
       font-weight: 700;
-      line-height: 1.25;
+      line-height: 1.22;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      word-break: break-word;
     }
 
     .place-card {
@@ -178,6 +155,9 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
       overflow: hidden;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
     }
 
     .media-wrap {
@@ -188,8 +168,8 @@
 
     .place-badge {
       position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
+      top: 0.65rem;
+      left: 0.65rem;
       z-index: 2;
       background: rgba(27, 36, 32, 0.82);
       backdrop-filter: blur(6px);
@@ -197,22 +177,21 @@
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      padding: 0.3rem 0.65rem;
+      padding: 0.3rem 0.6rem;
       border-radius: 999px;
     }
 
     .photo {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      max-height: 340px;
+      height: 210px;
       object-fit: cover;
       display: none;
     }
 
     .photo-status {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--ink-muted);
-      padding: 1rem;
+      padding: 0.9rem 1rem;
       line-height: 1.45;
       word-break: break-word;
     }
@@ -229,12 +208,12 @@
     }
 
     .place-body {
-      padding: clamp(1rem, 2.2vw, 1.4rem);
+      padding: 1rem 1.05rem 1.15rem;
     }
 
     .place-name {
       margin: 0;
-      font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+      font-size: 1.25rem;
       line-height: 1.25;
       font-weight: 800;
       letter-spacing: -0.015em;
@@ -243,15 +222,15 @@
 
     .place-coords {
       margin-top: 0.35rem;
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       color: var(--ink-muted);
       font-variant-numeric: tabular-nums;
     }
 
     .place-desc {
-      margin: 0.85rem 0 0;
-      font-size: clamp(0.9rem, 1.6vw, 0.98rem);
-      line-height: 1.62;
+      margin: 0.8rem 0 0;
+      font-size: 0.92rem;
+      line-height: 1.58;
       color: #2c3732;
     }
 
@@ -265,14 +244,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
       gap: 0.5rem;
       width: 100%;
       padding: 0.9rem 1.1rem;
       border-radius: var(--radius-md);
       background: var(--accent);
       color: #ffffff;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 700;
       text-decoration: none;
       box-shadow: 0 6px 18px rgba(29, 92, 70, 0.2);
@@ -290,7 +268,7 @@
     .reroll-btn {
       appearance: none;
       width: 100%;
-      padding: 0.78rem 1rem;
+      padding: 0.75rem 1rem;
       border-radius: var(--radius-md);
       border: 1px solid var(--line);
       background: var(--warm-soft);
@@ -310,47 +288,54 @@
       transform: scale(0.99);
     }
 
-    /* Bardzo wąskie ekrany (np. ekran zewnętrzny smartfona < 360px) */
-    @media (max-width: 359px) {
-      .tabs {
-        grid-template-columns: 1fr;
-      }
-      .tab-btn {
-        flex-direction: row;
+    /* Gdy szerokość ekranu jest większa niż wysokość (landscape): obrazek i opis obok siebie */
+    @media (orientation: landscape) {
+      body {
         align-items: center;
-        justify-content: flex-start;
-        gap: 0.6rem;
-        min-height: 44px;
-        padding: 0.55rem 0.75rem;
-      }
-      .tab-title {
-        -webkit-line-clamp: 1;
-      }
-    }
-
-    /* Szersze ekrany (rozłożony Fold, tablet, laptop, desktop >= 680px) */
-    @media (min-width: 680px) {
-      .layout-grid {
-        grid-template-columns: minmax(240px, 310px) 1fr;
       }
 
-      .sidebar {
-        position: sticky;
-        top: 1rem;
+      .app {
+        max-width: min(860px, 94vw);
       }
 
-      .tabs {
-        grid-template-columns: 1fr;
-        gap: 0.55rem;
+      .place-card {
+        display: grid;
+        grid-template-columns: minmax(220px, 44%) 1fr;
+        align-items: stretch;
       }
 
-      .tab-btn {
-        min-height: 68px;
-        padding: 0.75rem 0.9rem;
+      .media-wrap {
+        border-bottom: none;
+        border-right: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 220px;
       }
 
-      .tab-title {
-        -webkit-line-clamp: 2;
+      .photo {
+        height: 100%;
+        min-height: 220px;
+        max-height: 320px;
+      }
+
+      .place-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1.1rem 1.25rem;
+      }
+
+      .actions {
+        flex-direction: row;
+      }
+
+      .route-btn {
+        flex: 2;
+      }
+
+      .reroll-btn {
+        flex: 1;
       }
     }
   </style>
@@ -366,33 +351,29 @@
       <div class="route-hint" id="routeSummary">3 punkty</div>
     </header>
 
-    <div class="layout-grid">
-      <aside class="sidebar">
-        <nav class="tabs" id="tabsBar" aria-label="Wybór punktu na trasie"></nav>
+    <nav class="tabs" id="tabsBar" aria-label="Wybór punktu na trasie"></nav>
 
-        <div class="actions">
-          <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
-            Otwórz całą trasę (spacer) w Mapach Google
-          </a>
-          <button type="button" class="reroll-btn" onclick="wylosujNowaTrase()">
-            Wylosuj nową trasę (3 miejsca)
-          </button>
-        </div>
-      </aside>
+    <article class="place-card" id="targetBox">
+      <div class="media-wrap" id="photoBox">
+        <span class="place-badge" id="placeBadge">Przystanek 1</span>
+        <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
+        <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
+      </div>
 
-      <article class="place-card" id="targetBox">
-        <div class="media-wrap" id="photoBox">
-          <span class="place-badge" id="placeBadge">Przystanek 1</span>
-          <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
-          <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
-        </div>
+      <div class="place-body">
+        <h1 class="place-name" id="targetName">Ładowanie trasy...</h1>
+        <div class="place-coords" id="targetCoords"></div>
+        <p class="place-desc" id="targetDesc"></p>
+      </div>
+    </article>
 
-        <div class="place-body">
-          <h1 class="place-name" id="targetName">Ładowanie trasy...</h1>
-          <div class="place-coords" id="targetCoords"></div>
-          <p class="place-desc" id="targetDesc"></p>
-        </div>
-      </article>
+    <div class="actions">
+      <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
+        Otwórz całą trasę (spacer) w Mapach Google
+      </a>
+      <button type="button" class="reroll-btn" onclick="wylosujNowaTrase()">
+        Wylosuj nową trasę (3 miejsca)
+      </button>
     </div>
   </main>
 
@@ -488,7 +469,7 @@
       url.searchParams.set("gsrlimit", "5");
       url.searchParams.set("prop", "imageinfo");
       url.searchParams.set("iiprop", "url|mime");
-      url.searchParams.set("iiurlwidth", "1000");
+      url.searchParams.set("iiurlwidth", "800");
 
       const resp = await fetch(url.toString());
       if (!resp.ok) {
@@ -522,7 +503,7 @@
       const photoBox = document.getElementById("photoBox");
       const photoEl = document.getElementById("targetPhoto");
 
-      photoBox.style.display = "block";
+      photoBox.style.display = "flex";
       photoEl.onload = null;
       photoEl.onerror = null;
       photoEl.style.display = "none";

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gra terenowa — Ochota (losowa trasa)</title>
+  <title>Gra terenowa — promień celu</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -72,6 +72,16 @@
       margin-top: 4px;
       color: #1e3a8a;
     }
+    .target-box .radius-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
     .target-box .desc {
       font-size: 0.85rem;
       color: #334155;
@@ -92,6 +102,21 @@
     }
     .map-link:hover {
       background: #dbeafe;
+    }
+    .route-btn {
+      display: block;
+      margin-top: 0.75rem;
+      padding: 10px 14px;
+      background: #eef2ff;
+      color: #1e40af;
+      border: 1px solid #c7d2fe;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .route-btn:hover {
+      background: #e0e7ff;
     }
     .control-group {
       margin: 1rem 0;
@@ -206,6 +231,7 @@
     <div class="target-box" id="targetBox">
       <div class="label">Aktualny cel</div>
       <div class="name" id="targetName">Ładowanie trasy...</div>
+      <div class="radius-badge" id="targetRadius" style="display:none;"></div>
       <div class="desc" id="targetDesc"></div>
       <a class="map-link" id="targetMapLink" href="#" target="_blank" rel="noopener" style="display:none;">
         Pokaż cel w Mapach Google
@@ -214,13 +240,13 @@
 
     <div class="control-group">
       <label for="margines">
-        <span>Margines błędu:</span>
-        <span><strong id="marginesWartosc">50</strong> m</span>
+        <span>Dodatkowy margines błędu:</span>
+        <span><strong id="marginesWartosc">0</strong> m</span>
       </label>
-      <input type="range" id="margines" min="0" max="500" step="10" value="50">
+      <input type="range" id="margines" min="0" max="200" step="5" value="0">
 
       <div class="checkbox-row">
-        <input type="checkbox" id="uwzglednijGps" checked>
+        <input type="checkbox" id="uwzglednijGps">
         <label for="uwzglednijGps" style="margin:0; font-weight:normal; cursor:pointer;">
           Dolicz niepewność odczytu GPS (<code>accuracy</code>)
         </label>
@@ -228,6 +254,11 @@
     </div>
 
     <button class="primary" id="checkBtn" onclick="sprawdzLokalizacje()" disabled>Ładowanie...</button>
+
+    <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
+      Otwórz całą trasę (spacer) w Mapach Google
+    </a>
+
     <div id="wynik"></div>
 
     <div class="actions-row">
@@ -238,8 +269,8 @@
 
   <script>
     const LICZBA_CELOW_W_RUNDZIE = 3;
-    const STORAGE_IDS_KEY = "ochota_wylosowane_ids";
-    const STORAGE_ETAP_KEY = "ochota_etap";
+    const STORAGE_IDS_KEY = "ochota_wylosowane_ids_v2";
+    const STORAGE_ETAP_KEY = "ochota_etap_v2";
 
     let wszystkieCele = [];
     let CELE = [];
@@ -250,18 +281,52 @@
     const marginesLabel = document.getElementById("marginesWartosc");
     const checkboxGps = document.getElementById("uwzglednijGps");
 
-    // Wylicza środek (centroid) wielokąta na potrzeby pinezki / nawigacji w mapach
-    function srodekWielokata(polygon) {
-      let sumLat = 0;
-      let sumLon = 0;
-      for (const [lat, lon] of polygon) {
-        sumLat += lat;
-        sumLon += lon;
+    function odlegloscMetry(lat1, lon1, lat2, lon2) {
+      const R = 6371000;
+      const toRad = (deg) => (deg * Math.PI) / 180;
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function zbudujLinkCalejTrasy(cele, startCoords = null) {
+      if (!cele || cele.length === 0) return "#";
+
+      const ostatni = cele[cele.length - 1];
+      const posrednie = cele.slice(0, -1);
+
+      const params = new URLSearchParams({
+        api: "1",
+        destination: `${ostatni.lat},${ostatni.lon}`,
+        travelmode: "walking"
+      });
+
+      if (posrednie.length > 0) {
+        params.set(
+          "waypoints",
+          posrednie.map((c) => `${c.lat},${c.lon}`).join("|")
+        );
       }
-      return {
-        lat: sumLat / polygon.length,
-        lon: sumLon / polygon.length
-      };
+
+      if (startCoords) {
+        params.set("origin", `${startCoords.lat.toFixed(6)},${startCoords.lon.toFixed(6)}`);
+      }
+
+      return `https://www.google.com/maps/dir/?${params.toString()}`;
+    }
+
+    function aktualizujLinkCalejTrasy() {
+      const fullRouteLink = document.getElementById("fullRouteLink");
+      if (!CELE || CELE.length === 0) {
+        fullRouteLink.style.display = "none";
+        return;
+      }
+      fullRouteLink.href = zbudujLinkCalejTrasy(CELE, ostatniOdczyt);
+      fullRouteLink.style.display = "block";
     }
 
     function losujUnikalne(lista, ile) {
@@ -293,282 +358,3 @@
       ostatniOdczyt = null;
       document.getElementById("wynik").innerHTML = "";
       localStorage.setItem(STORAGE_ETAP_KEY, "0");
-      aktualizujUI();
-    }
-
-    async function zaladujCele() {
-      try {
-        const response = await fetch("./cele.json");
-        if (!response.ok) throw new Error(`Błąd HTTP: ${response.status}`);
-        wszystkieCele = await response.json();
-
-        if (!Array.isArray(wszystkieCele) || wszystkieCele.length === 0) {
-          throw new Error("Brak celów w cele.json");
-        }
-
-        const zapisaneIdsRaw = localStorage.getItem(STORAGE_IDS_KEY);
-        let odtworzone = null;
-
-        if (zapisaneIdsRaw) {
-          const zapisaneIds = JSON.parse(zapisaneIdsRaw);
-          if (Array.isArray(zapisaneIds) && zapisaneIds.length > 0) {
-            const mapa = new Map(wszystkieCele.map((c) => [c.id, c]));
-            const dopasowane = zapisaneIds.map((id) => mapa.get(id)).filter(Boolean);
-            if (dopasowane.length === zapisaneIds.length) {
-              odtworzone = dopasowane;
-            }
-          }
-        }
-
-        if (odtworzone) {
-          CELE = odtworzone;
-          if (aktualnyEtap > CELE.length) {
-            aktualnyEtap = CELE.length;
-            localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
-          }
-        } else {
-          CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
-          aktualnyEtap = 0;
-          zapiszStanTrasy();
-        }
-
-        zbudujPasekPostepu();
-        aktualizujUI();
-      } catch (err) {
-        document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
-        document.getElementById("targetDesc").textContent = "";
-        document.getElementById("targetMapLink").style.display = "none";
-        document.getElementById("wynik").textContent =
-          "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
-        console.error(err);
-      }
-    }
-
-    function zbudujPasekPostepu() {
-      const progressBar = document.getElementById("progressBar");
-      progressBar.innerHTML = "";
-
-      CELE.forEach((cel, idx) => {
-        const stepDiv = document.createElement("div");
-        stepDiv.className = "step";
-        stepDiv.id = `step-${idx}`;
-        stepDiv.textContent = `${idx + 1}. ${cel.nazwa}`;
-        progressBar.appendChild(stepDiv);
-      });
-    }
-
-    suwak.addEventListener("input", () => {
-      marginesLabel.textContent = suwak.value;
-      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
-        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
-      }
-    });
-
-    checkboxGps.addEventListener("change", () => {
-      if (ostatniOdczyt && aktualnyEtap < CELE.length) {
-        ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
-      }
-    });
-
-    function aktualizujUI() {
-      for (let i = 0; i < CELE.length; i++) {
-        const el = document.getElementById(`step-${i}`);
-        if (!el) continue;
-        el.className = "step";
-        if (i < aktualnyEtap) el.classList.add("done");
-        else if (i === aktualnyEtap) el.classList.add("active");
-      }
-
-      const targetBox = document.getElementById("targetBox");
-      const targetName = document.getElementById("targetName");
-      const targetDesc = document.getElementById("targetDesc");
-      const targetMapLink = document.getElementById("targetMapLink");
-      const checkBtn = document.getElementById("checkBtn");
-
-      if (aktualnyEtap >= CELE.length) {
-        targetBox.style.background = "#dcfce7";
-        targetBox.style.borderColor = "#86efac";
-        targetName.textContent = `Wszystkie ${CELE.length} wylosowane punkty zaliczone!`;
-        targetDesc.textContent = "Możesz wylosować nową trasę albo powtórzyć ten sam zestaw.";
-        targetMapLink.style.display = "none";
-        checkBtn.disabled = true;
-        checkBtn.style.opacity = "0.6";
-        checkBtn.textContent = "Trasa ukończona";
-      } else {
-        const cel = CELE[aktualnyEtap];
-        const centrum = srodekWielokata(cel.polygon);
-
-        targetBox.style.background = "#eff6ff";
-        targetBox.style.borderColor = "#bfdbfe";
-        targetName.textContent = cel.nazwa;
-        targetDesc.textContent = cel.opis || "";
-
-        targetMapLink.href = `https://www.google.com/maps/search/?api=1&query=${centrum.lat.toFixed(6)},${centrum.lon.toFixed(6)}`;
-        targetMapLink.style.display = "inline-block";
-
-        checkBtn.disabled = false;
-        checkBtn.style.opacity = "1";
-        checkBtn.textContent = `Sprawdź: ${cel.nazwa}`;
-      }
-    }
-
-    function sprawdzLokalizacje() {
-      const wynik = document.getElementById("wynik");
-
-      if (!navigator.geolocation) {
-        wynik.textContent = "Twoja przeglądarka nie obsługuje geolokalizacji.";
-        return;
-      }
-
-      wynik.textContent = "Pobieranie lokalizacji...";
-
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          ostatniOdczyt = {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-            acc: position.coords.accuracy
-          };
-          ocenPozycje(ostatniOdczyt.lat, ostatniOdczyt.lon, ostatniOdczyt.acc);
-        },
-        (error) => {
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              wynik.textContent = "Odmówiono dostępu do lokalizacji.";
-              break;
-            case error.POSITION_UNAVAILABLE:
-              wynik.textContent = "Informacje o lokalizacji są niedostępne.";
-              break;
-            case error.TIMEOUT:
-              wynik.textContent = "Upłynął limit czasu żądania.";
-              break;
-            default:
-              wynik.textContent = "Wystąpił nieznany błąd.";
-          }
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0
-        }
-      );
-    }
-
-    function ocenPozycje(lat, lon, acc) {
-      const wynik = document.getElementById("wynik");
-      if (aktualnyEtap >= CELE.length) return;
-
-      const cel = CELE[aktualnyEtap];
-      const marginesSuwak = Number(suwak.value);
-      const gpsBonus = checkboxGps.checked ? Math.round(acc) : 0;
-      const calkowityMargines = marginesSuwak + gpsBonus;
-
-      const dystans = odlegloscOdWielokataMetry(lat, lon, cel.polygon);
-      const trafiony = dystans <= calkowityMargines;
-
-      let statusHtml = "";
-
-      if (trafiony) {
-        const zaliczonyNazwa = cel.nazwa;
-        aktualnyEtap++;
-        localStorage.setItem(STORAGE_ETAP_KEY, String(aktualnyEtap));
-        aktualizujUI();
-
-        if (aktualnyEtap < CELE.length) {
-          statusHtml = `
-            <div class="status inside">
-              Zaliczono: ${zaliczonyNazwa}!<br>
-              Nowy cel: <strong>${CELE[aktualnyEtap].nazwa}</strong>
-            </div>
-          `;
-        } else {
-          statusHtml = `
-            <div class="status finished">
-              Gratulacje! Dotarłeś do ${zaliczonyNazwa} i ukończyłeś całą wylosowaną trasę!
-            </div>
-          `;
-        }
-      } else {
-        statusHtml = `
-          <div class="status outside">
-            Jeszcze nie dotarłeś do celu: ${cel.nazwa}.
-          </div>
-        `;
-      }
-
-      // Cel do nawigacji: aktualny (niezaliczony) lub kolejny po zaliczeniu
-      const celDoNawigacji = aktualnyEtap < CELE.length ? CELE[aktualnyEtap] : null;
-      let nawigacjaLinkHtml = "";
-
-      if (celDoNawigacji) {
-        const centrum = srodekWielokata(celDoNawigacji.polygon);
-        const dirUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat.toFixed(6)},${lon.toFixed(6)}&destination=${centrum.lat.toFixed(6)},${centrum.lon.toFixed(6)}&travelmode=walking`;
-        nawigacjaLinkHtml = `<a href="${dirUrl}" target="_blank" rel="noopener">Nawiguj pieszo do: ${celDoNawigacji.nazwa}</a>`;
-      }
-
-      const mojaPozycjaUrl = `https://www.google.com/maps/search/?api=1&query=${lat.toFixed(6)},${lon.toFixed(6)}`;
-
-      wynik.innerHTML = `
-        ${statusHtml}
-        <strong>Odległość do celu (${cel.nazwa}):</strong> ${Math.round(dystans)} m<br>
-        <strong>Zastosowany bufor:</strong> ${calkowityMargines} m
-        (suwak: ${marginesSuwak} m${checkboxGps.checked ? ` + GPS: ${gpsBonus} m` : ""})<br>
-        <strong>Twoje GPS:</strong> ${lat.toFixed(6)}, ${lon.toFixed(6)} (±${Math.round(acc)} m)
-        <div class="result-links">
-          <a href="${mojaPozycjaUrl}" target="_blank" rel="noopener">Pokaż moją pozycję w Mapach Google</a>
-          ${nawigacjaLinkHtml}
-        </div>
-      `;
-    }
-
-    function czyPunktWWielokacie(lat, lon, polygon) {
-      let inside = false;
-      for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-        const xi = polygon[i][0], yi = polygon[i][1];
-        const xj = polygon[j][0], yj = polygon[j][1];
-
-        const intersect = ((yi > lon) !== (yj > lon)) &&
-          (lat < (xj - xi) * (lon - yi) / (yj - yi) + xi);
-        if (intersect) inside = !inside;
-      }
-      return inside;
-    }
-
-    function odlegloscOdWielokataMetry(lat, lon, polygon) {
-      if (czyPunktWWielokacie(lat, lon, polygon)) {
-        return 0;
-      }
-
-      const R = 6371000;
-      const latRad = lat * Math.PI / 180;
-      const toXY = ([pLat, pLon]) => ({
-        x: (pLon - lon) * (Math.PI / 180) * R * Math.cos(latRad),
-        y: (pLat - lat) * (Math.PI / 180) * R
-      });
-
-      let minDist = Infinity;
-      for (let i = 0; i < polygon.length; i++) {
-        const a = toXY(polygon[i]);
-        const b = toXY(polygon[(i + 1) % polygon.length]);
-        const dist = odlegloscOdOdcinka(0, 0, a.x, a.y, b.x, b.y);
-        if (dist < minDist) minDist = dist;
-      }
-      return minDist;
-    }
-
-    function odlegloscOdOdcinka(px, py, ax, ay, bx, by) {
-      const dx = bx - ax;
-      const dy = by - ay;
-      const lenSq = dx * dx + dy * dy;
-      let t = lenSq === 0 ? 0 : ((px - ax) * dx + (py - ay) * dy) / lenSq;
-      t = Math.max(0, Math.min(1, t));
-      const projX = ax + t * dx;
-      const projY = ay + t * dy;
-      return Math.hypot(px - projX, py - projY);
-    }
-
-    zaladujCele();
-  </script>
-
-</body>
-</html>

@@ -3,91 +3,40 @@
     "id": "pieciu-siostr",
     "nazwa": "Park Pięciu Sióstr",
     "opis": "Skwer na Ochocie między ul. Bitwy Warszawskiej 1920 r., Szczęśliwicką a Białobrzeską.",
-    "polygon": [
-      [52.21625, 20.96520],
-      [52.21640, 20.96815],
-      [52.21435, 20.96935],
-      [52.21345, 20.96755],
-      [52.21415, 20.96545]
-    ]
+    "lat": 52.21505,
+    "lon": 20.96715,
+    "promien": 90
   },
   {
     "id": "szczesliwicki",
     "nazwa": "Park Szczęśliwicki",
     "opis": "Duży park z górką, stawami i alejkami między Włodarzewską, Drawską, Szczęśliwicką i Dickensa.",
-    "polygon": [
-      [52.21020, 20.95580],
-      [52.21040, 20.96280],
-      [52.20650, 20.96420],
-      [52.20360, 20.96220],
-      [52.20390, 20.95540],
-      [52.20720, 20.95460]
-    ]
+    "lat": 52.20710,
+    "lon": 20.95920,
+    "promien": 220
   },
   {
     "id": "blue-city",
     "nazwa": "CH Blue City",
     "opis": "Centrum handlowe w Al. Jerozolimskich po stronie Ochoty / Włoch (okolice ul. Opaczewskiej).",
-    "polygon": [
-      [52.21415, 20.95410],
-      [52.21335, 20.95715],
-      [52.21165, 20.95645],
-      [52.21235, 20.95335]
-    ]
+    "lat": 52.21285,
+    "lon": 20.95525,
+    "promien": 80
   },
   {
     "id": "fort-korotynskiego",
     "nazwa": "Fort Rakowiec (Korotyńskiego)",
-    "opis": "Dawny fort carski z XIX wieku po południowej stronie ul. Korotyńskiego, dziś z zielonym terenem i charakterystycznymi elementami fortyfikacji.",
-    "polygon": [
-      [52.20390, 20.97180],
-      [52.20410, 20.97720],
-      [52.20160, 20.97750],
-      [52.20140, 20.97210]
-    ]
+    "opis": "Dawny fort carski z XIX wieku po południowej stronie ul. Korotyńskiego, dziś z zielonym terenem i elementami fortyfikacji.",
+    "lat": 52.20280,
+    "lon": 20.97465,
+    "promien": 120
   },
   {
-    "id": "osiedle-kolonia-lubeckiego",
+    "id": "kolonia-lubeckiego",
     "nazwa": "Kolonia Lubeckiego",
-    "opis": "Zabytkowe osiedle z lat 20. XX wieku z ceglaną i tynkowaną zabudową między Grójecką, Wawelską, Filtrową i Lekarską.",
-    "polygon": [
-      [52.22160, 20.98550],
-      [52.22210, 20.99220],
-      [52.21780, 20.99300],
-      [52.21730, 20.98620]
-    ]
-  },
-  {
-    "id": "hala-banacha",
-    "nazwa": "Hala Banacha i plac",
-    "opis": "Jeden z najbardziej rozpoznawalnych punktów lokalnego życia na Ochocie — targowisko i okolice ulic Grójeckiej, Banacha i Bitwy Warszawskiej 1920 r.",
-    "polygon": [
-      [52.21430, 20.97620],
-      [52.21445, 20.97960],
-      [52.21230, 20.97990],
-      [52.21215, 20.97650]
-    ]
-  },
-  {
-    "id": "pomnik-barykada-wrzesnia",
-    "nazwa": "Pomnik Barykada Września",
-    "opis": "Charakterystyczny monument upamiętniający obronę Warszawy we wrześniu 1939 r., zlokalizowany na rogu Grójeckiej i Bitwy Warszawskiej 1920 r.",
-    "polygon": [
-      [52.21560, 20.97680],
-      [52.21570, 20.97810],
-      [52.21475, 20.97825],
-      [52.21465, 20.97695]
-    ]
-  },
-  {
-    "id": "dworzec-zachodni-ochota",
-    "nazwa": "Dworzec Warszawa Zachodnia (strona Ochoty)",
-    "opis": "Duży węzeł przesiadkowy po zachodniej stronie dzielnicy w rejonie Alei Jerozolimskich i tunelu/przejścia w stronę Ochoty.",
-    "polygon": [
-      [52.22020, 20.96150],
-      [52.22060, 20.96650],
-      [52.21760, 20.96720],
-      [52.21720, 20.96220]
-    ]
+    "opis": "Zabytkowe osiedle z lat 20. XX wieku między Grójecką, Wawelską, Filtrową i Lekarską.",
+    "lat": 52.21970,
+    "lon": 20.98915,
+    "promien": 180
   }
 ]

@@ -211,15 +211,37 @@ function aktualizujUI() {
   fullRouteLink.style.display = "flex";
 }
 
+async function pobierzListeCelow() {
+  // Najpierw próbujemy pliku z bieżącej lokalizacji (działa na GitHub Pages
+  // i na lokalnym serwerze). Jeśli strona jest otwarta jako file:// albo
+  // plik nie został opublikowany, pobieramy kopię z publicznego repozytorium.
+  const adresy = [
+    new URL("cele.json", window.location.href).href,
+    "https://raw.githubusercontent.com/HubertMalinowski/lokalizacja-test/main/cele.json"
+  ];
+  let ostatniBlad;
+
+  for (const adres of [...new Set(adresy)]) {
+    try {
+      const response = await fetch(adres, { cache: "no-cache" });
+      if (!response.ok) throw new Error(`HTTP ${response.status} (${adres})`);
+      const cele = await response.json();
+      if (!Array.isArray(cele) || cele.length === 0) {
+        throw new Error(`Plik nie zawiera listy celów (${adres})`);
+      }
+      return cele;
+    } catch (err) {
+      ostatniBlad = err;
+      console.warn(`Nie udało się pobrać ${adres}`, err);
+    }
+  }
+
+  throw ostatniBlad || new Error("Nie udało się pobrać pliku cele.json");
+}
+
 async function zaladujCele() {
   try {
-    const response = await fetch("./cele.json");
-    if (!response.ok) throw new Error(`Błąd HTTP: ${response.status}`);
-    wszystkieCele = await response.json();
-
-    if (!Array.isArray(wszystkieCele) || wszystkieCele.length === 0) {
-      throw new Error("Brak celów w cele.json");
-    }
+    wszystkieCele = await pobierzListeCelow();
 
     const zapisaneIdsRaw = localStorage.getItem(STORAGE_IDS_KEY);
     let odtworzone = null;
@@ -251,7 +273,7 @@ async function zaladujCele() {
   } catch (err) {
     document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
     document.getElementById("targetDesc").textContent =
-      "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
+      `Nie udało się pobrać cele.json. Otwórz stronę przez serwer (np. GitHub Pages) i sprawdź połączenie z internetem. Szczegóły: ${err.message}`;
     document.getElementById("photoBox").style.display = "none";
     document.getElementById("fullRouteLink").style.display = "none";
     console.error(err);

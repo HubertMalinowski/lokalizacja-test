@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Ochota — Trasa spacerowa</title>
+  <title>Warszawa — Trasa spacerowa</title>
   <style>
     :root {
       --bg: #f6f4ef;
@@ -80,6 +80,8 @@
       text-transform: uppercase;
       color: var(--accent);
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .brand-dot {
@@ -90,11 +92,130 @@
       flex-shrink: 0;
     }
 
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
     .route-hint {
       font-size: clamp(0.7rem, 2cqw, 0.78rem);
       color: var(--ink-muted);
       font-weight: 500;
       white-space: nowrap;
+    }
+
+    .change-district-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--surface-alt);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.28rem 0.65rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .change-district-btn:hover {
+      background: #e5decb;
+      border-color: #c8beab;
+    }
+
+    /* Ekran wyboru dzielnicy */
+    .district-screen {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .district-intro {
+      background: var(--surface-alt);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1rem;
+    }
+
+    .district-title {
+      margin: 0;
+      font-size: clamp(1.1rem, 4.4cqw, 1.35rem);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    .district-sub {
+      margin: 0.4rem 0 0;
+      font-size: clamp(0.84rem, 2.9cqw, 0.92rem);
+      line-height: 1.5;
+      color: var(--ink-muted);
+    }
+
+    .district-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+    }
+
+    .district-btn {
+      appearance: none;
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      text-align: left;
+      transition: transform 0.12s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .district-btn:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(29, 92, 70, 0.1);
+    }
+
+    .district-btn:active {
+      transform: scale(0.99);
+    }
+
+    .district-btn-name {
+      font-size: clamp(0.95rem, 3.4cqw, 1.05rem);
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .district-btn-meta {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .status-msg {
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md);
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-line);
+      color: var(--danger-ink);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* Ekran trasy */
+    .route-screen {
+      display: none;
     }
 
     .tabs {
@@ -323,6 +444,10 @@
         max-width: min(860px, 94vw);
       }
 
+      .district-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .place-card {
         display: grid;
         grid-template-columns: minmax(220px, 44%) minmax(0, 1fr);
@@ -371,48 +496,68 @@
     <header class="topbar">
       <div class="brand">
         <span class="brand-dot"></span>
-        <span>Ochota • Spacer</span>
+        <span id="headerTitle">Warszawa • Spacer</span>
       </div>
-      <div class="route-hint" id="routeSummary">3 punkty</div>
+      <div class="topbar-right">
+        <span class="route-hint" id="routeSummary">Wybór dzielnicy</span>
+        <button type="button" class="change-district-btn" id="changeDistrictBtn" onclick="otworzWyborDzielnicy()" style="display:none;">
+          Dzielnica
+        </button>
+      </div>
     </header>
 
-    <nav class="tabs" id="tabsBar" aria-label="Wybór punktu na trasie"></nav>
-
-    <article class="place-card" id="targetBox">
-      <div class="media-wrap" id="photoBox">
-        <span class="place-badge" id="placeBadge">Przystanek 1</span>
-        <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
-        <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
+    <!-- Widok 1: Wybór dzielnicy -->
+    <section class="district-screen" id="districtScreen" aria-label="Wybór dzielnicy">
+      <div class="district-intro">
+        <h1 class="district-title">Wybierz dzielnicę</h1>
+        <p class="district-sub">Kliknięcie wylosuje 3 miejsca z wybranej dzielnicy i otworzy trasę spacerową.</p>
       </div>
-
-      <div class="place-body">
-        <h1 class="place-name" id="targetName">Ładowanie trasy...</h1>
-        <div class="place-coords" id="targetCoords"></div>
-        <p class="place-desc" id="targetDesc"></p>
+      <div class="district-list" id="districtList">
+        <div class="photo-status">Wczytywanie dzielnic z <code>cele.json</code>...</div>
       </div>
-    </article>
+    </section>
 
-    <div class="actions">
-      <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
-        Otwórz całą trasę (spacer) w Mapach Google
-      </a>
-      <button type="button" class="reroll-btn" onclick="wylosujNowaTrase()">
-        Wylosuj nową trasę (3 miejsca)
-      </button>
-    </div>
+    <!-- Widok 2: Trasa i karta wybranego miejsca -->
+    <section class="route-screen" id="routeScreen" aria-label="Trasa spacerowa">
+      <nav class="tabs" id="tabsBar" aria-label="Wybór punktu na trasie"></nav>
+
+      <article class="place-card" id="targetBox">
+        <div class="media-wrap" id="photoBox">
+          <span class="place-badge" id="placeBadge">Przystanek 1</span>
+          <div class="photo-status" id="photoStatus">Ładowanie zdjęcia...</div>
+          <img class="photo" id="targetPhoto" alt="" referrerpolicy="no-referrer">
+        </div>
+
+        <div class="place-body">
+          <h1 class="place-name" id="targetName">Ładowanie trasy...</h1>
+          <div class="place-coords" id="targetCoords"></div>
+          <p class="place-desc" id="targetDesc"></p>
+        </div>
+      </article>
+
+      <div class="actions">
+        <a class="route-btn" id="fullRouteLink" href="#" target="_blank" rel="noopener" style="display:none;">
+          Otwórz całą trasę (spacer) w Mapach Google
+        </a>
+        <button type="button" class="reroll-btn" id="rerollBtn" onclick="wylosujNowaTrase()">
+          Wylosuj nową trasę
+        </button>
+      </div>
+    </section>
   </main>
 
   <script>
     const LICZBA_CELOW_W_RUNDZIE = 3;
-    const STORAGE_IDS_KEY = "ochota_wylosowane_ids_v4";
-    const STORAGE_WYBRANY_KEY = "ochota_wybrany_indeks_v4";
+    const STORAGE_DZIELNICA_KEY = "warszawa_wybrana_dzielnica_v1";
+    const STORAGE_IDS_KEY = "warszawa_wylosowane_ids_v1";
+    const STORAGE_WYBRANY_KEY = "warszawa_wybrany_indeks_v1";
 
     let wszystkieCele = [];
+    let aktywnaDzielnica = localStorage.getItem(STORAGE_DZIELNICA_KEY) || "";
     let CELE = [];
     let wybranyIndeks = Number(localStorage.getItem(STORAGE_WYBRANY_KEY) || 0);
     let numerZadaniaZdjecia = 0;
 
-    // Dopasowuje rozmiar pojedynczej linii tekstu, jeśli jest szersza niż kontener
     function dopasujPojedynczaLinie(el, maxPx, minPx) {
       if (!el) return;
       el.style.fontSize = `${maxPx}px`;
@@ -426,6 +571,19 @@
     function dopasujNapisyDoSzerokosci() {
       dopasujPojedynczaLinie(document.getElementById("targetCoords"), 12.5, 9.5);
       dopasujPojedynczaLinie(document.getElementById("placeBadge"), 12, 9.5);
+    }
+
+    function pobierzDzielnice(lista) {
+      const licznik = new Map();
+      for (const cel of lista) {
+        const nazwa = (cel.dzielnica || "Pozostałe").trim();
+        licznik.set(nazwa, (licznik.get(nazwa) || 0) + 1);
+      }
+      return [...licznik.entries()].map(([nazwa, liczba]) => ({ nazwa, liczba }));
+    }
+
+    function pobierzCeleWDzielnicy(dzielnica) {
+      return wszystkieCele.filter((c) => (c.dzielnica || "Pozostałe").trim() === dzielnica);
     }
 
     function zbudujLinkCalejTrasy(cele) {
@@ -460,8 +618,77 @@
     }
 
     function zapiszStan() {
+      localStorage.setItem(STORAGE_DZIELNICA_KEY, aktywnaDzielnica);
       localStorage.setItem(STORAGE_IDS_KEY, JSON.stringify(CELE.map((c) => c.id)));
       localStorage.setItem(STORAGE_WYBRANY_KEY, String(wybranyIndeks));
+    }
+
+    function pokazEkran(widok) {
+      const districtScreen = document.getElementById("districtScreen");
+      const routeScreen = document.getElementById("routeScreen");
+      const changeBtn = document.getElementById("changeDistrictBtn");
+      const headerTitle = document.getElementById("headerTitle");
+      const routeSummary = document.getElementById("routeSummary");
+
+      if (widok === "districts") {
+        districtScreen.style.display = "flex";
+        routeScreen.style.display = "none";
+        changeBtn.style.display = "none";
+        headerTitle.textContent = "Warszawa • Dzielnice";
+        routeSummary.textContent = `${pobierzDzielnice(wszystkieCele).length} dzielnice`;
+      } else {
+        districtScreen.style.display = "none";
+        routeScreen.style.display = "block";
+        changeBtn.style.display = "inline-block";
+        headerTitle.textContent = `${aktywnaDzielnica} • Spacer`;
+        routeSummary.textContent = `${CELE.length} ${CELE.length === 1 ? "punkt" : CELE.length < 5 ? "punkty" : "punktów"}`;
+      }
+    }
+
+    function otworzWyborDzielnicy() {
+      aktywnaDzielnica = "";
+      localStorage.removeItem(STORAGE_DZIELNICA_KEY);
+      localStorage.removeItem(STORAGE_IDS_KEY);
+      localStorage.removeItem(STORAGE_WYBRANY_KEY);
+      zbudujListeDzielnic();
+      pokazEkran("districts");
+    }
+
+    function zbudujListeDzielnic() {
+      const container = document.getElementById("districtList");
+      const dzielnice = pobierzDzielnice(wszystkieCele);
+
+      if (dzielnice.length === 0) {
+        container.innerHTML = `<div class="status-msg">Brak zdefiniowanych dzielnic w <code>cele.json</code>.</div>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      dzielnice.forEach(({ nazwa, liczba }) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "district-btn";
+        btn.innerHTML = `
+          <span class="district-btn-name">${nazwa}</span>
+          <span class="district-btn-meta">${liczba} ${liczba === 1 ? "miejsce" : liczba < 5 ? "miejsca" : "miejsc"}</span>
+        `;
+        btn.addEventListener("click", () => wybierzDzielniceILosuj(nazwa));
+        container.appendChild(btn);
+      });
+    }
+
+    function wybierzDzielniceILosuj(dzielnica) {
+      const kandydaci = pobierzCeleWDzielnicy(dzielnica);
+      if (kandydaci.length === 0) return;
+
+      aktywnaDzielnica = dzielnica;
+      CELE = losujUnikalne(kandydaci, LICZBA_CELOW_W_RUNDZIE);
+      wybranyIndeks = 0;
+      zapiszStan();
+
+      zbudujPrzelaczniki();
+      pokazEkran("route");
+      aktualizujUI();
     }
 
     function wybierzCel(idx) {
@@ -472,7 +699,12 @@
     }
 
     function wylosujNowaTrase() {
-      CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
+      if (!aktywnaDzielnica) {
+        otworzWyborDzielnicy();
+        return;
+      }
+      const kandydaci = pobierzCeleWDzielnicy(aktywnaDzielnica);
+      CELE = losujUnikalne(kandydaci, LICZBA_CELOW_W_RUNDZIE);
       wybranyIndeks = 0;
       zapiszStan();
       zbudujPrzelaczniki();
@@ -496,7 +728,8 @@
         tabsBar.appendChild(btn);
       });
 
-      document.getElementById("routeSummary").textContent = `${CELE.length} punkty`;
+      document.getElementById("routeSummary").textContent =
+        `${CELE.length} ${CELE.length === 1 ? "punkt" : CELE.length < 5 ? "punkty" : "punktów"}`;
     }
 
     async function pobierzUrlZWikimedia(query) {
@@ -638,13 +871,16 @@
           throw new Error("Brak celów w cele.json");
         }
 
+        zbudujListeDzielnic();
+
+        const kandydaciWDzielnicy = aktywnaDzielnica ? pobierzCeleWDzielnicy(aktywnaDzielnica) : [];
         const zapisaneIdsRaw = localStorage.getItem(STORAGE_IDS_KEY);
         let odtworzone = null;
 
-        if (zapisaneIdsRaw) {
+        if (aktywnaDzielnica && kandydaciWDzielnicy.length > 0 && zapisaneIdsRaw) {
           const zapisaneIds = JSON.parse(zapisaneIdsRaw);
           if (Array.isArray(zapisaneIds) && zapisaneIds.length > 0) {
-            const mapa = new Map(wszystkieCele.map((c) => [c.id, c]));
+            const mapa = new Map(kandydaciWDzielnicy.map((c) => [c.id, c]));
             const dopasowane = zapisaneIds.map((id) => mapa.get(id)).filter(Boolean);
             if (dopasowane.length === zapisaneIds.length) {
               odtworzone = dopasowane;
@@ -657,20 +893,16 @@
           if (wybranyIndeks >= CELE.length) {
             wybranyIndeks = 0;
           }
+          zbudujPrzelaczniki();
+          pokazEkran("route");
+          aktualizujUI();
         } else {
-          CELE = losujUnikalne(wszystkieCele, LICZBA_CELOW_W_RUNDZIE);
-          wybranyIndeks = 0;
-          zapiszStan();
+          pokazEkran("districts");
         }
-
-        zbudujPrzelaczniki();
-        aktualizujUI();
       } catch (err) {
-        document.getElementById("targetName").textContent = "Błąd wczytywania trasy";
-        document.getElementById("targetDesc").textContent =
-          "Nie udało się wczytać pliku cele.json. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik cele.json leży obok index.html.";
-        document.getElementById("photoBox").style.display = "none";
-        document.getElementById("fullRouteLink").style.display = "none";
+        document.getElementById("districtList").innerHTML =
+          `<div class="status-msg"><strong>Błąd wczytywania trasy:</strong> nie udało się wczytać pliku <code>cele.json</code>. Upewnij się, że strona działa przez serwer (np. GitHub Pages) i plik <code>cele.json</code> leży obok <code>index.html</code>.</div>`;
+        pokazEkran("districts");
         console.error(err);
       }
     }
